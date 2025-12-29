@@ -1,0 +1,26 @@
+{
+  "name": "shopify-tailwind-template",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A clean Shopify theme template built with Tailwind CSS.",
+  "author": "",
+  "scripts": {
+    "dev": "concurrently \"yarn dev:css\" \"yarn dev:shopify\"",
+    "dev:css": "tailwindcss -i ./src/styles/theme.css -o ./assets/theme.css --watch",
+    "dev:shopify": "shopify theme dev --port 8000",
+    "build": "tailwindcss -i ./src/styles/theme.css -o ./assets/theme.css --minify",
+    "pull": "shopify theme pull",
+    "push": "yarn build && shopify theme push",
+    "check": "shopify theme check --auto-correct",
+    "prettier": "prettier --write '**/*.{js,json,css,liquid}'"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@shopify/prettier-plugin-liquid": "^1.5.2",
+    "autoprefixer": "^10.4.20",
+    "concurrently": "^9.1.2",
+    "postcss": "^8.4.49",
+    "prettier": "^3.3.3",
+    "tailwindcss": "^3.4.17"
+  }
+}

@@ -1,0 +1,116 @@
+<!doctype html>
+<html class='js' lang='{{ request.locale.iso_code }}'>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width,initial-scale=1'>
+    <meta name='theme-color' content=''>
+    <link rel='canonical' href='{{ canonical_url }}'>
+
+    {%- if settings.favicon != blank -%}
+      <link rel='icon' type='image/png' href='{{ settings.favicon | image_url: width: 32, height: 32 }}'>
+    {%- endif -%}
+
+    <title>
+      {{ page_title }}
+      {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
+      {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
+      {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
+    </title>
+
+    {% if page_description %}
+      <meta name='description' content='{{ page_description | escape }}'>
+    {% endif %}
+
+    {% render 'meta-tags' %}
+
+    {% comment %} Core JavaScript utilities {% endcomment %}
+    <script src='{{ 'constants.js' | asset_url }}' defer='defer'></script>
+    <script src='{{ 'pubsub.js' | asset_url }}' defer='defer'></script>
+    <script src='{{ 'global.js' | asset_url }}' defer='defer'></script>
+
+    {% comment %} Component styles {% endcomment %}
+
+    {% comment %} Component JavaScript {% endcomment %}
+    <script src='{{ 'quick-add.js' | asset_url }}' defer='defer'></script>
+    <script src='{{ 'product-info.js' | asset_url }}' defer='defer'></script>
+    <script src='{{ 'product-form.js' | asset_url }}' defer='defer'></script>
+
+    {{ content_for_header }}
+
+    {% comment %} Theme styles {% endcomment %}
+    {{ 'theme.css' | asset_url | stylesheet_tag }}
+    {{ 'fonts.css' | asset_url | stylesheet_tag }}
+    {{ 'base.css' | asset_url | stylesheet_tag }}
+
+    <script>
+      if (Shopify.designMode) {
+        document.documentElement.classList.add('shopify-design-mode')
+      }
+    </script>
+  </head>
+
+  <body>
+    <a class='skip-to-content-link button visually-hidden' href='#MainContent'>
+      {{ 'accessibility.skip_to_text' | t }}
+    </a>
+
+    {%- render 'cart-drawer' -%}
+
+    <div class='header-group' id='main-header'>
+      {% sections 'header-group' %}
+    </div>
+
+    <main id='MainContent' class='content-for-layout focus-none' role='main' tabindex='-1'>
+      {{ content_for_layout }}
+    </main>
+
+    {% sections 'footer-group' %}
+
+    <ul hidden>
+      <li id='a11y-refresh-page-message'>{{ 'accessibility.refresh_page' | t }}</li>
+      <li id='a11y-new-window-message'>{{ 'accessibility.link_messages.new_window' | t }}</li>
+    </ul>
+
+    <script>
+      window.shopUrl = '{{ request.origin }}'
+      window.routes = {
+        cart_add_url: '{{ routes.cart_add_url }}',
+        cart_change_url: '{{ routes.cart_change_url }}',
+        cart_update_url: '{{ routes.cart_update_url }}',
+        cart_url: '{{ routes.cart_url }}',
+      }
+
+      window.cartStrings = {
+        error: `{{ 'sections.cart.cart_error' | t }}`,
+        quantityError: `{{ 'sections.cart.cart_quantity_error_html' | t: quantity: '[quantity]' }}`,
+      }
+
+      window.variantStrings = {
+        addToCart: `{{ 'products.product.add_to_cart' | t }}`,
+        soldOut: `{{ 'products.product.sold_out' | t }}`,
+        unavailable: `{{ 'products.product.unavailable' | t }}`,
+        unavailable_with_option: `{{ 'products.product.value_unavailable' | t: option_value: '[value]' }}`,
+      }
+
+      window.quickOrderListStrings = {
+        itemsAdded: `{{ 'sections.quick_order_list.items_added.other' | t: quantity: '[quantity]' }}`,
+        itemAdded: `{{ 'sections.quick_order_list.items_added.one' | t: quantity: '[quantity]' }}`,
+        itemsRemoved: `{{ 'sections.quick_order_list.items_removed.other' | t: quantity: '[quantity]' }}`,
+        itemRemoved: `{{ 'sections.quick_order_list.items_removed.one' | t: quantity: '[quantity]' }}`,
+        viewCart: `{{- 'sections.quick_order_list.view_cart' | t -}}`,
+        each: `{{- 'sections.quick_order_list.each' | t: money: '[money]' }}`,
+      }
+
+      window.accountStrings = {
+        nextLabel: `{{ 'customer.login_page.log_in' | t }}`,
+        logIn: `{{ 'customer.login_page.log_in' | t }}`,
+        saveLabel: `{{ 'customer.account.save' | t }}`,
+        savingLabel: `{{ 'customer.account.saving' | t }}`,
+        savedLabel: `{{ 'customer.account.saved' | t }}`,
+      }
+    </script>
+
+    <script src='{{ 'cart-drawer.js' | asset_url }}' defer='defer'></script>
+  </body>
+</html>

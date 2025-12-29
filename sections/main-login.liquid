@@ -1,0 +1,91 @@
+<div class='container mx-auto px-4 py-12 max-w-md'>
+  <h1 class='text-3xl font-bold mb-8 text-center'>{{ 'customer.login_page.title' | t }}</h1>
+
+  {%- form 'customer_login', class: 'form', novalidate: 'novalidate' -%}
+    {%- if form.errors -%}
+      <div class='mb-6 p-4 bg-red-50 border border-red-200 rounded-lg'>
+        <h2 class='text-red-800 font-semibold mb-2'>{{ 'accessibility.error' | t }}</h2>
+        <ul class='list-disc list-inside text-sm text-red-700'>
+          {%- for field in form.errors -%}
+            <li>
+              {%- if field == 'form' -%}
+                {{ form.errors.messages[field] }}
+              {%- else -%}
+                <a href='#{{ field }}'>
+                  {{- form.errors.translated_fields[field] | capitalize }}
+                  {{ form.errors.messages[field] -}}
+                </a>
+              {%- endif -%}
+            </li>
+          {%- endfor -%}
+        </ul>
+      </div>
+    {%- endif -%}
+
+    <div class='mb-4'>
+      <label for='CustomerEmail' class='block mb-2 font-semibold'>
+        {{ 'customer.login_page.email' | t }}
+      </label>
+      <input
+        type='email'
+        id='CustomerEmail'
+        name='customer[email]'
+        autocomplete='email'
+        value='{% if form.errors contains "form" %}{{ form.email }}{% endif %}'
+        class='w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black'
+        {% if form.errors contains 'email' %}
+          aria-invalid='true'
+          aria-describedby='email-error'
+        {% endif %}
+      >
+      {%- if form.errors contains 'email' -%}
+        <p id='email-error' class='mt-1 text-sm text-red-600'>{{ form.errors.messages.email }}</p>
+      {%- endif -%}
+    </div>
+
+    <div class='mb-6'>
+      <label for='CustomerPassword' class='block mb-2 font-semibold'>
+        {{ 'customer.login_page.password' | t }}
+      </label>
+      <input
+        type='password'
+        id='CustomerPassword'
+        name='customer[password]'
+        autocomplete='current-password'
+        class='w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black'
+        {% if form.errors contains 'password' %}
+          aria-invalid='true'
+          aria-describedby='password-error'
+        {% endif %}
+      >
+      {%- if form.errors contains 'password' -%}
+        <p id='password-error' class='mt-1 text-sm text-red-600'>{{ form.errors.messages.password }}</p>
+      {%- endif -%}
+    </div>
+
+    <button type='submit' class='w-full bg-black text-white px-8 py-3 rounded-lg hover:bg-gray-800 transition mb-4'>
+      {{ 'customer.login_page.log_in' | t }}
+    </button>
+
+    <div class='text-center space-y-2'>
+      <a
+        href='{{ routes.account_recover_url }}'
+        class='block text-sm text-gray-600 hover:text-gray-800'
+      >
+        {{ 'customer.login_page.forgot_password' | t }}
+      </a>
+      <p class='text-sm text-gray-600'>
+        Don't have an account?
+        <a href='{{ routes.account_register_url }}' class='underline hover:text-gray-800'>
+          {{ 'customer.login_page.create_account' | t }}
+        </a>
+      </p>
+    </div>
+  {%- endform -%}
+</div>
+
+{% schema %}
+{
+  "name": "Login"
+}
+{% endschema %}

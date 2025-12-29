@@ -1,0 +1,108 @@
+{% comment %}
+  Renders a list of product's price (regular, sale)
+
+  Accepts:
+  - product: {Object} Product Liquid object (optional)
+  - placeholder: {Boolean} Renders a placeholder price (optional)
+  - use_variant: {Boolean} Renders selected or first variant price instead of overall product pricing (optional)
+  - price_class: {String} Adds a price class to the price element (optional)
+  - show_compare_at_price: {Boolean} Renders the compare at price if the product matches the condition (optional)
+  - starting_price: {Boolean} Shows "starting from" text when price varies (optional)
+
+  Usage:
+  {% render 'price', product: product %}
+{% endcomment %}
+{%- liquid
+  if use_variant
+    assign target = product.selected_or_first_available_variant
+  elsif placeholder
+    assign target = null
+  else
+    assign target = product
+  endif
+
+  if target != null
+    assign compare_at_price = target.compare_at_price
+    assign price = target.price | default: 1999
+    assign available = target.available | default: false
+  else
+    assign compare_at_price = null
+    assign price = 1999
+    assign available = false
+  endif
+
+  assign price_min = product.price_min
+  assign price_max = product.price_max
+  assign money_price = price | money
+  assign money_price_min = price_min | money
+  assign money_price_max = price_max | money
+
+  if target == product and product.price_varies
+    if starting_price == true
+      assign money_price = 'products.product.volume_pricing.start_from' | t: minimum: money_price_min
+    else
+      assign money_price = 'products.product.volume_pricing.price_range' | t: minimum: money_price_min, maximum: money_price_max
+    endif
+  endif
+-%}
+{%- unless target == null and placeholder == null -%}
+  <div
+    class='text-sm uppercase tracking-wider{% if price_class %} {{ price_class }}{% endif %}{% if available == false %} opacity-50{% endif %}'
+  >
+    <div>
+      <div class='{% if compare_at_price > price %}hidden{% endif %}'>
+        {%- if product.quantity_price_breaks_configured? -%}
+          {%- if show_compare_at_price and compare_at_price -%}
+            {%- unless product.price_varies == false and product.compare_at_price_varies %}
+              <span class='sr-only'>
+                {{- 'products.product.price.regular_price' | t -}}
+              </span>
+              <span>
+                <s class='line-through opacity-60'>
+                  {{ compare_at_price | money }}
+                </s>
+              </span>
+            {%- endunless -%}
+          {%- endif -%}
+          <span class='sr-only'>{{ 'products.product.price.regular_price' | t }}</span>
+          <span>
+            {{- 'products.product.volume_pricing.price_range' | t: minimum: money_price_min, maximum: money_price_max -}}
+          </span>
+        {%- else -%}
+          <span class='sr-only'>{{ 'products.product.price.regular_price' | t }}</span>
+          <span>
+            {{ money_price }}
+          </span>
+        {%- endif -%}
+      </div>
+      <div class='{% unless compare_at_price > price %}hidden{% endunless %}'>
+        <span class='sr-only'>{{ 'products.product.price.sale_price' | t }}</span>
+        <span>
+          {{ money_price }}
+        </span>
+        {%- unless product.price_varies == false and product.compare_at_price_varies -%}
+          <span class='ml-2'>
+            <s class='line-through opacity-60{% if starting_price == true and product.price_varies %} hidden{% endif %}'>
+              {{ compare_at_price | money }}
+            </s>
+          </span>
+          <span class='sr-only'>{{ 'products.product.price.regular_price' | t }}</span>
+        {%- endunless -%}
+      </div>
+      <small class='text-xs{% if product.selected_or_first_available_variant.unit_price_measurement == nil %} hidden{% endif %}'>
+        <span class='sr-only'>{{ 'products.product.price.unit_price' | t }}</span>
+        <span>
+          <span>{{- product.selected_or_first_available_variant.unit_price | money -}}</span>
+          <span aria-hidden='true'>/</span>
+          <span class='sr-only'>&nbsp;{{ 'accessibility.unit_price_separator' | t }}&nbsp;</span>
+          <span>
+            {%- if product.selected_or_first_available_variant.unit_price_measurement.reference_value != 1 -%}
+              {{- product.selected_or_first_available_variant.unit_price_measurement.reference_value -}}
+            {%- endif -%}
+            {{ product.selected_or_first_available_variant.unit_price_measurement.reference_unit }}
+          </span>
+        </span>
+      </small>
+    </div>
+  </div>
+{% endunless %}

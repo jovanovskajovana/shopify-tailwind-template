@@ -1,0 +1,124 @@
+<product-info
+  id='MainProduct-{{ section.id }}'
+  data-section='{{ section.id }}'
+  data-product-id='{{ product.id }}'
+  data-update-url='true'
+  data-url='{{ product.url }}'
+>
+  <div class='container mx-auto px-4 py-12'>
+    <div class='grid grid-cols-1 md:grid-cols-2 gap-8'>
+      {%- comment -%} Product Images {%- endcomment -%}
+      <div>
+        {% if product.featured_image %}
+          <img
+            src='{{ product.featured_image | image_url: width: 800 }}'
+            alt='{{ product.featured_image.alt | escape }}'
+            width='800'
+            height='{{ 800 | divided_by: product.featured_image.aspect_ratio | round }}'
+            class='w-full rounded-lg'
+            loading='lazy'
+          >
+        {% endif %}
+      </div>
+
+      {%- comment -%} Product Info {%- endcomment -%}
+      <div>
+        <h1 class='text-4xl font-bold mb-4'>{{ product.title }}</h1>
+
+        <div class='text-2xl font-semibold mb-6'>
+          {{ product.selected_or_first_available_variant.price | money }}
+        </div>
+
+        <div class='mb-8 text-gray-700 leading-relaxed [&>h2]:text-2xl [&>h2]:font-bold [&>h2]:mt-6 [&>h2]:mb-4 [&>h3]:text-xl [&>h3]:font-semibold [&>h3]:mt-4 [&>h3]:mb-3 [&>p]:mb-4 [&>ul]:list-disc [&>ul]:ml-6 [&>ul]:mb-4 [&>ol]:list-decimal [&>ol]:ml-6 [&>ol]:mb-4 [&>li]:mb-2 [&>a]:text-black [&>a]:underline [&>a]:hover:text-gray-600'>
+          {{ product.description }}
+        </div>
+
+        <product-form class='product-form' data-section-id='{{ section.id }}'>
+          <div class='mb-4 p-4 bg-red-50 border border-red-200 rounded-lg hidden' role='alert' hidden>
+            <span class='text-sm text-red-700'></span>
+          </div>
+
+          {%- form 'product', product, id: 'product-form', class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+            <input
+              type='hidden'
+              name='id'
+              value='{{ product.selected_or_first_available_variant.id }}'
+              class='product-variant-id'
+            >
+
+            {%- unless product.has_only_default_variant -%}
+              <div class='mb-6'>
+                {%- for option in product.options_with_values -%}
+                  <div class='mb-4'>
+                    <label for='Option-{{ section.id }}-{{ forloop.parentloop.index0 }}' class='block font-semibold mb-2'>
+                      {{ option.name }}
+                    </label>
+                    <select
+                      id='Option-{{ section.id }}-{{ forloop.parentloop.index0 }}'
+                      name='options[{{ option.name | escape }}]'
+                      form='product-form'
+                      class='w-full border border-gray-300 rounded px-4 py-2'
+                    >
+                      {%- for value in option.values -%}
+                        <option
+                          value='{{ value | escape }}'
+                          {% if option.selected_value == value %}
+                            selected='selected'
+                          {% endif %}
+                        >
+                          {{ value }}
+                        </option>
+                      {%- endfor -%}
+                    </select>
+                  </div>
+                {%- endfor -%}
+              </div>
+            {%- endunless -%}
+
+            <div class='mb-4'>
+              <label for='Quantity-{{ section.id }}' class='block font-semibold mb-2'>
+                {{ 'products.product.quantity.label' | t }}
+              </label>
+              <input
+                type='number'
+                id='Quantity-{{ section.id }}'
+                name='quantity'
+                value='1'
+                min='1'
+                class='w-full border border-gray-300 rounded px-4 py-2'
+              >
+            </div>
+
+            <button
+              type='submit'
+              name='add'
+              id='ProductSubmitButton-{{ section.id }}'
+              class='w-full bg-black text-white px-8 py-4 rounded-lg hover:bg-gray-800 transition disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2'
+              {% if product.selected_or_first_available_variant.available == false %}
+                disabled
+              {% endif %}
+            >
+              <span>
+                {%- if product.selected_or_first_available_variant.available == false -%}
+                  {{ 'products.product.sold_out' | t }}
+                {%- else -%}
+                  {{ 'products.product.add_to_cart' | t }}
+                {%- endif -%}
+              </span>
+              <span class='loading-spinner hidden'>
+                {%- render 'loading-spinner' -%}
+              </span>
+            </button>
+          {%- endform -%}
+        </product-form>
+      </div>
+    </div>
+  </div>
+</product-info>
+
+{% schema %}
+{
+  "name": "Product",
+  "settings": []
+}
+{% endschema %}

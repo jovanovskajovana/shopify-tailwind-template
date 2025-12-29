@@ -1,0 +1,76 @@
+{% comment %}
+  Renders the product buy-button.
+
+  Accepts:
+  - class: {String} a class to be added to the container (optional)
+  - product: {Object} product object
+  - product_form_id: {String} product form id
+  - section_id: {String} id of section to which this snippet belongs
+
+  Usage:
+  {% render 'buy-button-main',
+    product: product,
+    product_form_id: product_form_id,
+    section_id: section.id
+  %}
+{% endcomment %}
+
+<product-form
+  class='{% if class %} {{ class }}{% endif %}'
+  data-section-id='{{ section.id }}'
+>
+  <div class='mb-4 p-4 bg-red-50 border border-red-200 rounded-lg hidden' role='alert' hidden>
+    <span class='text-sm text-red-700'></span>
+  </div>
+
+  {%- form 'product', product, id: product_form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+    <input
+      type='hidden'
+      name='id'
+      value='{{ product.selected_or_first_available_variant.id }}'
+      {% if product.selected_or_first_available_variant.available == false
+        or quantity_rule_soldout
+        or product.selected_or_first_available_variant == null
+      %}
+        disabled
+      {% endif %}
+      class='product-variant-id'
+    >
+
+    {%- liquid
+      assign quantity_rule_soldout = false
+      if product.selected_or_first_available_variant.quantity_rule.min > product.selected_or_first_available_variant.inventory_quantity
+        assign quantity_rule_soldout = true
+      endif
+    -%}
+    <button
+      id='ProductSubmitButton-{{ section_id }}'
+      type='submit'
+      name='add'
+      class='w-full bg-black text-white px-8 py-4 rounded-lg hover:bg-gray-800 transition disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2'
+      {% if product.selected_or_first_available_variant.available == false
+        or quantity_rule_soldout
+        or product.selected_or_first_available_variant == null
+      %}
+        disabled
+      {% endif %}
+    >
+      <span>
+        {%- if product.selected_or_first_available_variant == null -%}
+          {{ 'products.product.unavailable' | t }}
+        {%- elsif product.selected_or_first_available_variant.available == false or quantity_rule_soldout -%}
+          {{ 'products.product.sold_out' | t }}
+        {%- else -%}
+          {{ 'products.product.add_to_cart' | t }}
+        {%- endif -%}
+      </span>
+      <span id='price-{{ section_id }}' role='status' class='ml-2'>
+        ―
+        {%- render 'price', product: product, use_variant: true -%}
+      </span>
+      <span class='hidden' hidden>
+        {%- render 'loading-spinner' -%}
+      </span>
+    </button>
+  {%- endform -%}
+</product-form>

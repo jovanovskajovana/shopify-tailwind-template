@@ -1,0 +1,109 @@
+<header class='bg-white border-b border-gray-200 sticky top-0 z-40'>
+  <div class='container mx-auto px-4'>
+    <div class='flex items-center justify-between h-16'>
+      {%- comment -%} Mobile Menu Toggle {%- endcomment -%}
+      <button
+        type='button'
+        class='md:hidden p-2'
+        aria-label='{{ 'sections.header.menu_items.back' | t }}'
+        data-mobile-menu-toggle
+      >
+        <svg class='w-6 h-6' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+          <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M4 6h16M4 12h16M4 18h16'></path>
+        </svg>
+      </button>
+
+      {%- comment -%} Logo {%- endcomment -%}
+      <a href='{{ routes.root_url }}' class='text-2xl font-bold'>
+        {%- if section.settings.logo != blank -%}
+          <img
+            src='{{ section.settings.logo | image_url: width: 200 }}'
+            alt='{{ shop.name }}'
+            width='200'
+            height='auto'
+            loading='eager'
+          >
+        {%- else -%}
+          {{ shop.name }}
+        {%- endif -%}
+      </a>
+
+      {%- comment -%} Desktop Navigation {%- endcomment -%}
+      {%- if linklists['main-menu'] != blank -%}
+        <nav class='hidden md:flex space-x-8'>
+          {%- for link in linklists['main-menu'].links -%}
+            <a href='{{ link.url }}' class='hover:text-gray-600'>{{ link.title }}</a>
+          {%- endfor -%}
+        </nav>
+      {%- endif -%}
+
+      {%- comment -%} Mobile Menu (hidden by default) {%- endcomment -%}
+      {%- if linklists['main-menu'] != blank -%}
+        <nav
+          class='fixed top-16 left-0 right-0 bg-white border-b border-gray-200 p-4 hidden md:hidden'
+          data-mobile-menu
+        >
+          <ul class='space-y-4'>
+            {%- for link in linklists['main-menu'].links -%}
+              <li>
+                <a href='{{ link.url }}' class='block hover:text-gray-600'>{{ link.title }}</a>
+              </li>
+            {%- endfor -%}
+          </ul>
+        </nav>
+      {%- endif -%}
+
+      {%- comment -%} Account & Cart {%- endcomment -%}
+      <div class='flex items-center space-x-4 md:space-x-6'>
+        <a
+          href='{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}'
+          class='hover:text-gray-600 text-sm md:text-base'
+        >
+          {{ 'sections.header.menu_items.account' | t }}
+        </a>
+        <div class='relative'>
+          <a
+            href='{{ routes.cart_url }}'
+            class='hover:text-gray-600 text-sm md:text-base relative no-underline'
+            id='cart-bubble'
+            aria-label='{{ 'sections.header.menu_items.cart' | t }}'
+          >
+            {{ 'sections.header.menu_items.cart' | t }}
+            {%- if cart.item_count > 0 -%}
+              <span
+                class='absolute -top-2 -right-2 bg-black text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center'
+              >
+                {{ cart.item_count }}
+              </span>
+            {%- endif -%}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const menuToggle = document.querySelector('[data-mobile-menu-toggle]')
+    const mobileMenu = document.querySelector('[data-mobile-menu]')
+    if (menuToggle && mobileMenu) {
+      menuToggle.addEventListener('click', function () {
+        mobileMenu.classList.toggle('hidden')
+      })
+    }
+  })
+</script>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,170 @@
+<script src='{{ 'media-gallery.js' | asset_url }}' defer='defer'></script>
+
+{% comment %}
+  Renders a product media gallery to be used on product page.
+
+  Accepts:
+  - class: {String} a class to be added to the container (optional)
+  - product: {Object} Product liquid object
+  - variant_images: {Array} Product images associated with a variant
+
+  Usage:
+  {% render 'product-media-gallery',
+    class: 'my-class',
+    product: product,
+    variant_images: variant_images
+  %}
+{% endcomment %}
+
+{% liquid
+  assign selected_variant = product.selected_or_first_available_variant
+  assign selected_variant_images = selected_variant.metafields.custom.gallery.value
+  if selected_variant_images == blank
+    assign selected_variant_images = product.images
+  endif
+  assign selected_variant_thumbnail = selected_variant_images | first | image_url: width: 1000
+
+  # Build variant galleries JSON
+  assign variant_galleries = ''
+  for variant in product.variants
+    assign gallery_data = variant.metafields.custom.gallery.value
+    if gallery_data == blank
+      assign gallery_data = product.images
+    endif
+
+    assign image_urls = '['
+    for image in gallery_data
+      assign image_url = image | image_url: width: 1000
+      if forloop.last
+        assign image_urls = image_urls | append: '"' | append: image_url | append: '"'
+      else
+        assign image_urls = image_urls | append: '"' | append: image_url | append: '",'
+      endif
+    endfor
+    assign image_urls = image_urls | append: ']'
+    assign variant_gallery = '{"id":"' | append: variant.id | append: '","gallery":' | append: image_urls | append: '}'
+
+    if variant_galleries != ''
+      assign variant_galleries = variant_galleries | append: ','
+    endif
+    assign variant_galleries = variant_galleries | append: variant_gallery
+  endfor
+%}
+<script type='module'>
+  if (typeof subscribe !== 'undefined' && typeof PUB_SUB_EVENTS !== 'undefined') {
+    const handleVariantChange = ({ data: { variant } }) => {
+      if (!variant?.id) return
+
+      const mediaGallery = document.querySelector('media-gallery')
+      if (!mediaGallery) return
+
+      let variantGalleries
+      try {
+        variantGalleries = JSON.parse(mediaGallery.dataset.variantGalleries)
+      } catch (e) {
+        return
+      }
+
+      const selectedGallery = variantGalleries.find((gallery) => gallery.id === variant.id.toString()) || variantGalleries[0]
+      if (!selectedGallery?.gallery?.length) return
+
+      const galleryContainer = document.getElementById('product-gallery')
+      if (!galleryContainer) return
+
+      // Update thumbnail
+      const thumbnailImg = galleryContainer.querySelector('.img-thumbnail')
+      if (thumbnailImg && selectedGallery.gallery[0]) {
+        thumbnailImg.src = selectedGallery.gallery[0]
+      }
+
+      // Clear existing gallery items
+      galleryContainer.querySelectorAll('.gallery-item').forEach((item) => item.remove())
+
+      // Create new gallery items
+      const fragment = document.createDocumentFragment()
+      selectedGallery.gallery.forEach((imageUrl, index) => {
+        if (index === 0) return
+
+        const galleryItem = document.createElement('div')
+        galleryItem.className = 'gallery-item mb-4 hidden'
+        const img = document.createElement('img')
+        img.src = imageUrl
+        img.className = 'gallery-img w-full h-auto rounded-lg opacity-0 transition-opacity duration-700 ease-gallery'
+        img.alt = ''
+        img.width = '1000'
+        img.height = 'auto'
+        img.loading = 'lazy'
+        galleryItem.appendChild(img)
+        fragment.appendChild(galleryItem)
+      })
+
+      // Insert before controls container
+      const controlsContainer = galleryContainer.querySelector('.gallery-controls-container')
+      if (controlsContainer) {
+        galleryContainer.insertBefore(fragment, controlsContainer)
+      } else {
+        galleryContainer.appendChild(fragment)
+      }
+
+      mediaGallery.reinitialize()
+    }
+
+    const onVariantChangeUnsubscriber = subscribe(PUB_SUB_EVENTS.variantChange, handleVariantChange)
+    if (typeof document.addEventListener !== 'undefined') {
+      document.addEventListener('turbo:before-cache', onVariantChangeUnsubscriber)
+    }
+  }
+</script>
+
+<media-gallery
+  id='MediaGallery-{{ section.id }}'
+  role='region'
+  aria-label='{{ 'products.product.media.gallery_viewer' | t }}'
+  data-desktop-layout='{{ section.settings.gallery_layout }}'
+  data-variant-galleries='[{{ variant_galleries | join: "," }}]'
+>
+  <div class='sr-only' role='status' id='GalleryStatus-{{ section.id }}'></div>
+  <div class='relative{% if class %} {{ class }}{% endif %}' id='product-gallery'>
+    <div class='mb-4'>
+      <img
+        src='{{ selected_variant_thumbnail }}'
+        alt='{{ product.title | escape }}'
+        class='img-thumbnail w-full h-auto rounded-lg'
+        width='1000'
+        height='auto'
+        loading='eager'
+      >
+    </div>
+    {%- for media in selected_variant_images -%}
+      {%- if forloop.first -%}
+        {%- continue -%}
+      {%- endif -%}
+      <div class='gallery-item mb-4 hidden'>
+        <img
+          src='{{ media | image_url: width: 1000 }}'
+          alt='{{ product.title | escape }}'
+          class='gallery-img w-full h-auto rounded-lg opacity-0 transition-opacity duration-700 ease-gallery'
+          width='1000'
+          height='auto'
+          loading='lazy'
+        >
+      </div>
+    {%- endfor -%}
+    <div class='gallery-controls-container absolute inset-0 flex items-center justify-between pointer-events-none'>
+      <button
+        class='absolute left-4 w-10 h-10 bg-black bg-opacity-50 hover:bg-opacity-70 rounded-full flex items-center justify-center pointer-events-auto'
+        id='gallery-left-btn'
+        aria-label='{{ 'accessibility.previous' | t }}'
+      >
+        {{- 'icon-arrow-left-white.svg' | inline_asset_content -}}
+      </button>
+      <button
+        class='absolute right-4 w-10 h-10 bg-black bg-opacity-50 hover:bg-opacity-70 rounded-full flex items-center justify-center pointer-events-auto'
+        id='gallery-right-btn'
+        aria-label='{{ 'accessibility.next' | t }}'
+      >
+        {{- 'icon-arrow-right-white.svg' | inline_asset_content -}}
+      </button>
+    </div>
+  </div>
+</media-gallery>

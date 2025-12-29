@@ -1,0 +1,226 @@
+<script src='{{ 'cart.js' | asset_url }}' defer='defer'></script>
+
+{% comment %}
+  Renders the cart drawer.
+
+  Usage:
+  {% render 'cart-drawer' %}
+{% endcomment %}
+
+<cart-drawer
+  id='CartDrawer-Container'
+  class='fixed top-0 left-0 flex justify-end w-screen h-full opacity-0 invisible transition-all duration-300 z-[1000] bg-black/50{% if cart == empty %} is-empty{% endif %}'
+>
+  <div id='CartDrawer' class='relative'>
+    <div
+      id='CartDrawer-Panel'
+      class='flex flex-col h-full max-w-full overflow-hidden bg-white w-[35vw] transform translate-x-full transition-transform duration-300 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]'
+      role='dialog'
+      aria-modal='true'
+      aria-label='{{ 'sections.cart.title' | t }}'
+      tabindex='-1'
+    >
+      <div class='flex flex-col p-5'>
+        <div class='flex justify-between items-center border-b w-full pb-3'>
+          <h2 id='CartDrawer-Title' class='text-xl font-semibold'>
+            {{ 'sections.cart.title' | t }}
+            <span id='CartDrawer-TitleCount' class='text-sm'>({{ cart.item_count }})</span>
+          </h2>
+          <button
+            id='CartDrawer-Close'
+            class='relative bg-transparent border rounded-full w-9 h-9 cursor-pointer'
+            type='button'
+            onclick="this.closest('cart-drawer').close()"
+            aria-label='{{ 'accessibility.close' | t }}'
+          >
+            <span class='sr-only'>Close</span>
+            <span class='absolute top-1/2 left-1/2 w-4 h-px bg-black transform -translate-x-1/2 -translate-y-1/2 rotate-45'></span>
+            <span class='absolute top-1/2 left-1/2 w-4 h-px bg-black transform -translate-x-1/2 -translate-y-1/2 -rotate-45'></span>
+          </button>
+        </div>
+      </div>
+
+      {%- if cart == empty -%}
+        <div id='CartDrawer-Empty' class='flex flex-col items-center justify-center h-full p-5'>
+          <h2 class='text-xl font-semibold mb-4'>{{ 'sections.cart.empty' | t }}</h2>
+          <p class='text-sm'>{{ 'sections.cart.empty_start_adding' | t }}</p>
+        </div>
+      {%- endif -%}
+
+      <cart-drawer-items id='CartDrawer-Items' class='flex-1 overflow-auto'>
+        <form
+          action='{{ routes.cart_url }}'
+          id='CartDrawer-Form'
+          method='post'
+        >
+          <div id='CartDrawer-CartItems' class='p-5 js-contents'>
+            {%- if cart != empty -%}
+              <div class='flex flex-col space-y-4' role='table'>
+                {%- for item in cart.items -%}
+                  <div id='CartDrawer-Item-{{ item.index | plus: 1 }}' class='flex gap-4' role='row'>
+                    <div class='flex-shrink-0 w-20 h-20 rounded overflow-hidden' role='cell' headers='CartDrawer-ColumnProductImage'>
+                      <a href='{{ item.url }}' tabindex='-1' aria-hidden='true'>
+                        <img
+                          src='{{ item.image | image_url: width: 300 }}'
+                          alt='{{ item.title | escape }}'
+                          loading='lazy'
+                          width='300'
+                          height='300'
+                          class='w-full h-full object-cover'
+                        >
+                      </a>
+                    </div>
+                    <div class='flex-1 flex flex-col' role='cell' headers='CartDrawer-ColumnProduct'>
+                      <a href='{{ item.url }}' class='font-semibold mb-1'>
+                        {{- item.product.title | escape -}}
+                      </a>
+
+                      {%- if item.product.has_only_default_variant == false
+                        or item.properties.size != 0
+                        or item.selling_plan_allocation != null
+                      -%}
+                        {%- if item.product.has_only_default_variant == false -%}
+                          <div class='text-sm text-gray-600 mb-1'>
+                            {%- for option in item.options_with_values -%}
+                              {{ option.value -}}
+                              {%- unless forloop.last %}, {% endunless %}
+                            {%- endfor -%}
+                          </div>
+                        {%- endif -%}
+
+                        {%- if item.properties.size != 0 -%}
+                          <div class='text-sm text-gray-600 mb-1'>
+                            {%- for property in item.properties -%}
+                              {%- assign property_first_char = property.first | slice: 0 -%}
+                              {%- if property.last != blank and property_first_char != '_' -%}
+                                {%- if property.last contains '/uploads/' -%}
+                                  <a
+                                    href='{{ property.last }}'
+                                    class='underline'
+                                    target='_blank'
+                                    aria-describedby='a11y-new-window-message'
+                                  >
+                                    {{ property.last | split: '/' | last }}
+                                  </a>
+                                {%- else -%}
+                                  <p>{{ property.last }}</p>
+                                {%- endif -%}
+                              {%- endif -%}
+                            {%- endfor -%}
+                          </div>
+                        {%- endif -%}
+                      {%- endif -%}
+
+                      <div class='mt-auto' role='cell' headers='CartDrawer-ColumnQuantity'>
+                        <div class='flex items-center gap-2'>
+                          <quantity-input class='quantity'>
+                            <select
+                              class='border rounded px-2 py-1 text-sm'
+                              data-quantity-variant-id='{{ item.variant.id }}'
+                              name='updates[]'
+                              data-cart-quantity='{{ cart | item_count_for_variant: item.variant.id }}'
+                              aria-label='{{ 'products.product.quantity.input_label' | t: product: item.product.title | escape }}'
+                              id='Drawer-quantity-{{ item.index | plus: 1 }}'
+                              data-index='{{ item.index | plus: 1 }}'
+                            >
+                              {% assign available_stock = item.variant.inventory_quantity %}
+                              {% assign max_quantity = available_stock %}
+                              {% if max_quantity > 30 %}
+                                {% assign max_quantity = 30 %}
+                              {% endif %}
+                              {% for i in (1..max_quantity) %}
+                                <option
+                                  value='{{ i }}'
+                                  {% if item.quantity == i %}
+                                    selected
+                                  {% endif %}
+                                >
+                                  {{ i }}
+                                </option>
+                              {% endfor %}
+                            </select>
+                          </quantity-input>
+
+                          <cart-remove-button
+                            id='CartDrawer-Remove-{{ item.index | plus: 1 }}'
+                            data-index='{{ item.index | plus: 1 }}'
+                          >
+                            <button
+                              type='button'
+                              class='text-sm text-red-600 underline'
+                              aria-label='{{ 'sections.cart.remove_title' | t: title: item.title | escape }}'
+                              data-variant-id='{{ item.variant.id }}'
+                            >
+                              {{- 'sections.cart.remove' | t -}}
+                            </button>
+                          </cart-remove-button>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class='text-right' role='cell' headers='CartDrawer-ColumnTotal'>
+                      {%- if item.original_line_price != item.final_line_price -%}
+                        <div class='flex flex-col items-end'>
+                          <s class='text-sm text-gray-500 line-through'>
+                            {{ item.original_line_price | money }}
+                          </s>
+                          <span class='font-semibold'>
+                            {{ item.final_line_price | money }}
+                          </span>
+                        </div>
+                      {%- else -%}
+                        <span class='font-semibold'>
+                          {{ item.original_line_price | money }}
+                        </span>
+                      {%- endif -%}
+                    </div>
+                  </div>
+                  <div
+                    id='CartDrawer-LineItemError-{{ item.index | plus: 1 }}'
+                    class='text-sm text-red-600'
+                    role='alert'
+                  >
+                    <span id='CartDrawer-LineItemErrorText-{{ item.index | plus: 1 }}' class='cart-item-error-text'></span>
+                  </div>
+                {%- endfor -%}
+              </div>
+              <div class='border-t pt-4 mt-4'>
+                <div class='flex justify-between text-sm mb-2'>
+                  <span>{{ 'customer.order.subtotal' | t }}</span>
+                  <span class='font-semibold'>{{ cart.items_subtotal_price | money }}</span>
+                </div>
+              </div>
+            {%- endif -%}
+            <p id='CartDrawer-LiveRegionText' class='sr-only' role='status'></p>
+            <p id='CartDrawer-LineItemStatus' class='sr-only' aria-hidden='true' role='status'>
+              {{ 'accessibility.loading' | t }}
+            </p>
+          </div>
+          <div class='text-center text-sm text-red-600 mb-2' id='CartDrawer-CartErrors' role='alert'></div>
+        </form>
+      </cart-drawer-items>
+
+      <div class='border-t p-5 bg-gray-50'>
+        <button
+          type='submit'
+          id='CartDrawer-Checkout'
+          class='w-full bg-black text-white py-3 px-4 rounded font-semibold hover:bg-gray-800 transition-colors'
+          name='checkout'
+          form='CartDrawer-Form'
+          {% if cart == empty %}
+            disabled
+          {% endif %}
+        >
+          {{ 'sections.cart.checkout' | t }}
+        </button>
+      </div>
+    </div>
+    <div
+      id='CartDrawer-LoadingSpinner'
+      class='absolute top-0 left-0 flex justify-center items-center w-full h-full pointer-events-none hidden'
+      style='background-color: rgba(255, 255, 255, 0.8);'
+    >
+      <span id='CartDrawer-LoadingSpinnerInner' class='loading-spinner'></span>
+    </div>
+  </div>
+</cart-drawer>

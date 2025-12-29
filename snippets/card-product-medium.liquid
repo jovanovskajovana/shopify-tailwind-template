@@ -1,0 +1,105 @@
+{% comment %}
+  Renders a medium version of the product card.
+
+  Accepts:
+  - class: {String} a class to be added to the container (optional)
+  - card_product: {Object} Product Liquid object
+  - section_id: {String} The ID of the section that contains this card
+
+  Usage:
+  {% render 'card-product-medium',
+    class: 'my-class',
+    card_product: product,
+    section_id: section.id
+  %}
+{% endcomment %}
+{% liquid
+  assign product_image = card_product.featured_media | image_url: width: 1000
+  if request.path == '/collections/all' and card_product.metafields.custom.product_grid_image != blank
+    assign product_image = card_product.metafields.custom.product_grid_image | image_url: width: 1000
+  endif
+%}
+
+<div class='{% if class %} {{ class }}{% endif %}'>
+  <a
+    href='{{ card_product.url }}'
+    id='CardLink-{{ section_id }}-{{ card_product.id }}'
+    aria-labelledby='CardLink-{{ section_id }}-{{ card_product.id }} Badge-{{ section_id }}-{{ card_product.id }}'
+    class='block'
+  >
+    <div class='aspect-square overflow-hidden'>
+      <img
+        src='{{ product_image }}'
+        alt='{{ card_product.title | escape }}'
+        width='1000'
+        height='1000'
+        class='w-full h-full object-cover'
+        loading='lazy'
+      >
+    </div>
+  </a>
+  <div class='mt-4'>
+    {%- if card_product.metafields.custom.thumbnail_image != blank -%}
+      <div class='mb-2'>
+        <img
+          src='{{ card_product.metafields.custom.thumbnail_image | image_url: width: 1000 }}'
+          alt='{{ card_product.title | escape }}'
+          width='1000'
+          height='auto'
+          class='w-full h-auto'
+          loading='lazy'
+        >
+      </div>
+    {%- endif -%}
+    <div>
+      <h3 class='text-xl font-semibold mb-2' id='title-{{ section_id }}-{{ card_product.id }}'>
+        {{ card_product.title | escape }}
+      </h3>
+      <div class='mb-4'>
+        {% render 'price', product: card_product, show_compare_at_price: true, starting_price: true %}
+      </div>
+
+      {% assign product_form_id = 'quick-add-' | append: section_id | append: card_product.id %}
+
+      <div class='no-js-hidden'>
+        <modal-opener data-modal='#QuickAdd-{{ card_product.id }}'>
+          <button
+            id='{{ product_form_id }}-submit'
+            type='submit'
+            name='add'
+            class='w-full border border-black px-6 py-3 rounded-lg hover:bg-gray-100 transition'
+            aria-haspopup='dialog'
+            aria-labelledby='{{ product_form_id }}-submit title-{{ section_id }}-{{ card_product.id }}'
+            data-product-url='{{ card_product.url }}'
+          >
+            {{ 'products.product.quick_view' | t }}
+          </button>
+        </modal-opener>
+        <quick-add-modal
+          id='QuickAdd-{{ card_product.id }}'
+          class='fixed inset-0 z-50 opacity-0 invisible transition-opacity transition-[visibility] duration-200 is-active:opacity-100 is-active:visible is-active:block'
+        >
+          <div class='fixed inset-0 bg-black bg-opacity-50' id='OverlayClose-{{ card_product.id }}'></div>
+          <div
+            role='dialog'
+            aria-label='{{ 'products.product.choose_product_options' | t: product_name: card_product.title | escape }}'
+            aria-modal='true'
+            class='fixed inset-0 flex items-center justify-center p-4'
+            tabindex='-1'
+          >
+            <div class='bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 relative'>
+              <button
+                id='ModalClose-{{ card_product.id }}'
+                class='absolute top-4 right-4 w-8 h-8 flex items-center justify-center hover:bg-gray-100 rounded'
+                aria-label='{{ 'accessibility.close' | t }}'
+              >
+                {{- 'icon-close.svg' | inline_asset_content -}}
+              </button>
+              <div id='QuickAddInfo-{{ card_product.id }}'></div>
+            </div>
+          </div>
+        </quick-add-modal>
+      </div>
+    </div>
+  </div>
+</div>

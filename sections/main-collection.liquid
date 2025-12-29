@@ -1,0 +1,90 @@
+<div class='container mx-auto px-4 py-12'>
+  <div class='text-center mb-12'>
+    <h1 class='text-4xl md:text-5xl font-bold mb-4'>{{ collection.title }}</h1>
+    {%- if collection.description != blank -%}
+      <div class='max-w-3xl mx-auto text-lg text-gray-600'>
+        {{ collection.description }}
+      </div>
+    {%- endif -%}
+  </div>
+
+  {%- paginate collection.products by section.settings.products_per_page | default: 24 -%}
+    {%- if collection.products.size == 0 -%}
+      <div class='text-center py-20'>
+        <h2 class='text-2xl mb-6'>{{ 'sections.collection_template.empty' | t }}</h2>
+        <a
+          href='{{ routes.root_url }}'
+          class='inline-block bg-black text-white px-8 py-4 rounded-lg hover:bg-gray-800 transition'
+        >
+          {{ 'sections.collection_template.button' | t }}
+        </a>
+      </div>
+    {%- else -%}
+      <div class='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8'>
+        {%- for product in collection.products -%}
+          {% render 'card-product-medium', card_product: product, section_id: section.id %}
+        {%- endfor -%}
+      </div>
+
+      {%- if paginate.pages > 1 -%}
+        <nav role='navigation' aria-label='Pagination' class='mt-12'>
+          <ul class='flex flex-wrap justify-center gap-2'>
+            {%- if paginate.previous -%}
+              <li>
+                <a
+                  href='{{ paginate.previous.url }}'
+                  class='px-4 py-2 border border-gray-300 rounded hover:bg-gray-100 transition'
+                >
+                  {{ 'accessibility.previous' | t }}
+                </a>
+              </li>
+            {%- endif -%}
+            {%- for part in paginate.parts -%}
+              <li>
+                {%- if part.is_link -%}
+                  <a
+                    href='{{ part.url }}'
+                    class='px-4 py-2 border border-gray-300 rounded hover:bg-gray-100 transition'
+                  >
+                    {{ part.title }}
+                  </a>
+                {%- else -%}
+                  <span class='px-4 py-2 border border-gray-300 rounded bg-gray-100'>
+                    {{ part.title }}
+                  </span>
+                {%- endif -%}
+              </li>
+            {%- endfor -%}
+            {%- if paginate.next -%}
+              <li>
+                <a
+                  href='{{ paginate.next.url }}'
+                  class='px-4 py-2 border border-gray-300 rounded hover:bg-gray-100 transition'
+                >
+                  {{ 'accessibility.next' | t }}
+                </a>
+              </li>
+            {%- endif -%}
+          </ul>
+        </nav>
+      {%- endif -%}
+    {%- endif -%}
+  {%- endpaginate -%}
+</div>
+
+{% schema %}
+{
+  "name": "Collection",
+  "settings": [
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "label": "Products per page",
+      "min": 8,
+      "max": 48,
+      "step": 4,
+      "default": 24
+    }
+  ]
+}
+{% endschema %}

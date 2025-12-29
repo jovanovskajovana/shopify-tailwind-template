@@ -1,0 +1,36 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Shopify Tailwind Template",
+    "theme_version": "1.0.0",
+    "theme_author": "",
+    "theme_documentation_url": "https://help.shopify.com/manual/online-store/themes",
+    "theme_support_url": "https://support.shopify.com/"
+  },
+  {
+    "name": "Social Media",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Social Media Links"
+      },
+      {
+        "type": "text",
+        "id": "social_twitter_link",
+        "label": "Twitter/X Link",
+        "info": "Used for Twitter card meta tags. Example: https://twitter.com/yourhandle"
+      }
+    ]
+  },
+  {
+    "name": "Favicon",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon",
+        "info": "Favicon used for the website."
+      }
+    ]
+  }
+]
