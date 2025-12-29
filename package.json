@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "description": "A clean Shopify theme template built with Tailwind CSS.",
-  "author": "",
+  "author": "jovanovskajovana",
   "scripts": {
     "dev": "concurrently \"yarn dev:css\" \"yarn dev:shopify\"",
     "dev:css": "tailwindcss -i ./src/styles/theme.css -o ./assets/theme.css --watch",
