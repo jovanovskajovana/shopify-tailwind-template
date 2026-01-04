@@ -1,0 +1,88 @@
+{
+  "sections": {
+    "header": {
+      "name": "Header"
+    },
+    "footer": {
+      "name": "Footer"
+    },
+    "announcement-bar": {
+      "name": "Announcement bar"
+    },
+    "cart-drawer": {
+      "name": "Cart drawer"
+    },
+    "cart-bubble": {
+      "name": "Cart bubble"
+    },
+    "cart-live-region-text": {
+      "name": "Cart live region text"
+    },
+    "home-hero": {
+      "name": "Home hero"
+    },
+    "main-404": {
+      "name": "404"
+    },
+    "main-account": {
+      "name": "Account"
+    },
+    "main-activate-account": {
+      "name": "Activate account"
+    },
+    "main-addresses": {
+      "name": "Addresses"
+    },
+    "main-collection": {
+      "name": "Collection"
+    },
+    "main-login": {
+      "name": "Login"
+    },
+    "main-page": {
+      "name": "Page"
+    },
+    "main-product": {
+      "name": "Product"
+    },
+    "main-register": {
+      "name": "Register"
+    },
+    "main-reset-password": {
+      "name": "Reset password"
+    }
+  },
+  "settings": {
+    "social_media": {
+      "name": "Social Media",
+      "social_media_links": {
+        "label": "Social Media Links"
+      },
+      "social_twitter_link": {
+        "label": "Twitter/X Link",
+        "info": "Used for Twitter card meta tags. Example: https://twitter.com/yourhandle"
+      }
+    },
+    "favicon": {
+      "name": "Favicon",
+      "favicon": {
+        "label": "Favicon",
+        "info": "Favicon used for the website."
+      }
+    },
+    "header": {
+      "logo": {
+        "label": "Logo"
+      }
+    },
+    "footer": {
+      "contact_heading": {
+        "label": "Contact Heading"
+      },
+      "contact_info": {
+        "label": "Contact Information"
+      }
+    }
+  }
+}
+
