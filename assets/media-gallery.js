@@ -40,21 +40,19 @@ if (!customElements.get('media-gallery')) {
        */
       #initializeElements() {
         this.gallery = this.querySelector('#product-gallery')
-        this.images = this.gallery?.querySelectorAll('.gallery-img:not(.img-thumbnail)')
+        this.images = this.gallery?.querySelectorAll('.gallery-img')
         this.thumbnail = this.gallery?.querySelector('.img-thumbnail')
         this.nextButton = this.querySelector('#gallery-right-btn')
         this.prevButton = this.querySelector('#gallery-left-btn')
         this.dotsContainer = this.querySelector('.gallery-dots')
 
         if (!this.gallery || !this.images?.length) {
-          console.warn('Media Gallery: Required elements not found')
           return
         }
 
-        // Create dots container if it doesn't exist
         if (!this.dotsContainer) {
           this.dotsContainer = document.createElement('div')
-          this.dotsContainer.className = 'gallery-dots hidden md:flex justify-center gap-2 mt-4 absolute bottom-[30px] left-0 right-0'
+          this.dotsContainer.className = 'gallery-dots flex justify-center gap-2 mt-4'
           this.gallery.appendChild(this.dotsContainer)
         }
       }
@@ -116,24 +114,25 @@ if (!customElements.get('media-gallery')) {
         if (!this.images?.length) return
 
         if (this.thumbnail) {
-          this.thumbnail.style.opacity = this.#isThumbnailVisible ? '1' : '0'
+          this.thumbnail.classList.toggle('opacity-0', !this.#isThumbnailVisible)
         }
 
         this.images.forEach((img, index) => {
-          const isActive = index === this.#currentIndex
+          const isActive = !this.#isThumbnailVisible && index === this.#currentIndex
           img.classList.toggle('opacity-0', !isActive)
           img.classList.toggle('opacity-100', isActive)
-          img.setAttribute('aria-hidden', !isActive)
+          img.setAttribute('aria-hidden', String(!isActive))
         })
 
-        // Update dots
-        const dots = this.dotsContainer.querySelectorAll('.gallery-dot')
-        dots.forEach((dot, index) => {
-          const isActive = index === this.#currentIndex
-          dot.classList.toggle('bg-gray-300', !isActive)
-          dot.classList.toggle('bg-black', isActive)
-          dot.setAttribute('aria-current', isActive ? 'true' : 'false')
-        })
+        if (this.dotsContainer) {
+          const dots = this.dotsContainer.querySelectorAll('.gallery-dot')
+          dots.forEach((dot, index) => {
+            const isActive = !this.#isThumbnailVisible && index === this.#currentIndex
+            dot.classList.toggle('bg-gray-300', !isActive)
+            dot.classList.toggle('bg-black', isActive)
+            dot.setAttribute('aria-current', isActive ? 'true' : 'false')
+          })
+        }
       }
 
       /**
@@ -143,8 +142,13 @@ if (!customElements.get('media-gallery')) {
       #handleNext() {
         if (this.#isThumbnailVisible) {
           this.#isThumbnailVisible = false
+          this.#currentIndex = 0
         } else if (this.images?.length) {
-          this.#currentIndex = (this.#currentIndex + 1) % this.images.length
+          if (this.#currentIndex >= this.images.length - 1) {
+            this.#isThumbnailVisible = true
+          } else {
+            this.#currentIndex = this.#currentIndex + 1
+          }
         }
         this.#updateGallery()
       }
@@ -154,8 +158,15 @@ if (!customElements.get('media-gallery')) {
        * @private
        */
       #handlePrev() {
-        if (!this.#isThumbnailVisible && this.images?.length) {
-          this.#currentIndex = (this.#currentIndex - 1 + this.images.length) % this.images.length
+        if (this.#isThumbnailVisible && this.images?.length) {
+          this.#isThumbnailVisible = false
+          this.#currentIndex = this.images.length - 1
+        } else if (this.images?.length) {
+          if (this.#currentIndex === 0) {
+            this.#isThumbnailVisible = true
+          } else {
+            this.#currentIndex = this.#currentIndex - 1
+          }
         }
         this.#updateGallery()
       }

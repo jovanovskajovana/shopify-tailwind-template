@@ -5,7 +5,7 @@
       {%- if linklists.footer != blank -%}
         {%- for link in linklists.footer.links -%}
           <div>
-            <h3 class='font-bold mb-4'>{{ link.title }}</h3>
+            <h3 class='text-lg font-bold mb-4'>{{ link.title }}</h3>
             {%- if link.links != blank -%}
               <ul class='space-y-2'>
                 {%- for childlink in link.links -%}
@@ -22,8 +22,10 @@
       {%- comment -%} Contact Info {%- endcomment -%}
       {%- if section.settings.contact_info != blank -%}
         <div>
-          <h3 class='font-bold mb-4'>{{ section.settings.contact_heading }}</h3>
-          <p class='text-gray-400'>{{ section.settings.contact_info }}</p>
+          <h3 class='text-lg font-bold mb-4'>{{ section.settings.contact_heading }}</h3>
+          <a href='mailto:{{ section.settings.contact_info }}' class='text-gray-400 hover:text-gray-300'>
+            {{ section.settings.contact_info }}
+          </a>
         </div>
       {%- endif -%}
     </div>
@@ -53,7 +55,8 @@
 
 {% schema %}
 {
-  "name": "Footer",
+  "name": "t:sections.footer.name",
+  "tag": "section",
   "settings": [
     {
       "type": "text",

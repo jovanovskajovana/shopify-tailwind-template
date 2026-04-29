@@ -1,4 +1,4 @@
-<div class='container mx-auto px-4 py-12'>
+<section class='container mx-auto px-4 py-12'>
   <div class='text-center mb-12'>
     <h1 class='text-4xl md:text-5xl font-bold mb-4'>{{ collection.title }}</h1>
     {%- if collection.description != blank -%}
@@ -70,11 +70,12 @@
       {%- endif -%}
     {%- endif -%}
   {%- endpaginate -%}
-</div>
+</section>
 
 {% schema %}
 {
-  "name": "Collection",
+  "name": "t:sections.main-collection.name",
+  "tag": "section",
   "settings": [
     {
       "type": "range",

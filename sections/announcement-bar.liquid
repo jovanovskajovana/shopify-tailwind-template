@@ -1,28 +1,35 @@
-<div class='bg-black text-white py-2 overflow-hidden'>
-  <div class='flex animate-marquee whitespace-nowrap'>
-    {% capture elements %}
+<section class='bg-black text-white py-2 overflow-hidden'>
+  {% capture elements %}
     {% for block in section.blocks %}
       {% if block.settings.link %}
-        <a href="{{ block.settings.link }}" target="_blank" class="inline-block px-4 text-xs uppercase tracking-wider hover:opacity-80">
+        <a href="{{ block.settings.link }}" target="_blank" class="inline-block px-8 text-xs uppercase tracking-wider hover:opacity-80">
           <span class="mr-2">•</span>
           {{ block.settings.item_text }}
         </a>
       {% else %}
-        <span class="inline-block px-4 text-xs uppercase tracking-wider">
+        <span class="inline-block px-8 text-xs uppercase tracking-wider">
           <span class="mr-2">•</span>
           {{ block.settings.item_text }}
         </span>
       {% endif %}
     {% endfor %}
   {% endcapture %}
-    {{ elements }}
-    {{ elements }}
+
+  {% capture repeated %}
+    {{ elements }}{{ elements }}{{ elements }}{{ elements }}{{ elements }}{{ elements }}{{ elements }}{{ elements }}
+  {% endcapture %}
+
+  <div class='flex whitespace-nowrap'>
+    <div class='flex animate-marquee'>{{ repeated }}</div>
+    <div class='flex animate-marquee'>{{ repeated }}</div>
   </div>
-</div>
+</section>
 
 {% schema %}
 {
-  "name": "Announcement bar",
+  "name": "t:sections.announcement-bar.name",
+  "tag": "section",
+  "settings": [],
   "blocks": [
     {
       "type": "text",

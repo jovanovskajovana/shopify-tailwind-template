@@ -168,6 +168,9 @@
       "empty": "No products found.",
       "button": "Return back home"
     },
+    "featured_collection": {
+      "view_all": "View all"
+    },
     "quick_order_list": {
       "product_total": "Product subtotal",
       "view_cart": "View cart",

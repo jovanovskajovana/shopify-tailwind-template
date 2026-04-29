@@ -13,8 +13,15 @@
   "sections": {
     "announcement-bar": {
       "type": "announcement-bar",
-      "blocks": {},
-      "block_order": [],
+      "blocks": {
+        "item_1": {
+          "type": "text",
+          "settings": {
+            "item_text": "Free shipping on orders over $50"
+          }
+        }
+      },
+      "block_order": ["item_1"],
       "settings": {}
     },
     "header": {

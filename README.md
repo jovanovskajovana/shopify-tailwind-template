@@ -10,9 +10,18 @@ A clean Shopify theme template built with Tailwind CSS, based on [Shopify's Dawn
 - **Product Variants** - Dynamic variant selection
 - **Modern JavaScript** - ES6+ with custom elements (Web Components)
 
+## Prerequisites
+
+- [Node.js](https://nodejs.org/) (v18+)
+- [Yarn](https://yarnpkg.com/)
+- [Shopify CLI](https://shopify.dev/docs/api/shopify-cli) (`npm install -g @shopify/cli`)
+- A Shopify store — create a free [Shopify Partners](https://partners.shopify.com/) development store if you don't have one
+
+## Getting Started
+
 #### `develop`
 
-After cloning the repository, navigate to the root folder and install the dependencies:
+Clone the repository, navigate to the root folder, and install the dependencies:
 
 ```
 yarn
@@ -23,6 +32,8 @@ To start the development mode available at http://localhost:8000 run:
 ```
 yarn dev
 ```
+
+On first run, the Shopify CLI will prompt you to authenticate and select your store.
 
 #### `build`
 
@@ -102,18 +113,21 @@ Tailwind configuration is in `tailwind.config.js` with custom breakpoints and co
 ## Key Components
 
 ### Cart Drawer
+
 - AJAX cart updates
 - Real-time item count
 - Smooth animations
 - Accessible focus management
 
 ### Product Form
+
 - Dynamic variant selection
 - Quantity management
 - Error handling
 - Loading states
 
 ### Quick Add Modal
+
 - Fast product preview
 - Add to cart without leaving page
 - Modal dialog with focus trapping

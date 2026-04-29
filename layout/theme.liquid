@@ -2,9 +2,7 @@
 <html class='js' lang='{{ request.locale.iso_code }}'>
   <head>
     <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <meta name='viewport' content='width=device-width,initial-scale=1'>
-    <meta name='theme-color' content=''>
     <link rel='canonical' href='{{ canonical_url }}'>
 
     {%- if settings.favicon != blank -%}
@@ -24,24 +22,22 @@
 
     {% render 'meta-tags' %}
 
+    {{ content_for_header }}
+
+    {% comment %} Theme styles {% endcomment %}
+    {{ 'base.css' | asset_url | stylesheet_tag }}
+    {{ 'fonts.css' | asset_url | stylesheet_tag }}
+    {{ 'theme.css' | asset_url | stylesheet_tag }}
+
     {% comment %} Core JavaScript utilities {% endcomment %}
     <script src='{{ 'constants.js' | asset_url }}' defer='defer'></script>
     <script src='{{ 'pubsub.js' | asset_url }}' defer='defer'></script>
     <script src='{{ 'global.js' | asset_url }}' defer='defer'></script>
 
-    {% comment %} Component styles {% endcomment %}
-
     {% comment %} Component JavaScript {% endcomment %}
     <script src='{{ 'quick-add.js' | asset_url }}' defer='defer'></script>
     <script src='{{ 'product-info.js' | asset_url }}' defer='defer'></script>
     <script src='{{ 'product-form.js' | asset_url }}' defer='defer'></script>
-
-    {{ content_for_header }}
-
-    {% comment %} Theme styles {% endcomment %}
-    {{ 'theme.css' | asset_url | stylesheet_tag }}
-    {{ 'fonts.css' | asset_url | stylesheet_tag }}
-    {{ 'base.css' | asset_url | stylesheet_tag }}
 
     <script>
       if (Shopify.designMode) {
@@ -61,7 +57,7 @@
       {% sections 'header-group' %}
     </div>
 
-    <main id='MainContent' class='content-for-layout focus-none' role='main' tabindex='-1'>
+    <main id='MainContent' class='content-for-layout focus-none min-h-[60vh] pt-24' role='main' tabindex='-1'>
       {{ content_for_layout }}
     </main>
 

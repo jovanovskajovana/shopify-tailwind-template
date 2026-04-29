@@ -7,73 +7,73 @@
 >
   <div class='container mx-auto px-4 py-12'>
     <div class='grid grid-cols-1 md:grid-cols-2 gap-8'>
-      {%- comment -%} Product Images {%- endcomment -%}
+      {%- comment -%} Product Media {%- endcomment -%}
       <div>
-        {% if product.featured_image %}
-          <img
-            src='{{ product.featured_image | image_url: width: 800 }}'
-            alt='{{ product.featured_image.alt | escape }}'
-            width='800'
-            height='{{ 800 | divided_by: product.featured_image.aspect_ratio | round }}'
-            class='w-full rounded-lg'
-            loading='lazy'
-          >
-        {% endif %}
+        {% render 'product-media-gallery', product: product, section: section %}
       </div>
 
       {%- comment -%} Product Info {%- endcomment -%}
       <div>
         <h1 class='text-4xl font-bold mb-4'>{{ product.title }}</h1>
 
-        <div class='text-2xl font-semibold mb-6'>
-          {{ product.selected_or_first_available_variant.price | money }}
+        <div id='price-{{ section.id }}' class='text-2xl font-semibold mb-6'>
+          {% render 'price', product: product, use_variant: true, show_compare_at_price: true, starting_price: true %}
         </div>
 
         <div class='mb-8 text-gray-700 leading-relaxed [&>h2]:text-2xl [&>h2]:font-bold [&>h2]:mt-6 [&>h2]:mb-4 [&>h3]:text-xl [&>h3]:font-semibold [&>h3]:mt-4 [&>h3]:mb-3 [&>p]:mb-4 [&>ul]:list-disc [&>ul]:ml-6 [&>ul]:mb-4 [&>ol]:list-decimal [&>ol]:ml-6 [&>ol]:mb-4 [&>li]:mb-2 [&>a]:text-black [&>a]:underline [&>a]:hover:text-gray-600'>
           {{ product.description }}
         </div>
 
+        {%- unless product.has_only_default_variant -%}
+          <variant-selects
+            id='variant-selects-{{ section.id }}'
+            data-section='{{ section.id }}'
+            data-url='{{ product.url }}'
+            data-update-url='true'
+            {{ block.shopify_attributes }}
+          >
+            <div class='mb-6'>
+              {%- for option in product.options_with_values -%}
+                <div class='mb-4'>
+                  <label for='Option-{{ section.id }}-{{ forloop.index0 }}' class='block font-semibold mb-2'>
+                    {{ option.name }}
+                  </label>
+                  <select
+                    id='Option-{{ section.id }}-{{ forloop.index0 }}'
+                    name='options[{{ option.name | escape }}]'
+                    class='w-full border border-gray-300 rounded px-4 py-2'
+                  >
+                    {%- for value in option.values -%}
+                      <option
+                        value='{{ value | escape }}'
+                        data-option-value-id='{{ value | handleize }}'
+                        {% if option.selected_value == value %}
+                          selected='selected'
+                        {% endif %}
+                      >
+                        {{ value }}
+                      </option>
+                    {%- endfor -%}
+                  </select>
+                </div>
+              {%- endfor -%}
+            </div>
+          </variant-selects>
+        {%- endunless -%}
+
         <product-form class='product-form' data-section-id='{{ section.id }}'>
           <div class='mb-4 p-4 bg-red-50 border border-red-200 rounded-lg hidden' role='alert' hidden>
             <span class='text-sm text-red-700'></span>
           </div>
 
-          {%- form 'product', product, id: 'product-form', class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
+          {%- assign form_id = 'product-form-' | append: section.id -%}
+          {%- form 'product', product, id: form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
             <input
               type='hidden'
               name='id'
               value='{{ product.selected_or_first_available_variant.id }}'
               class='product-variant-id'
             >
-
-            {%- unless product.has_only_default_variant -%}
-              <div class='mb-6'>
-                {%- for option in product.options_with_values -%}
-                  <div class='mb-4'>
-                    <label for='Option-{{ section.id }}-{{ forloop.parentloop.index0 }}' class='block font-semibold mb-2'>
-                      {{ option.name }}
-                    </label>
-                    <select
-                      id='Option-{{ section.id }}-{{ forloop.parentloop.index0 }}'
-                      name='options[{{ option.name | escape }}]'
-                      form='product-form'
-                      class='w-full border border-gray-300 rounded px-4 py-2'
-                    >
-                      {%- for value in option.values -%}
-                        <option
-                          value='{{ value | escape }}'
-                          {% if option.selected_value == value %}
-                            selected='selected'
-                          {% endif %}
-                        >
-                          {{ value }}
-                        </option>
-                      {%- endfor -%}
-                    </select>
-                  </div>
-                {%- endfor -%}
-              </div>
-            {%- endunless -%}
 
             <div class='mb-4'>
               <label for='Quantity-{{ section.id }}' class='block font-semibold mb-2'>
@@ -118,7 +118,8 @@
 
 {% schema %}
 {
-  "name": "Product",
+  "name": "t:sections.main-product.name",
+  "tag": "section",
   "settings": []
 }
 {% endschema %}

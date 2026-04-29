@@ -1,4 +1,4 @@
-<div class='container mx-auto px-4 py-12'>
+<section class='container mx-auto px-4 py-12'>
   <h1 class='text-3xl font-bold mb-8'>{{ 'customer.addresses.title' | t }}</h1>
 
   {%- paginate customer.addresses by 5 -%}
@@ -387,7 +387,7 @@
       </nav>
     {%- endif -%}
   {%- endpaginate -%}
-</div>
+</section>
 
 <script>
   document.addEventListener('DOMContentLoaded', function () {
@@ -449,6 +449,7 @@
 
 {% schema %}
 {
-  "name": "Addresses"
+  "name": "t:sections.main-addresses.name",
+  "tag": "section"
 }
 {% endschema %}

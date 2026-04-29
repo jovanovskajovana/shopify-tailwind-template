@@ -14,7 +14,8 @@
     "footer": {
       "type": "footer",
       "settings": {
-        "contact_info": "Contact us for more information"
+        "contact_heading": "Contact",
+        "contact_info": "hello@jovanovskajovana.com"
       }
     }
   },

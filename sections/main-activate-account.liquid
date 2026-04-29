@@ -1,4 +1,4 @@
-<div class='container mx-auto px-4 py-12 max-w-md'>
+<section class='container mx-auto px-4 py-12 max-w-md'>
   <h1 class='text-3xl font-bold mb-4 text-center'>{{ 'customer.activate_account.title' | t }}</h1>
   {%- assign subtext = 'customer.activate_account.subtext' | t -%}
   {%- if subtext != blank -%}
@@ -78,10 +78,11 @@
       </a>
     </div>
   {%- endform -%}
-</div>
+</section>
 
 {% schema %}
 {
-  "name": "Activate Account"
+  "name": "t:sections.main-activate-account.name",
+  "tag": "section"
 }
 {% endschema %}

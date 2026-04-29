@@ -1,4 +1,4 @@
-<div class='container mx-auto px-4 py-12 max-w-md'>
+<section class='container mx-auto px-4 py-12 max-w-md'>
   <h1 class='text-3xl font-bold mb-8 text-center'>{{ 'customer.login_page.create_account' | t }}</h1>
 
   {%- form 'create_customer', class: 'form', novalidate: 'novalidate' -%}
@@ -95,10 +95,11 @@
       </a>
     </p>
   {%- endform -%}
-</div>
+</section>
 
 {% schema %}
 {
-  "name": "Register"
+  "name": "t:sections.main-register.name",
+  "tag": "section"
 }
 {% endschema %}
