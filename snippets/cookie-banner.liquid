@@ -1,0 +1,59 @@
+{% comment %}
+  Renders the cookie consent banner.
+
+  Usage:
+  {% render 'cookie-banner' %}
+{% endcomment %}
+
+<style>
+  #shopify-pc__banner {
+    display: none !important;
+  }
+</style>
+
+<div
+  class='fixed bottom-0 right-0 z-[999] w-full p-4 sm:max-w-md sm:p-6 translate-y-full transition-transform duration-500 ease-out'
+  data-cookie-banner
+>
+  <div class='bg-white-100 border border-gray-200 rounded-lg shadow-lg p-6'>
+    <h3 class='text-lg font-bold text-black-100 mb-2'>
+      {{ 'sections.cookie_banner.title' | t }}
+    </h3>
+    <p class='text-sm text-gray-600 leading-relaxed mb-4'>
+      {{ 'sections.cookie_banner.text' | t }}
+      {%- if pages['privacy-policy'] != blank %}
+        <a
+          href='{{ pages['privacy-policy'].url }}'
+          class='underline hover:text-black-100 transition-colors'
+        >
+          {{ 'sections.cookie_banner.privacy_link' | t -}}</a
+        >.
+      {%- endif -%}
+    </p>
+    <div class='flex items-center justify-between gap-4'>
+      <button
+        type='button'
+        class='text-sm text-gray-600 underline hover:text-black-100 transition-colors'
+        data-cookie-manage
+      >
+        {{ 'sections.cookie_banner.manage' | t }}
+      </button>
+      <div class='flex items-center gap-2'>
+        <button
+          type='button'
+          class='text-sm border border-black-100 text-black-100 px-4 py-2 rounded hover:bg-gray-100 transition-colors'
+          data-cookie-decline
+        >
+          {{ 'sections.cookie_banner.decline' | t }}
+        </button>
+        <button
+          type='button'
+          class='text-sm bg-black-100 text-white-100 px-4 py-2 rounded hover:bg-gray-800 transition-colors'
+          data-cookie-accept
+        >
+          {{ 'sections.cookie_banner.accept' | t }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

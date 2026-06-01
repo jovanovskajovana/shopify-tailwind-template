@@ -1,4 +1,4 @@
-<footer class='bg-gray-900 text-white py-12 mt-20'>
+<footer class='bg-gray-900 text-white py-12'>
   <div class='container mx-auto px-4'>
     <div class='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8'>
       {%- comment -%} Shop Links {%- endcomment -%}
@@ -22,7 +22,7 @@
       {%- comment -%} Contact Info {%- endcomment -%}
       {%- if section.settings.contact_info != blank -%}
         <div>
-          <h3 class='text-lg font-bold mb-4'>{{ section.settings.contact_heading }}</h3>
+          <h3 class='text-lg text-white-100 font-bold mb-4'>{{ section.settings.contact_heading }}</h3>
           <a href='mailto:{{ section.settings.contact_info }}' class='text-gray-400 hover:text-gray-300'>
             {{ section.settings.contact_info }}
           </a>
@@ -36,7 +36,7 @@
         <ul class='flex flex-wrap justify-center gap-4 text-sm'>
           {%- for policy in shop.policies -%}
             <li>
-              <a href='{{ policy.url }}' class='hover:text-gray-300'>{{ policy.title }}</a>
+              <a href='{{ policy.url }}' class='text-white-100 hover:text-gray-300'>{{ policy.title }}</a>
             </li>
           {%- endfor -%}
         </ul>

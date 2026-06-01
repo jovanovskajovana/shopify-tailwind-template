@@ -79,7 +79,7 @@
           id='QuickAdd-{{ card_product.id }}'
           class='fixed inset-0 z-50 opacity-0 invisible transition-opacity transition-[visibility] duration-200 is-active:opacity-100 is-active:visible is-active:block'
         >
-          <div class='fixed inset-0 bg-black bg-opacity-50' id='OverlayClose-{{ card_product.id }}'></div>
+          <div class='fixed inset-0 bg-black-100 bg-opacity-50' id='OverlayClose-{{ card_product.id }}'></div>
           <div
             role='dialog'
             aria-label='{{ 'products.product.choose_product_options' | t: product_name: card_product.title | escape }}'
@@ -87,7 +87,7 @@
             class='fixed inset-0 flex items-center justify-center p-4'
             tabindex='-1'
           >
-            <div class='bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 relative'>
+            <div class='bg-white-100 rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 relative'>
               <button
                 id='ModalClose-{{ card_product.id }}'
                 class='absolute top-4 right-4 w-8 h-8 flex items-center justify-center hover:bg-gray-100 rounded'

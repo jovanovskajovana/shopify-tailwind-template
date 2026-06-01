@@ -1,7 +1,7 @@
-<section class='container mx-auto px-4 py-12'>
+<section class='container mx-auto px-4 py-12' data-featured-collection-section>
   {%- if section.settings.heading != blank -%}
     <div class='text-center mb-12'>
-      <h2 class='text-4xl md:text-5xl font-bold mb-4'>{{ section.settings.heading }}</h2>
+      <h2 class='text-4xl md:text-5xl font-bold mb-4 opacity-0' data-featured-heading>{{ section.settings.heading }}</h2>
     </div>
   {%- endif -%}
 
@@ -12,7 +12,7 @@
   {%- endif -%}
 
   {%- if featured_collection.products.size > 0 -%}
-    <div class='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8'>
+    <div class='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 [&>*]:opacity-0' data-featured-grid>
       {%- for product in featured_collection.products limit: section.settings.products_to_show -%}
         {% render 'card-product-medium', card_product: product, section_id: section.id %}
       {%- endfor -%}
@@ -22,7 +22,8 @@
       <div class='text-center mt-12'>
         <a
           href='{{ featured_collection.url }}'
-          class='inline-block bg-black text-white px-8 py-4 rounded-lg hover:bg-gray-800 transition'
+          class='inline-block bg-black-100 text-white-100 px-8 py-4 rounded-lg hover:bg-gray-800 transition-colors opacity-0'
+          data-featured-button
         >
           {{ 'sections.featured_collection.view_all' | t }}
         </a>
@@ -30,6 +31,8 @@
     {%- endif -%}
   {%- endif -%}
 </section>
+
+<script src='{{ 'featured-collection.js' | asset_url }}' defer='defer'></script>
 
 {% schema %}
 {

@@ -62,6 +62,20 @@ if (!customElements.get('quick-add-modal')) {
         this.preventDuplicatedIDs(productElement)
         this.removeDOMElements(productElement)
         this.preventVariantURLSwitching(productElement)
+        this.revealAnimatedElements(productElement)
+      }
+
+      revealAnimatedElements(productElement) {
+        if (!productElement) return
+
+        // The product page hides these with `opacity-0` for a GSAP entrance
+        // animation that never runs inside the modal, so drop the class here.
+        const selector =
+          '[data-product-media], [data-product-title], [data-product-price], [data-product-description], [data-product-variants], [data-product-form]'
+
+        productElement.querySelectorAll(selector).forEach((element) => {
+          element.classList.remove('opacity-0')
+        })
       }
 
       preventVariantURLSwitching(productElement) {

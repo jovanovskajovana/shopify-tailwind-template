@@ -129,10 +129,19 @@
       "menu_items": {
         "shop": "Shop",
         "account": "Account",
+        "contact": "Contact",
         "cart": "Cart",
         "logo": "Logo",
         "back": "Back"
       }
+    },
+    "cookie_banner": {
+      "title": "Cookie consent",
+      "text": "We use cookies and similar technologies to keep things running smoothly, personalize your experience, and understand what works. We'll only do this if you're in. For details, see our",
+      "privacy_link": "Privacy Policy",
+      "accept": "Accept",
+      "decline": "Decline",
+      "manage": "Manage preferences"
     },
     "cart": {
       "title": "Your cart",

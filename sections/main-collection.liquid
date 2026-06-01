@@ -1,5 +1,5 @@
-<section class='container mx-auto px-4 py-12'>
-  <div class='text-center mb-12'>
+<section class='container mx-auto px-4 py-12' data-collection-section>
+  <div class='text-center mb-12 opacity-0' data-collection-heading>
     <h1 class='text-4xl md:text-5xl font-bold mb-4'>{{ collection.title }}</h1>
     {%- if collection.description != blank -%}
       <div class='max-w-3xl mx-auto text-lg text-gray-600'>
@@ -14,13 +14,13 @@
         <h2 class='text-2xl mb-6'>{{ 'sections.collection_template.empty' | t }}</h2>
         <a
           href='{{ routes.root_url }}'
-          class='inline-block bg-black text-white px-8 py-4 rounded-lg hover:bg-gray-800 transition'
+          class='inline-block bg-black-100 text-white-100 px-8 py-4 rounded-lg hover:bg-gray-800 transition-colors'
         >
           {{ 'sections.collection_template.button' | t }}
         </a>
       </div>
     {%- else -%}
-      <div class='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8'>
+      <div class='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 [&>*]:opacity-0' data-collection-grid>
         {%- for product in collection.products -%}
           {% render 'card-product-medium', card_product: product, section_id: section.id %}
         {%- endfor -%}
@@ -71,6 +71,8 @@
     {%- endif -%}
   {%- endpaginate -%}
 </section>
+
+<script src='{{ 'main-collection.js' | asset_url }}' defer='defer'></script>
 
 {% schema %}
 {

@@ -1,21 +1,31 @@
-<section class='container mx-auto px-4 py-12'>
-  <div class='text-center mb-12'>
-    <h1 class='text-4xl md:text-5xl font-bold mb-4'>{{ page.title }}</h1>
+<section class='min-h-[calc(100vh-var(--header-height,6rem))] flex items-center px-4' data-contact-section>
+  <div class='mx-auto w-full max-w-2xl text-center'>
+    <h1 class='text-4xl md:text-5xl font-bold tracking-tight mb-4 opacity-0' data-contact-heading>{{ page.title }}</h1>
+
     {%- if page.content != blank -%}
-      <div class='max-w-3xl mx-auto text-lg text-gray-600'>
+      <div class='mx-auto max-w-prose text-lg text-gray-600 leading-relaxed opacity-0' data-contact-content>
         {{ page.content }}
       </div>
     {%- endif -%}
-  </div>
 
-  <div class='max-w-xl mx-auto'>
-    <p class='text-lg text-center'>
-      <a href='mailto:{{ section.settings.email }}' class='text-black underline hover:text-gray-600'>
-        {{ section.settings.email }}
-      </a>
-    </p>
+    {%- if section.settings.email != blank -%}
+      <div class='mt-12 opacity-0' data-contact-cta>
+        <p class='text-sm uppercase tracking-widest text-gray-500 mb-3'>Get in touch</p>
+        <a
+          href='mailto:{{ section.settings.email }}'
+          class='inline-flex items-center gap-2 bg-black-100 text-white-100 px-8 py-4 rounded-lg hover:bg-gray-800 transition-colors'
+        >
+          <svg class='w-5 h-5' fill='none' stroke='currentColor' viewBox='0 0 24 24' aria-hidden='true'>
+            <path stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M3 8l9 6 9-6M3 8v8a2 2 0 002 2h14a2 2 0 002-2V8M3 8a2 2 0 012-2h14a2 2 0 012 2'></path>
+          </svg>
+          {{ section.settings.email }}
+        </a>
+      </div>
+    {%- endif -%}
   </div>
 </section>
+
+<script src='{{ 'main-contact.js' | asset_url }}' defer='defer'></script>
 
 {% schema %}
 {

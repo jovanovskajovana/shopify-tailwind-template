@@ -9,12 +9,12 @@
 
 <cart-drawer
   id='CartDrawer-Container'
-  class='fixed top-0 left-0 flex justify-end w-screen h-full opacity-0 invisible transition-all duration-300 z-[1000] bg-black/50{% if cart == empty %} is-empty{% endif %}'
+  class='fixed top-0 left-0 flex justify-end w-screen h-full opacity-0 invisible transition-all duration-300 z-[1000] bg-black-100/50{% if cart == empty %} is-empty{% endif %}'
 >
   <div id='CartDrawer' class='relative'>
     <div
       id='CartDrawer-Panel'
-      class='flex flex-col h-full max-w-full overflow-hidden bg-white w-[35vw] transform translate-x-full transition-transform duration-300 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]'
+      class='flex flex-col h-full max-w-full overflow-hidden bg-white-100 w-[35vw] transform translate-x-full transition-transform duration-300 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]'
       role='dialog'
       aria-modal='true'
       aria-label='{{ 'sections.cart.title' | t }}'
@@ -28,14 +28,13 @@
           </h2>
           <button
             id='CartDrawer-Close'
-            class='relative bg-transparent border rounded-full w-9 h-9 cursor-pointer'
+            class='flex items-center justify-center bg-transparent w-9 h-9 cursor-pointer'
             type='button'
             onclick="this.closest('cart-drawer').close()"
             aria-label='{{ 'accessibility.close' | t }}'
           >
             <span class='sr-only'>Close</span>
-            <span class='absolute top-1/2 left-1/2 w-4 h-px bg-black transform -translate-x-1/2 -translate-y-1/2 rotate-45'></span>
-            <span class='absolute top-1/2 left-1/2 w-4 h-px bg-black transform -translate-x-1/2 -translate-y-1/2 -rotate-45'></span>
+            {{- 'icon-close.svg' | inline_asset_content -}}
           </button>
         </div>
       </div>
@@ -204,7 +203,7 @@
         <button
           type='submit'
           id='CartDrawer-Checkout'
-          class='w-full bg-black text-white py-3 px-4 rounded font-semibold hover:bg-gray-800 transition-colors'
+          class='w-full bg-black-100 text-white-100 py-3 px-4 rounded font-semibold hover:bg-gray-800 transition-colors'
           name='checkout'
           form='CartDrawer-Form'
           {% if cart == empty %}
