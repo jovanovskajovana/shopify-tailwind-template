@@ -26,8 +26,9 @@ module.exports = {
       fontFamily: {
         // Add your custom fonts here
         //example:
-        sans: ['Inter', 'sans-serif'],
-        serif: ['Inter', 'serif'],
+        'helvetica-now': ['Helvetica Now Display', 'sans-serif'],
+        'pp-formula': ['PPFormula', 'monospace'],
+        'pp-formula-condensed': ['PPFormula Condensed', 'monospace'],
       },
       screens: {
         xs: '360px',
