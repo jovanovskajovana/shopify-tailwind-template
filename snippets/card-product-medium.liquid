@@ -67,7 +67,7 @@
             id='{{ product_form_id }}-submit'
             type='submit'
             name='add'
-            class='w-full border border-black px-6 py-3 rounded-lg hover:bg-gray-100 transition'
+            class='hover:bg-gray-100 border border-black rounded-lg w-full py-3 px-6 transition'
             aria-haspopup='dialog'
             aria-labelledby='{{ product_form_id }}-submit title-{{ section_id }}-{{ card_product.id }}'
             data-product-url='{{ card_product.url }}'
@@ -77,7 +77,7 @@
         </modal-opener>
         <quick-add-modal
           id='QuickAdd-{{ card_product.id }}'
-          class='fixed inset-0 z-50 opacity-0 invisible transition-opacity transition-[visibility] duration-200 is-active:opacity-100 is-active:visible is-active:block'
+          class='fixed inset-0 invisible is-active:visible is-active:block z-[1000] opacity-0 transition-opacity transition-[visibility] duration-200 is-active:opacity-100'
         >
           <div class='fixed inset-0 bg-black-100 bg-opacity-50' id='OverlayClose-{{ card_product.id }}'></div>
           <div
@@ -87,10 +87,10 @@
             class='fixed inset-0 flex items-center justify-center p-4'
             tabindex='-1'
           >
-            <div class='bg-white-100 rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 relative'>
+            <div class='relative bg-white-100 rounded-lg max-w-2xl w-full max-h-[90vh] p-6 overflow-y-auto'>
               <button
                 id='ModalClose-{{ card_product.id }}'
-                class='absolute top-4 right-4 w-8 h-8 flex items-center justify-center hover:bg-gray-100 rounded'
+                class='absolute top-4 right-4 flex items-center justify-center hover:bg-gray-100 rounded w-8 h-8'
                 aria-label='{{ 'accessibility.close' | t }}'
               >
                 {{- 'icon-close.svg' | inline_asset_content -}}

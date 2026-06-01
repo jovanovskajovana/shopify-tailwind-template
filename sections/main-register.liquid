@@ -1,11 +1,11 @@
-<section class='container mx-auto px-4 py-12 max-w-md'>
-  <h1 class='text-3xl font-bold mb-8 text-center'>{{ 'customer.login_page.create_account' | t }}</h1>
+<section class='max-w-md py-12 px-4 md:px-8 lg:px-12 mx-auto'>
+  <h1 class='text-3xl font-bold text-center mb-8'>{{ 'customer.login_page.create_account' | t }}</h1>
 
   {%- form 'create_customer', class: 'form', novalidate: 'novalidate' -%}
     {%- if form.errors -%}
-      <div class='mb-6 p-4 bg-red-50 border border-red-200 rounded-lg'>
+      <div class='bg-red-50 border border-red-200 rounded-lg p-4 mb-6'>
         <h2 class='text-red-800 font-semibold mb-2'>{{ 'accessibility.error' | t }}</h2>
-        <ul class='list-disc list-inside text-sm text-red-700'>
+        <ul class='text-sm text-red-700 list-disc list-inside'>
           {%- for field in form.errors -%}
             <li>
               {%- if field == 'form' -%}
@@ -23,7 +23,7 @@
     {%- endif -%}
 
     <div class='mb-4'>
-      <label for='RegisterFirstName' class='block mb-2 font-semibold'>
+      <label for='RegisterFirstName' class='block font-semibold mb-2'>
         {{ 'customer.register.first_name' | t }}
       </label>
       <input
@@ -32,19 +32,19 @@
         name='customer[first_name]'
         autocomplete='given-name'
         value='{{ form.first_name }}'
-        class='w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black'
+        class='border border-gray-300 focus:ring-2 focus:ring-black rounded w-full py-2 px-4 focus:outline-none'
         {% if form.errors contains 'first_name' %}
           aria-invalid='true'
           aria-describedby='first_name-error'
         {% endif %}
       >
       {%- if form.errors contains 'first_name' -%}
-        <p id='first_name-error' class='mt-1 text-sm text-red-600'>{{ form.errors.messages.first_name }}</p>
+        <p id='first_name-error' class='text-sm text-red-600 mt-1'>{{ form.errors.messages.first_name }}</p>
       {%- endif -%}
     </div>
 
     <div class='mb-4'>
-      <label for='RegisterEmail' class='block mb-2 font-semibold'>
+      <label for='RegisterEmail' class='block font-semibold mb-2'>
         {{ 'customer.register.email' | t }}
       </label>
       <input
@@ -53,19 +53,19 @@
         name='customer[email]'
         autocomplete='email'
         value='{{ form.email }}'
-        class='w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black'
+        class='border border-gray-300 focus:ring-2 focus:ring-black rounded w-full py-2 px-4 focus:outline-none'
         {% if form.errors contains 'email' %}
           aria-invalid='true'
           aria-describedby='email-error'
         {% endif %}
       >
       {%- if form.errors contains 'email' -%}
-        <p id='email-error' class='mt-1 text-sm text-red-600'>{{ form.errors.messages.email }}</p>
+        <p id='email-error' class='text-sm text-red-600 mt-1'>{{ form.errors.messages.email }}</p>
       {%- endif -%}
     </div>
 
     <div class='mb-6'>
-      <label for='RegisterPassword' class='block mb-2 font-semibold'>
+      <label for='RegisterPassword' class='block font-semibold mb-2'>
         {{ 'customer.register.password' | t }}
       </label>
       <input
@@ -73,24 +73,24 @@
         id='RegisterPassword'
         name='customer[password]'
         autocomplete='new-password'
-        class='w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-black'
+        class='border border-gray-300 focus:ring-2 focus:ring-black rounded w-full py-2 px-4 focus:outline-none'
         {% if form.errors contains 'password' %}
           aria-invalid='true'
           aria-describedby='password-error'
         {% endif %}
       >
       {%- if form.errors contains 'password' -%}
-        <p id='password-error' class='mt-1 text-sm text-red-600'>{{ form.errors.messages.password }}</p>
+        <p id='password-error' class='text-sm text-red-600 mt-1'>{{ form.errors.messages.password }}</p>
       {%- endif -%}
     </div>
 
-    <button type='submit' class='w-full bg-black text-white px-8 py-3 rounded-lg hover:bg-gray-800 transition'>
+    <button type='submit' class='bg-black hover:bg-gray-800 rounded-lg text-white w-full py-3 px-8 transition'>
       {{ 'customer.register.submit' | t }}
     </button>
 
-    <p class='mt-4 text-center text-sm text-gray-600'>
+    <p class='text-sm text-gray-600 text-center mt-4'>
       Already have an account?
-      <a href='{{ routes.account_login_url }}' class='underline hover:text-gray-800'>
+      <a href='{{ routes.account_login_url }}' class='hover:text-gray-800 underline'>
         {{ 'customer.login_page.log_in' | t }}
       </a>
     </p>

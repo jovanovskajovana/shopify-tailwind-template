@@ -1,13 +1,13 @@
-<section class='bg-white-100 text-black-100 border-b border-gray-200 py-2 overflow-hidden'>
+<section class='bg-white-100 border-b border-gray-200 text-black-100 py-2 overflow-hidden'>
   {% capture elements %}
     {% for block in section.blocks %}
       {% if block.settings.link %}
-        <a href="{{ block.settings.link }}" target="_blank" class="inline-block px-8 text-xs uppercase tracking-wider hover:opacity-80">
+        <a href="{{ block.settings.link }}" target="_blank" class="inline-block text-xs tracking-wider uppercase px-8 hover:opacity-80">
           <span class="mr-2">•</span>
           {{ block.settings.item_text }}
         </a>
       {% else %}
-        <span class="inline-block px-8 text-xs uppercase tracking-wider">
+        <span class="inline-block text-xs tracking-wider uppercase px-8">
           <span class="mr-2">•</span>
           {{ block.settings.item_text }}
         </span>

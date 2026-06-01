@@ -14,14 +14,14 @@
   <div id='CartDrawer' class='relative'>
     <div
       id='CartDrawer-Panel'
-      class='flex flex-col h-full max-w-full overflow-hidden bg-white-100 w-[35vw] transform translate-x-full transition-transform duration-300 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]'
+      class='flex flex-col bg-white-100 max-w-full w-[35vw] h-full overflow-hidden transform translate-x-full transition-transform duration-300 ease-[cubic-bezier(0.25,0.46,0.45,0.94)]'
       role='dialog'
       aria-modal='true'
       aria-label='{{ 'sections.cart.title' | t }}'
       tabindex='-1'
     >
       <div class='flex flex-col p-5'>
-        <div class='flex justify-between items-center border-b w-full pb-3'>
+        <div class='flex items-center justify-between border-b w-full pb-3'>
           <h2 id='CartDrawer-Title' class='text-xl font-semibold'>
             {{ 'sections.cart.title' | t }}
             <span id='CartDrawer-TitleCount' class='text-sm'>({{ cart.item_count }})</span>
@@ -57,7 +57,7 @@
               <div class='flex flex-col space-y-4' role='table'>
                 {%- for item in cart.items -%}
                   <div id='CartDrawer-Item-{{ item.index | plus: 1 }}' class='flex gap-4' role='row'>
-                    <div class='flex-shrink-0 w-20 h-20 rounded overflow-hidden' role='cell' headers='CartDrawer-ColumnProductImage'>
+                    <div class='rounded w-20 h-20 flex-shrink-0 overflow-hidden' role='cell' headers='CartDrawer-ColumnProductImage'>
                       <a href='{{ item.url }}' tabindex='-1' aria-hidden='true'>
                         <img
                           src='{{ item.image | image_url: width: 300 }}'
@@ -69,7 +69,7 @@
                         >
                       </a>
                     </div>
-                    <div class='flex-1 flex flex-col' role='cell' headers='CartDrawer-ColumnProduct'>
+                    <div class='flex flex-col flex-1' role='cell' headers='CartDrawer-ColumnProduct'>
                       <a href='{{ item.url }}' class='font-semibold mb-1'>
                         {{- item.product.title | escape -}}
                       </a>
@@ -114,7 +114,7 @@
                         <div class='flex items-center gap-2'>
                           <quantity-input class='quantity'>
                             <select
-                              class='border rounded px-2 py-1 text-sm'
+                              class='border rounded text-sm py-1 px-2'
                               data-quantity-variant-id='{{ item.variant.id }}'
                               name='updates[]'
                               data-cart-quantity='{{ cart | item_count_for_variant: item.variant.id }}'
@@ -195,15 +195,15 @@
               {{ 'accessibility.loading' | t }}
             </p>
           </div>
-          <div class='text-center text-sm text-red-600 mb-2' id='CartDrawer-CartErrors' role='alert'></div>
+          <div class='text-sm text-red-600 text-center mb-2' id='CartDrawer-CartErrors' role='alert'></div>
         </form>
       </cart-drawer-items>
 
-      <div class='border-t p-5 bg-gray-50'>
+      <div class='bg-gray-50 border-t p-5'>
         <button
           type='submit'
           id='CartDrawer-Checkout'
-          class='w-full bg-black-100 text-white-100 py-3 px-4 rounded font-semibold hover:bg-gray-800 transition-colors'
+          class='bg-black-100 hover:bg-gray-800 rounded text-white-100 font-semibold w-full py-3 px-4 transition-colors'
           name='checkout'
           form='CartDrawer-Form'
           {% if cart == empty %}
@@ -216,7 +216,7 @@
     </div>
     <div
       id='CartDrawer-LoadingSpinner'
-      class='absolute top-0 left-0 flex justify-center items-center w-full h-full pointer-events-none hidden'
+      class='absolute top-0 left-0 flex hidden items-center justify-center w-full h-full pointer-events-none'
       style='background-color: rgba(255, 255, 255, 0.8);'
     >
       <span id='CartDrawer-LoadingSpinnerInner' class='loading-spinner'></span>

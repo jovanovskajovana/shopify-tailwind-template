@@ -1,4 +1,4 @@
-<section class='container mx-auto px-4 py-12' data-featured-collection-section>
+<section class='max-w-screen-2xl py-12 px-4 md:px-8 lg:px-12 mx-auto' data-featured-collection-section>
   {%- if section.settings.heading != blank -%}
     <div class='text-center mb-12'>
       <h2 class='text-4xl md:text-5xl font-bold mb-4 opacity-0' data-featured-heading>{{ section.settings.heading }}</h2>
@@ -8,7 +8,7 @@
   {%- if section.settings.collection != blank -%}
     {%- assign featured_collection = section.settings.collection -%}
   {%- else -%}
-    {%- assign featured_collection = collections['all'] -%}
+    {%- assign featured_collection = collections.all -%}
   {%- endif -%}
 
   {%- if featured_collection.products.size > 0 -%}
@@ -22,7 +22,7 @@
       <div class='text-center mt-12'>
         <a
           href='{{ featured_collection.url }}'
-          class='inline-block bg-black-100 text-white-100 px-8 py-4 rounded-lg hover:bg-gray-800 transition-colors opacity-0'
+          class='inline-block bg-black-100 hover:bg-gray-800 rounded-lg text-white-100 py-4 px-8 transition-colors opacity-0'
           data-featured-button
         >
           {{ 'sections.featured_collection.view_all' | t }}

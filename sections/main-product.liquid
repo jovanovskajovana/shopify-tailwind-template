@@ -5,7 +5,7 @@
   data-update-url='true'
   data-url='{{ product.url }}'
 >
-  <div class='container mx-auto px-4 py-12' data-product-section>
+  <div class='max-w-screen-2xl py-12 px-4 md:px-8 lg:px-12 mx-auto' data-product-section>
     <div class='grid grid-cols-1 md:grid-cols-2 gap-8'>
       {%- comment -%} Product Media {%- endcomment -%}
       <div class='opacity-0' data-product-media>
@@ -46,7 +46,7 @@
                   <select
                     id='Option-{{ section.id }}-{{ forloop.index0 }}'
                     name='options[{{ option.name | escape }}]'
-                    class='w-full border border-gray-300 rounded px-4 py-2'
+                    class='border border-gray-300 rounded w-full py-2 px-4'
                   >
                     {%- for value in option.values -%}
                       <option
@@ -67,7 +67,7 @@
         {%- endunless -%}
 
         <product-form class='product-form opacity-0' data-section-id='{{ section.id }}' data-product-form>
-          <div class='mb-4 p-4 bg-red-50 border border-red-200 rounded-lg hidden' role='alert' hidden>
+          <div class='hidden bg-red-50 border border-red-200 rounded-lg p-4 mb-4' role='alert' hidden>
             <span class='text-sm text-red-700'></span>
           </div>
 
@@ -90,7 +90,7 @@
                 name='quantity'
                 value='1'
                 min='1'
-                class='w-full border border-gray-300 rounded px-4 py-2'
+                class='border border-gray-300 rounded w-full py-2 px-4'
               >
             </div>
 
@@ -98,7 +98,7 @@
               type='submit'
               name='add'
               id='ProductSubmitButton-{{ section.id }}'
-              class='w-full bg-black-100 text-white-100 px-8 py-4 rounded-lg hover:bg-gray-800 transition disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2'
+              class='flex items-center justify-center gap-2 bg-black-100 hover:bg-gray-800 rounded-lg text-white-100 w-full py-4 px-8 transition disabled:opacity-50 disabled:cursor-not-allowed'
               {% if product.selected_or_first_available_variant.available == false %}
                 disabled
               {% endif %}
@@ -110,7 +110,7 @@
                   {{ 'products.product.add_to_cart' | t }}
                 {%- endif -%}
               </span>
-              <span class='loading-spinner hidden'>
+              <span class='hidden loading-spinner'>
                 {%- render 'loading-spinner' -%}
               </span>
             </button>

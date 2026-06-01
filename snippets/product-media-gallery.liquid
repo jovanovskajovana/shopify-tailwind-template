@@ -122,11 +122,11 @@
 >
   <div class='sr-only' role='status' id='GalleryStatus-{{ section.id }}'></div>
   <div class='relative{% if class %} {{ class }}{% endif %}' id='product-gallery'>
-    <div class='relative overflow-hidden rounded-lg'>
+    <div class='relative rounded-lg overflow-hidden'>
       <img
         src='{{ selected_variant_thumbnail }}'
         alt='{{ product.title | escape }}'
-        class='img-thumbnail w-full h-auto transition-opacity duration-700 ease-gallery'
+        class='w-full h-auto img-thumbnail transition-opacity duration-700 ease-gallery'
         width='1000'
         height='auto'
         loading='eager'
@@ -138,23 +138,23 @@
         <img
           src='{{ media | image_url: width: 1000 }}'
           alt='{{ product.title | escape }}'
-          class='gallery-img absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-700 ease-gallery'
+          class='absolute inset-0 w-full h-full gallery-img object-cover opacity-0 transition-opacity duration-700 ease-gallery'
           width='1000'
           height='auto'
           loading='lazy'
           aria-hidden='true'
         >
       {%- endfor -%}
-      <div class='gallery-controls-container absolute inset-0 flex items-center justify-between pointer-events-none'>
+      <div class='absolute inset-0 flex items-center justify-between pointer-events-none gallery-controls-container'>
         <button
-          class='absolute left-4 w-10 h-10 bg-black bg-opacity-50 hover:bg-opacity-70 rounded-full flex items-center justify-center pointer-events-auto'
+          class='absolute left-4 flex items-center justify-center bg-black bg-opacity-50 hover:bg-opacity-70 rounded-full w-10 h-10 pointer-events-auto'
           id='gallery-left-btn'
           aria-label='{{ 'accessibility.previous' | t }}'
         >
           {{- 'icon-arrow-left-white.svg' | inline_asset_content -}}
         </button>
         <button
-          class='absolute right-4 w-10 h-10 bg-black bg-opacity-50 hover:bg-opacity-70 rounded-full flex items-center justify-center pointer-events-auto'
+          class='absolute right-4 flex items-center justify-center bg-black bg-opacity-50 hover:bg-opacity-70 rounded-full w-10 h-10 pointer-events-auto'
           id='gallery-right-btn'
           aria-label='{{ 'accessibility.next' | t }}'
         >

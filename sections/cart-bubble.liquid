@@ -1,13 +1,13 @@
 <a
   href='{{ routes.cart_url }}'
-  class='hover:text-gray-600 text-sm md:text-base relative no-underline'
+  class='relative text-sm md:text-base hover:text-gray-600 no-underline'
   id='cart-bubble-section'
   aria-label='{{ 'sections.header.menu_items.cart' | t }}'
 >
   {{ 'sections.header.menu_items.cart' | t }}
   {%- if cart.item_count > 0 -%}
     <span
-      class='absolute -top-2 -right-2 bg-black-100 text-white-100 text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center cart-count'
+      class='absolute -top-2 -right-2 flex items-center justify-center bg-black-100 rounded-full text-xs text-white-100 font-bold w-5 h-5 cart-count'
     >
       {{ cart.item_count }}
     </span>
