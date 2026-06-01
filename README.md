@@ -5,6 +5,7 @@ A clean Shopify theme template built with Tailwind CSS, based on [Shopify's Dawn
 ## Features
 
 - **Tailwind CSS** - Utility-first CSS framework
+- **Animations** - GSAP and Lenis bundled via Vite
 - **AJAX Cart** - Cart drawer with real-time updates
 - **Quick Add to Cart** - Quick view modal for products
 - **Product Variants** - Dynamic variant selection
@@ -88,6 +89,8 @@ yarn check
 ├── snippets/         # Reusable code snippets
 ├── templates/        # Page templates
 └── src/
+    ├── js/           # JavaScript source bundled by Vite
+    │   └── main.js   # Animation entry point (GSAP, Lenis)
     └── styles/       # Tailwind CSS source files
         └── theme.css # Main Tailwind input file
 ```
@@ -109,6 +112,17 @@ assets/theme.css
 Custom styles can be added using Tailwind's `@layer` directives in `src/styles/theme.css`.
 
 Tailwind configuration is in `tailwind.config.js` with custom breakpoints and content paths for Shopify Liquid files.
+
+## Animations
+
+JavaScript animation libraries are bundled with [Vite](https://vitejs.dev/):
+
+- **[GSAP](https://gsap.com/)** (with `ScrollTrigger`) - timeline and scroll-driven animations
+- **[Lenis](https://lenis.darkroom.engineering/)** - smooth scrolling
+
+The entry point is `src/js/main.js`, which initializes Lenis and syncs it with GSAP's `ScrollTrigger`. It compiles to `assets/main.js` and is loaded first in `layout/theme.liquid`. `gsap`, `ScrollTrigger`, and `lenis` are exposed on `window` for use in sections and snippets.
+
+Vite runs automatically with `yarn dev` (watch mode) and `yarn build` (minified), alongside the Tailwind compile step.
 
 ## Key Components
 

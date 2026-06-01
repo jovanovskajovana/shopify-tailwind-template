@@ -5,22 +5,27 @@
   "description": "A clean Shopify theme template built with Tailwind CSS.",
   "author": "jovanovskajovana",
   "scripts": {
-    "dev": "concurrently \"yarn dev:css\" \"yarn dev:shopify\"",
+    "dev": "concurrently \"yarn dev:css\" \"yarn dev:js\" \"yarn dev:shopify\"",
     "dev:css": "tailwindcss -i ./src/styles/theme.css -o ./assets/theme.css --watch",
+    "dev:js": "vite build --watch",
     "dev:shopify": "shopify theme dev --port 8000",
-    "build": "tailwindcss -i ./src/styles/theme.css -o ./assets/theme.css --minify",
+    "build": "tailwindcss -i ./src/styles/theme.css -o ./assets/theme.css --minify && vite build",
     "pull": "shopify theme pull",
     "push": "yarn build && shopify theme push",
     "check": "shopify theme check --auto-correct",
     "prettier": "prettier --write '**/*.{js,json,css,liquid}'"
   },
-  "dependencies": {},
+  "dependencies": {
+    "gsap": "^3.13.0",
+    "lenis": "^1.1.14"
+  },
   "devDependencies": {
     "@shopify/prettier-plugin-liquid": "^1.5.2",
     "autoprefixer": "^10.4.20",
     "concurrently": "^9.1.2",
     "postcss": "^8.4.49",
     "prettier": "^3.3.3",
-    "tailwindcss": "^3.4.17"
+    "tailwindcss": "^3.4.17",
+    "vite": "^5.4.0"
   }
 }

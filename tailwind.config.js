@@ -12,9 +12,22 @@ module.exports = {
     extend: {
       colors: {
         // Add your custom colors here
+        //example:
+        white: {
+          100: '#fff',
+        },
+        black: {
+          100: '#000',
+        },
+        blue: {
+          100: '#374295',
+        },
       },
       fontFamily: {
         // Add your custom fonts here
+        //example:
+        sans: ['Inter', 'sans-serif'],
+        serif: ['Inter', 'serif'],
       },
       screens: {
         xs: '360px',
@@ -26,20 +39,24 @@ module.exports = {
         xxl: '1900px',
       },
       transitionTimingFunction: {
+        //example:
         gallery: 'cubic-bezier(0, 0, 0.06, 1)',
       },
       keyframes: {
+        //example:
         marquee: {
           '0%': { transform: 'translateX(0)' },
           '100%': { transform: 'translateX(-100%)' },
         },
       },
       animation: {
+        //example:
         marquee: 'marquee 60s linear infinite',
       },
     },
   },
   plugins: [
+    //example:
     function ({ addVariant }) {
       addVariant('is-active', '&.is-active')
     },
