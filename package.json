@@ -8,7 +8,7 @@
     "dev": "concurrently \"yarn dev:css\" \"yarn dev:js\" \"yarn dev:shopify\"",
     "dev:css": "tailwindcss -i ./src/styles/theme.css -o ./assets/theme.css --watch",
     "dev:js": "vite build --watch",
-    "dev:shopify": "shopify theme dev --port 8000",
+"dev:shopify": "shopify theme dev --environment development --port 8000",
     "build": "tailwindcss -i ./src/styles/theme.css -o ./assets/theme.css --minify && vite build",
     "pull": "shopify theme pull",
     "push": "yarn build && shopify theme push",

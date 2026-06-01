@@ -1,11 +1,12 @@
 <header class='sticky top-0 bg-white-100 border-b border-gray-200 z-40'>
   <div class='max-w-screen-2xl px-4 md:px-8 lg:px-12 mx-auto'>
-    <div class='flex items-center justify-between h-16'>
+    <div class='grid grid-cols-3 items-center h-16'>
       {%- comment -%} Mobile Menu Toggle {%- endcomment -%}
       <button
         type='button'
-        class='md:hidden p-2'
+        class='md:hidden col-start-1 justify-self-start -ml-2 p-2'
         aria-label='{{ 'sections.header.menu_items.back' | t }}'
+        aria-expanded='false'
         data-mobile-menu-toggle
       >
         <svg class='w-6 h-6' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
@@ -13,14 +14,18 @@
         </svg>
       </button>
 
-      {%- comment -%} Logo {%- endcomment -%}
-      <a href='{{ routes.root_url }}' class='text-2xl font-bold'>
+      {%- comment -%} Logo (centered on mobile, left on desktop) {%- endcomment -%}
+      <a
+        href='{{ routes.root_url }}'
+        class='col-start-2 justify-self-center md:col-start-1 md:justify-self-start text-center md:text-left text-base md:text-2xl font-bold leading-none'
+      >
         {%- if section.settings.logo != blank -%}
           <img
-            src='{{ section.settings.logo | image_url: width: 200 }}'
+            class='h-8 md:h-10 w-auto object-contain'
+            src='{{ section.settings.logo | image_url: width: 400 }}'
             alt='{{ shop.name }}'
             width='200'
-            height='auto'
+            height='40'
             loading='eager'
           >
         {%- else -%}
@@ -30,37 +35,31 @@
 
       {%- comment -%} Desktop Navigation {%- endcomment -%}
       {%- if linklists['main-menu'] != blank -%}
-        <nav class='hidden md:flex space-x-8'>
+        <nav class='hidden md:flex md:col-start-2 md:justify-self-center space-x-6 lg:space-x-8'>
           {%- for link in linklists['main-menu'].links -%}
-            <a href='{{ link.url }}' class='hover:text-gray-600'>{{ link.title }}</a>
+            <a href='{{ link.url }}' class='whitespace-nowrap hover:text-gray-600'>{{ link.title }}</a>
           {%- endfor -%}
         </nav>
       {%- endif -%}
 
-      {%- comment -%} Mobile Menu (hidden by default) {%- endcomment -%}
+      {%- comment -%} Mobile Menu (hidden by default, toggled via JS) {%- endcomment -%}
       {%- if linklists['main-menu'] != blank -%}
         <nav
-          class='fixed top-16 left-0 right-0 hidden md:hidden bg-white-100 border-b border-gray-200 p-4'
+          class='fixed inset-x-0 top-16 hidden md:hidden max-h-[calc(100vh-4rem)] overflow-y-auto bg-white-100 border-b border-gray-200 shadow-lg px-4 sm:px-8'
           data-mobile-menu
         >
-          <ul class='space-y-4'>
+          <ul class='divide-y divide-gray-100'>
             {%- for link in linklists['main-menu'].links -%}
               <li>
-                <a href='{{ link.url }}' class='block hover:text-gray-600'>{{ link.title }}</a>
+                <a href='{{ link.url }}' class='block py-4 text-base hover:text-gray-600'>{{ link.title }}</a>
               </li>
             {%- endfor -%}
           </ul>
         </nav>
       {%- endif -%}
 
-      {%- comment -%} Contact, Account & Cart {%- endcomment -%}
-      <div class='flex items-center space-x-4 md:space-x-6'>
-        <a
-          href='{{ pages.contact.url | default: '/pages/contact' }}'
-          class='text-sm md:text-base hover:text-gray-600'
-        >
-          {{ 'sections.header.menu_items.contact' | t }}
-        </a>
+      {%- comment -%} Account & Cart {%- endcomment -%}
+      <div class='col-start-3 justify-self-end flex items-center space-x-4 md:space-x-6'>
         <a
           href='{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}'
           class='text-sm md:text-base hover:text-gray-600'

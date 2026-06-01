@@ -2,6 +2,18 @@
 
 A clean Shopify theme template built with Tailwind CSS, based on [Shopify's Dawn theme](https://github.com/Shopify/dawn). This template provides all of Dawn's features and functionality while using Tailwind CSS for styling, giving you a modern development workflow with utility classes.
 
+## Demo
+
+![Theme preview](docs/demo.gif)
+
+> [!NOTE]
+> The demo runs on a Shopify **development store**, which is password-protected and not a live storefront. Development stores can't have their storefront password removed and may be rate-limited.
+>
+> To browse the live theme, use the password-protected link below (the password is intentionally public — a dev store carries no real data):
+>
+> - **Preview:** [tailwind-theme-template.myshopify.com](https://tailwind-theme-template.myshopify.com)
+> - **Storefront password:** `seemow`
+
 ## Features
 
 - **Tailwind CSS** - Utility-first CSS framework

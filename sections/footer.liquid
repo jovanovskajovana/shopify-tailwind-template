@@ -5,7 +5,7 @@
       {%- if linklists.footer != blank -%}
         {%- for link in linklists.footer.links -%}
           <div>
-            <h3 class='text-lg font-bold mb-4'>{{ link.title }}</h3>
+            <h3 class='text-lg text-white-100 font-bold mb-4'>{{ link.title }}</h3>
             {%- if link.links != blank -%}
               <ul class='space-y-2'>
                 {%- for childlink in link.links -%}
