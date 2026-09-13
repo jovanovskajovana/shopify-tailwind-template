@@ -8,7 +8,7 @@
     {%- endif -%}
   </div>
 
-  {%- paginate collection.products by section.settings.products_per_page | default: 24 -%}
+  {%- paginate collection.products by section.settings.products_per_page -%}
     {%- if collection.products.size == 0 -%}
       <div class='text-center py-20'>
         <h2 class='text-2xl mb-6'>{{ 'sections.collection_template.empty' | t }}</h2>
@@ -91,3 +91,14 @@
   ]
 }
 {% endschema %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{%- paginate collection.products by section.settings.products_per_page |
+    default: 24 -%}"
+  to: "{%- paginate collection.products by section.settings.products_per_page -%}"
+  position: 430..504
+{% endcomment %}
