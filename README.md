@@ -1,6 +1,6 @@
 # Shopify Tailwind Template
 
-A clean Shopify theme template built with Tailwind CSS, based on [Shopify's Dawn theme](https://github.com/Shopify/dawn). This template provides all of Dawn's features and functionality while using Tailwind CSS for styling, giving you a modern development workflow with utility classes.
+A clean Shopify theme template built with Tailwind CSS, based on [Shopify's Dawn theme](https://github.com/Shopify/dawn). It is a storefront starter for the home page, catalog, product, cart, content pages, and contact, styled with utility classes.
 
 ## Demo
 
@@ -21,6 +21,7 @@ A clean Shopify theme template built with Tailwind CSS, based on [Shopify's Dawn
 - **AJAX Cart** - Cart drawer with real-time updates
 - **Quick Add to Cart** - Quick view modal for products
 - **Product Variants** - Dynamic variant selection
+- **Customer accounts** - Shopify-hosted sign-in, opened from the header
 - **Modern JavaScript** - ES6+ with custom elements (Web Components)
 
 ## Prerequisites
@@ -66,7 +67,7 @@ yarn prettier
 
 #### `pull`
 
-To pull the latest changes from the Shopify's schema, run:
+To pull the theme from the connected Shopify store, run:
 
 ```
 yarn pull
