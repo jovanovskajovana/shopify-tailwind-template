@@ -97,7 +97,6 @@
 
       // Create new gallery images stacked absolutely
       const imageContainer = galleryContainer.querySelector('.relative')
-      const controlsContainer = imageContainer?.querySelector('.gallery-controls-container')
       const fragment = document.createDocumentFragment()
       selectedGallery.gallery.forEach((imageUrl, index) => {
         if (index === 0) return
@@ -112,11 +111,7 @@
         fragment.appendChild(img)
       })
 
-      if (controlsContainer) {
-        imageContainer.insertBefore(fragment, controlsContainer)
-      } else if (imageContainer) {
-        imageContainer.appendChild(fragment)
-      }
+      if (imageContainer) imageContainer.appendChild(fragment)
 
       mediaGallery.reinitialize()
     }
@@ -167,22 +162,6 @@
             aria-hidden: 'true'
         }}
       {%- endfor -%}
-      <div class='absolute inset-0 flex items-center justify-between pointer-events-none gallery-controls-container'>
-        <button
-          class='absolute left-[4.267vw] lg:left-[1.111vw] flex items-center justify-center bg-black-100/50 hover:bg-black-100/70 rounded-full w-[10.667vw] lg:w-[2.778vw] h-[10.667vw] lg:h-[2.778vw] pointer-events-auto'
-          id='gallery-left-btn'
-          aria-label='{{ 'accessibility.previous' | t }}'
-        >
-          {{- 'icon-arrow-left-white.svg' | inline_asset_content -}}
-        </button>
-        <button
-          class='absolute right-[4.267vw] lg:right-[1.111vw] flex items-center justify-center bg-black-100/50 hover:bg-black-100/70 rounded-full w-[10.667vw] lg:w-[2.778vw] h-[10.667vw] lg:h-[2.778vw] pointer-events-auto'
-          id='gallery-right-btn'
-          aria-label='{{ 'accessibility.next' | t }}'
-        >
-          {{- 'icon-arrow-right-white.svg' | inline_asset_content -}}
-        </button>
-      </div>
     </div>
   </div>
 </media-gallery>

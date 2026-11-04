@@ -42,8 +42,6 @@ if (!customElements.get('media-gallery')) {
         this.gallery = this.querySelector('#product-gallery')
         this.images = this.gallery?.querySelectorAll('.gallery-img')
         this.thumbnail = this.gallery?.querySelector('.img-thumbnail')
-        this.nextButton = this.querySelector('#gallery-right-btn')
-        this.prevButton = this.querySelector('#gallery-left-btn')
         this.dotsContainer = this.querySelector('.gallery-dots')
 
         if (!this.gallery || !this.images?.length) {
@@ -52,7 +50,7 @@ if (!customElements.get('media-gallery')) {
 
         if (!this.dotsContainer) {
           this.dotsContainer = document.createElement('div')
-          this.dotsContainer.className = 'gallery-dots flex justify-center gap-[2.133vw] lg:gap-[0.556vw] mt-[4.267vw] lg:mt-[1.111vw]'
+          this.dotsContainer.className = 'gallery-dots absolute bottom-[4.267vw] lg:bottom-[1.111vw] inset-x-0 flex justify-center gap-[2.133vw] lg:gap-[0.556vw] z-10'
           this.gallery.appendChild(this.dotsContainer)
         }
       }
@@ -73,10 +71,6 @@ if (!customElements.get('media-gallery')) {
        * @private
        */
       #initializeGallery() {
-        // Button controls
-        this.#addEventListenerWithCleanup(this.nextButton, 'click', () => this.#handleNext())
-        this.#addEventListenerWithCleanup(this.prevButton, 'click', () => this.#handlePrev())
-
         // Keyboard navigation
         this.#addEventListenerWithCleanup(window, 'keydown', (event) => {
           if (document.activeElement === this || this.contains(document.activeElement)) {
@@ -125,9 +119,10 @@ if (!customElements.get('media-gallery')) {
         })
 
         if (this.dotsContainer) {
+          const activeIndex = this.thumbnail && this.#isThumbnailVisible ? 0 : (this.thumbnail ? this.#currentIndex + 1 : this.#currentIndex)
           const dots = this.dotsContainer.querySelectorAll('.gallery-dot')
           dots.forEach((dot, index) => {
-            const isActive = !this.#isThumbnailVisible && index === this.#currentIndex
+            const isActive = index === activeIndex
             dot.classList.toggle('bg-gray-300', !isActive)
             dot.classList.toggle('bg-black-100', isActive)
             dot.setAttribute('aria-current', isActive ? 'true' : 'false')
@@ -209,14 +204,24 @@ if (!customElements.get('media-gallery')) {
        * @private
        */
       #createDots() {
+        if (!this.dotsContainer) return
+
         this.dotsContainer.innerHTML = ''
-        this.images?.forEach((_, index) => {
+        const count = (this.thumbnail ? 1 : 0) + (this.images?.length || 0)
+        if (count < 2) {
+          this.dotsContainer.classList.add('hidden')
+          return
+        }
+
+        this.dotsContainer.classList.remove('hidden')
+        for (let index = 0; index < count; index += 1) {
           const dot = document.createElement('button')
-          dot.className = 'gallery-dot w-[7px] h-[7px] rounded-full border-0 bg-gray-300 p-0 cursor-pointer'
-          dot.setAttribute('aria-label', `Go to slide ${index + 1}`)
+          dot.type = 'button'
+          dot.className = 'gallery-dot bg-gray-300 border-0 rounded-full w-[2.133vw] lg:w-[0.556vw] h-[2.133vw] lg:h-[0.556vw] p-0 cursor-pointer'
+          dot.setAttribute('aria-label', `Go to image ${index + 1}`)
           this.#addEventListenerWithCleanup(dot, 'click', () => this.#handleDotClick(index))
           this.dotsContainer.appendChild(dot)
-        })
+        }
       }
 
       /**
@@ -224,8 +229,13 @@ if (!customElements.get('media-gallery')) {
        * @private
        */
       #handleDotClick(index) {
-        this.#isThumbnailVisible = false
-        this.#currentIndex = index
+        if (this.thumbnail && index === 0) {
+          this.#isThumbnailVisible = true
+          this.#currentIndex = 0
+        } else {
+          this.#isThumbnailVisible = false
+          this.#currentIndex = this.thumbnail ? index - 1 : index
+        }
         this.#updateGallery()
       }
     },
