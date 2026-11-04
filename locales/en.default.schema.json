@@ -24,20 +24,8 @@
     "main-404": {
       "name": "404"
     },
-    "main-account": {
-      "name": "Account"
-    },
-    "main-activate-account": {
-      "name": "Activate account"
-    },
-    "main-addresses": {
-      "name": "Addresses"
-    },
     "main-collection": {
       "name": "Collection"
-    },
-    "main-login": {
-      "name": "Login"
     },
     "main-page": {
       "name": "Page"
@@ -53,12 +41,6 @@
     },
     "newsletter": {
       "name": "Newsletter"
-    },
-    "main-register": {
-      "name": "Register"
-    },
-    "main-reset-password": {
-      "name": "Reset password"
     },
     "featured-collection": {
       "name": "Featured collection"
