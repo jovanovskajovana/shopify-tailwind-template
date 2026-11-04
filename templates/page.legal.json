@@ -16,7 +16,7 @@
           "type": "nav_link",
           "settings": {
             "label": "Privacy policy",
-            "page": "data-sharing-opt-out"
+            "page": "privacy-policy"
           }
         },
         "terms": {
