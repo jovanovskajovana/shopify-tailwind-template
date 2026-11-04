@@ -35,7 +35,6 @@
             data-url='{{ product.url }}'
             data-update-url='true'
             data-product-variants
-            {{ block.shopify_attributes }}
           >
             <div class='mb-6'>
               {%- for option in product.options_with_values -%}

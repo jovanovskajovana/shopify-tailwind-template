@@ -10,7 +10,8 @@
       {%- endif -%}
     </div>
 
-    {%- form 'customer', id: 'newsletter-form-{{ section.id }}', class: 'flex flex-col gap-4 w-full md:max-w-md' -%}
+    {%- assign form_id = 'NewsletterForm-' | append: section.id -%}
+    {%- form 'customer', id: form_id, class: 'flex flex-col gap-4 w-full md:max-w-md' -%}
       <input type='hidden' name='contact[tags]' value='newsletter'>
 
       <div class='flex items-center gap-2 bg-gray-900 rounded-lg p-2'>
