@@ -1,0 +1,87 @@
+<section class='bg-gray-800 text-white-100'>
+  <div class='flex flex-col md:flex-row md:items-center md:justify-between gap-8 max-w-screen-2xl py-12 px-4 md:px-8 lg:px-12 mx-auto'>
+    <div class='max-w-md'>
+      {%- if section.settings.heading != blank -%}
+        <h2 class='text-3xl md:text-4xl text-white-100 font-bold tracking-tight mb-3'>{{ section.settings.heading }}</h2>
+      {%- endif -%}
+
+      {%- if section.settings.text != blank -%}
+        <p class='text-gray-400 leading-relaxed'>{{ section.settings.text }}</p>
+      {%- endif -%}
+    </div>
+
+    {%- form 'customer', id: 'newsletter-form-{{ section.id }}', class: 'flex flex-col gap-4 w-full md:max-w-md' -%}
+      <input type='hidden' name='contact[tags]' value='newsletter'>
+
+      <div class='flex items-center gap-2 bg-gray-900 rounded-lg p-2'>
+        <label for='NewsletterEmail-{{ section.id }}' class='sr-only'>{{ section.settings.heading }}</label>
+        <input
+          type='email'
+          id='NewsletterEmail-{{ section.id }}'
+          name='contact[email]'
+          value='{% if form.email %}{{ form.email }}{% endif %}'
+          placeholder='{{ section.settings.placeholder }}'
+          class='bg-transparent text-white-100 placeholder:text-gray-500 w-full min-w-0 py-2 px-4 focus:outline-none'
+          autocomplete='email'
+          required
+        >
+        <button
+          type='submit'
+          class='flex-shrink-0 bg-white-100 hover:bg-gray-100 rounded-lg text-sm text-black-100 font-medium tracking-wider uppercase whitespace-nowrap py-3 px-6 transition-colors'
+        >
+          {{ section.settings.button_label }}
+        </button>
+      </div>
+
+      {%- if form.posted_successfully? -%}
+        <p class='text-sm text-gray-400' role='status'>{{ section.settings.success_message }}</p>
+      {%- elsif form.errors -%}
+        <div class='text-sm text-gray-400' role='alert'>{{ form.errors | default_errors }}</div>
+      {%- endif -%}
+    {%- endform -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "t:sections.newsletter.name",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Newsletter"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text",
+      "default": "Sign up for news and offers."
+    },
+    {
+      "type": "text",
+      "id": "placeholder",
+      "label": "Email placeholder",
+      "default": "Email"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "Subscribe"
+    },
+    {
+      "type": "text",
+      "id": "success_message",
+      "label": "Success message",
+      "default": "Thanks for subscribing."
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.newsletter.name"
+    }
+  ]
+}
+{% endschema %}

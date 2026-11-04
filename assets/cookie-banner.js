@@ -2,6 +2,22 @@ document.addEventListener('DOMContentLoaded', () => {
   const banner = document.querySelector('[data-cookie-banner]')
   if (!banner) return
 
+  const start = () => initBanner(banner)
+
+  if (window.Shopify && window.Shopify.customerPrivacy) {
+    start()
+    return
+  }
+
+  if (window.Shopify && typeof window.Shopify.loadFeatures === 'function') {
+    window.Shopify.loadFeatures([{ name: 'consent-tracking-api', version: '0.1' }], start)
+    return
+  }
+
+  start()
+})
+
+function initBanner(banner) {
   const privacy = window.Shopify && window.Shopify.customerPrivacy
 
   const hasConsent = () => {
@@ -54,4 +70,4 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     })
   }
-})
+}

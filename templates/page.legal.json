@@ -1,0 +1,33 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-legal",
+      "blocks": {
+        "privacy": {
+          "type": "nav_link",
+          "settings": {
+            "label": "Privacy policy",
+            "page": "privacy-policy"
+          }
+        },
+        "terms": {
+          "type": "nav_link",
+          "settings": {
+            "label": "Terms and conditions",
+            "page": "terms-and-conditions"
+          }
+        },
+        "cookies": {
+          "type": "nav_link",
+          "settings": {
+            "label": "Cookie policy",
+            "page": "cookie-policy"
+          }
+        }
+      },
+      "block_order": ["privacy", "terms", "cookies"],
+      "settings": {}
+    }
+  },
+  "order": ["main"]
+}

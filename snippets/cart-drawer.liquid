@@ -59,14 +59,18 @@
                   <div id='CartDrawer-Item-{{ item.index | plus: 1 }}' class='flex gap-4' role='row'>
                     <div class='rounded w-20 h-20 flex-shrink-0 overflow-hidden' role='cell' headers='CartDrawer-ColumnProductImage'>
                       <a href='{{ item.url }}' tabindex='-1' aria-hidden='true'>
-                        <img
-                          src='{{ item.image | image_url: width: 300 }}'
-                          alt='{{ item.title | escape }}'
-                          loading='lazy'
-                          width='300'
-                          height='300'
-                          class='w-full h-full object-cover'
-                        >
+                        {%- if item.image != blank -%}
+                          {{
+                            item.image
+                            | image_url: width: 320
+                            | image_tag:
+                              widths: '80, 160, 240, 320',
+                              sizes: '80px',
+                              alt: item.title,
+                              loading: 'lazy',
+                              class: 'w-full h-full object-cover'
+                          }}
+                        {%- endif -%}
                       </a>
                     </div>
                     <div class='flex flex-col flex-1' role='cell' headers='CartDrawer-ColumnProduct'>

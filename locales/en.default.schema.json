@@ -33,8 +33,17 @@
     "main-page": {
       "name": "Page"
     },
+    "main-legal": {
+      "name": "Legal"
+    },
     "main-product": {
       "name": "Product"
+    },
+    "product-reviews": {
+      "name": "Product reviews"
+    },
+    "newsletter": {
+      "name": "Newsletter"
     },
     "main-register": {
       "name": "Register"

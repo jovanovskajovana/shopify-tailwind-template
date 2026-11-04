@@ -14,9 +14,9 @@
   %}
 {% endcomment %}
 {% liquid
-  assign product_image = card_product.featured_media | image_url: width: 1000
+  assign card_image = card_product.featured_media
   if request.path == '/collections/all' and card_product.metafields.custom.product_grid_image != blank
-    assign product_image = card_product.metafields.custom.product_grid_image | image_url: width: 1000
+    assign card_image = card_product.metafields.custom.product_grid_image
   endif
 %}
 
@@ -28,27 +28,33 @@
     class='block'
   >
     <div class='aspect-square overflow-hidden'>
-      <img
-        src='{{ product_image }}'
-        alt='{{ card_product.title | escape }}'
-        width='1000'
-        height='1000'
-        class='w-full h-full object-cover'
-        loading='lazy'
-      >
+      {%- if card_image != blank -%}
+        {{
+          card_image
+          | image_url: width: 1600
+          | image_tag:
+            widths: '400, 600, 800, 1000, 1200, 1600',
+            sizes: '(min-width: 1700px) 25vw, (min-width: 1200px) 33vw, (min-width: 672px) 50vw, 100vw',
+            alt: card_product.title,
+            class: 'w-full h-full object-cover',
+            loading: 'lazy'
+        }}
+      {%- endif -%}
     </div>
   </a>
   <div class='mt-4'>
     {%- if card_product.metafields.custom.thumbnail_image != blank -%}
       <div class='mb-2'>
-        <img
-          src='{{ card_product.metafields.custom.thumbnail_image | image_url: width: 1000 }}'
-          alt='{{ card_product.title | escape }}'
-          width='1000'
-          height='auto'
-          class='w-full h-auto'
-          loading='lazy'
-        >
+        {{
+          card_product.metafields.custom.thumbnail_image
+          | image_url: width: 1600
+          | image_tag:
+            widths: '400, 600, 800, 1000, 1200, 1600',
+            sizes: '(min-width: 1700px) 25vw, (min-width: 1200px) 33vw, (min-width: 672px) 50vw, 100vw',
+            alt: card_product.title,
+            class: 'w-full h-auto',
+            loading: 'lazy'
+        }}
       </div>
     {%- endif -%}
     <div>

@@ -34,22 +34,22 @@
       </a>
 
       {%- comment -%} Desktop Navigation {%- endcomment -%}
-      {%- if linklists['main-menu'] != blank -%}
+      {%- if section.settings.menu != blank -%}
         <nav class='hidden md:flex md:col-start-2 md:justify-self-center space-x-6 lg:space-x-8'>
-          {%- for link in linklists['main-menu'].links -%}
+          {%- for link in section.settings.menu.links -%}
             <a href='{{ link.url }}' class='whitespace-nowrap hover:text-gray-600'>{{ link.title }}</a>
           {%- endfor -%}
         </nav>
       {%- endif -%}
 
       {%- comment -%} Mobile Menu (hidden by default, toggled via JS) {%- endcomment -%}
-      {%- if linklists['main-menu'] != blank -%}
+      {%- if section.settings.menu != blank -%}
         <nav
           class='fixed inset-x-0 top-16 hidden md:hidden max-h-[calc(100vh-4rem)] overflow-y-auto bg-white-100 border-b border-gray-200 shadow-lg px-4 sm:px-8'
           data-mobile-menu
         >
           <ul class='divide-y divide-gray-100'>
-            {%- for link in linklists['main-menu'].links -%}
+            {%- for link in section.settings.menu.links -%}
               <li>
                 <a href='{{ link.url }}' class='block py-4 text-base hover:text-gray-600'>{{ link.title }}</a>
               </li>
@@ -60,12 +60,11 @@
 
       {%- comment -%} Account & Cart {%- endcomment -%}
       <div class='col-start-3 justify-self-end flex items-center space-x-4 md:space-x-6'>
-        <a
-          href='{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}'
-          class='text-sm md:text-base hover:text-gray-600'
-        >
-          {{ 'sections.header.menu_items.account' | t }}
-        </a>
+        {%- if shop.customer_accounts_enabled -%}
+          <shopify-account class='text-sm md:text-base hover:text-gray-600' menu='customer-account-main-menu'>
+            {{ 'sections.header.menu_items.account' | t }}
+          </shopify-account>
+        {%- endif -%}
         <div class='relative'>
           <a
             href='{{ routes.cart_url }}'
@@ -99,6 +98,12 @@
       "type": "image_picker",
       "id": "logo",
       "label": "Logo"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu",
+      "default": "main-menu"
     }
   ]
 }

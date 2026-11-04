@@ -4,6 +4,17 @@ class CartDrawer extends HTMLElement {
 
     this.addEventListener('keyup', (evt) => evt.code === 'Escape' && this.close())
     this.setHeaderCartIconAccessibility()
+    this.openFromCartLink()
+  }
+
+  openFromCartLink() {
+    const params = new URLSearchParams(window.location.search)
+    if (params.get('cart') !== 'open') return
+
+    params.delete('cart')
+    const search = params.toString()
+    window.history.replaceState({}, '', `${window.location.pathname}${search ? `?${search}` : ''}${window.location.hash}`)
+    this.open()
   }
 
   setHeaderCartIconAccessibility() {

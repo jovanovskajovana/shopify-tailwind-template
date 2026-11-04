@@ -3,7 +3,13 @@
     "main": {
       "type": "main-product",
       "settings": {}
+    },
+    "reviews": {
+      "type": "product-reviews",
+      "settings": {
+        "heading": "Reviews"
+      }
     }
   },
-  "order": ["main"]
+  "order": ["main", "reviews"]
 }

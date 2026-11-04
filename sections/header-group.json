@@ -28,7 +28,9 @@
       "type": "header",
       "blocks": {},
       "block_order": [],
-      "settings": {}
+      "settings": {
+        "menu": "main-menu"
+      }
     }
   },
   "order": ["announcement-bar", "header"]

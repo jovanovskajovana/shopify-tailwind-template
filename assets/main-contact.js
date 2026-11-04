@@ -1,8 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-  if (!window.gsap) return
-
-  const { gsap } = window
-
   const section = document.querySelector('[data-contact-section]')
   if (!section) return
 
@@ -12,6 +8,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const targets = [heading, content, cta].filter(Boolean)
   if (!targets.length) return
+
+  if (!window.gsap || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    targets.forEach((el) => el.classList.remove('opacity-0'))
+    return
+  }
+
+  const { gsap } = window
 
   // Entrance animation: fade and slide the content up in sequence.
   gsap.set(targets, { opacity: 0, y: 40 })

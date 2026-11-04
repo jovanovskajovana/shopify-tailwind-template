@@ -6,6 +6,11 @@ gsap.registerPlugin(ScrollTrigger)
 ScrollTrigger.config({ ignoreMobileResize: true })
 
 function init() {
+  window.gsap = gsap
+  window.ScrollTrigger = ScrollTrigger
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+
   const lenis = new Lenis({
     duration: 1.2,
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -24,8 +29,6 @@ function init() {
   gsap.ticker.lagSmoothing(0)
 
   window.lenis = lenis
-  window.gsap = gsap
-  window.ScrollTrigger = ScrollTrigger
 }
 
 if (document.readyState === 'loading') {

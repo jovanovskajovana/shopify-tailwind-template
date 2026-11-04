@@ -11,13 +11,24 @@
   "name": "t:sections.footer.name",
   "type": "footer",
   "sections": {
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "heading": "Newsletter",
+        "text": "Sign up for news and offers.",
+        "placeholder": "Email",
+        "button_label": "Subscribe",
+        "success_message": "Thanks for subscribing."
+      }
+    },
     "footer": {
       "type": "footer",
       "settings": {
+        "menu": "footer",
         "contact_heading": "Contact",
         "contact_info": "hello@jovanovskajovana.com"
       }
     }
   },
-  "order": ["footer"]
+  "order": ["newsletter", "footer"]
 }

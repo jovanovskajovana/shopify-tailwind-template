@@ -22,7 +22,7 @@
   if selected_variant_images == blank
     assign selected_variant_images = product.images
   endif
-  assign selected_variant_thumbnail = selected_variant_images | first | image_url: width: 1000
+  assign selected_variant_image = selected_variant_images | first
 
   # Build variant galleries JSON
   assign variant_galleries = ''
@@ -34,11 +34,11 @@
 
     assign image_urls = '['
     for image in gallery_data
-      assign image_url = image | image_url: width: 1000
+      assign image_url = image | image_url: width: 1600 | json
       if forloop.last
-        assign image_urls = image_urls | append: '"' | append: image_url | append: '"'
+        assign image_urls = image_urls | append: image_url
       else
-        assign image_urls = image_urls | append: '"' | append: image_url | append: '",'
+        assign image_urls = image_urls | append: image_url | append: ','
       endif
     endfor
     assign image_urls = image_urls | append: ']'
@@ -71,10 +71,25 @@
       const galleryContainer = document.getElementById('product-gallery')
       if (!galleryContainer) return
 
+      const galleryWidths = [400, 800, 1200, 1600]
+      const gallerySizes = '(min-width: 992px) 50vw, 100vw'
+
+      const withWidth = (url, width) => {
+        const parsed = new URL(url, window.location.origin)
+        parsed.searchParams.set('width', String(width))
+        return parsed.toString()
+      }
+
+      const setResponsive = (img, url) => {
+        img.src = withWidth(url, 1600)
+        img.srcset = galleryWidths.map((width) => `${withWidth(url, width)} ${width}w`).join(', ')
+        img.sizes = gallerySizes
+      }
+
       // Update thumbnail
       const thumbnailImg = galleryContainer.querySelector('.img-thumbnail')
       if (thumbnailImg && selectedGallery.gallery[0]) {
-        thumbnailImg.src = selectedGallery.gallery[0]
+        setResponsive(thumbnailImg, selectedGallery.gallery[0])
       }
 
       // Clear existing gallery images (not thumbnail or controls)
@@ -87,7 +102,7 @@
       selectedGallery.gallery.forEach((imageUrl, index) => {
         if (index === 0) return
         const img = document.createElement('img')
-        img.src = imageUrl
+        setResponsive(img, imageUrl)
         img.className = 'gallery-img absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-700 ease-gallery'
         img.alt = ''
         img.width = '1000'
@@ -123,27 +138,34 @@
   <div class='sr-only' role='status' id='GalleryStatus-{{ section.id }}'></div>
   <div class='relative{% if class %} {{ class }}{% endif %}' id='product-gallery'>
     <div class='relative rounded-lg overflow-hidden'>
-      <img
-        src='{{ selected_variant_thumbnail }}'
-        alt='{{ product.title | escape }}'
-        class='w-full h-auto img-thumbnail transition-opacity duration-700 ease-gallery'
-        width='1000'
-        height='auto'
-        loading='eager'
-      >
+      {%- if selected_variant_image != blank -%}
+        {{
+          selected_variant_image
+          | image_url: width: 1600
+          | image_tag:
+            widths: '400, 800, 1200, 1600',
+            sizes: '(min-width: 992px) 50vw, 100vw',
+            alt: product.title,
+            class: 'w-full h-auto img-thumbnail transition-opacity duration-700 ease-gallery',
+            loading: 'eager',
+            fetchpriority: 'high'
+        }}
+      {%- endif -%}
       {%- for media in selected_variant_images -%}
         {%- if forloop.first -%}
           {%- continue -%}
         {%- endif -%}
-        <img
-          src='{{ media | image_url: width: 1000 }}'
-          alt='{{ product.title | escape }}'
-          class='absolute inset-0 w-full h-full gallery-img object-cover opacity-0 transition-opacity duration-700 ease-gallery'
-          width='1000'
-          height='auto'
-          loading='lazy'
-          aria-hidden='true'
-        >
+        {{
+          media
+          | image_url: width: 1600
+          | image_tag:
+            widths: '400, 800, 1200, 1600',
+            sizes: '(min-width: 992px) 50vw, 100vw',
+            alt: product.title,
+            class: 'absolute inset-0 w-full h-full gallery-img object-cover opacity-0 transition-opacity duration-700 ease-gallery',
+            loading: 'lazy',
+            aria-hidden: 'true'
+        }}
       {%- endfor -%}
       <div class='absolute inset-0 flex items-center justify-between pointer-events-none gallery-controls-container'>
         <button

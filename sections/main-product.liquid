@@ -51,8 +51,8 @@
                     {%- for value in option.values -%}
                       <option
                         value='{{ value | escape }}'
-                        data-option-value-id='{{ value | handleize }}'
-                        {% if option.selected_value == value %}
+                        data-option-value-id='{{ value.id }}'
+                        {% if value.selected %}
                           selected='selected'
                         {% endif %}
                       >

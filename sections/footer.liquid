@@ -2,15 +2,15 @@
   <div class='max-w-screen-2xl px-4 md:px-8 lg:px-12 mx-auto'>
     <div class='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8'>
       {%- comment -%} Shop Links {%- endcomment -%}
-      {%- if linklists.footer != blank -%}
-        {%- for link in linklists.footer.links -%}
+      {%- if section.settings.menu != blank -%}
+        {%- for link in section.settings.menu.links -%}
           <div>
             <h3 class='text-lg text-white-100 font-bold mb-4'>{{ link.title }}</h3>
             {%- if link.links != blank -%}
               <ul class='space-y-2'>
                 {%- for childlink in link.links -%}
                   <li>
-                    <a href='{{ childlink.url }}' class='hover:text-gray-300'>{{ childlink.title }}</a>
+                    <a href='{{ childlink.url }}' class='text-gray-400 hover:text-gray-300'>{{ childlink.title }}</a>
                   </li>
                 {%- endfor -%}
               </ul>
@@ -30,15 +30,22 @@
       {%- endif -%}
     </div>
 
-    {%- comment -%} Policy Links {%- endcomment -%}
-    {%- if shop.policies.size > 0 -%}
+    {%- capture legal_links -%}
+      {%- assign legal_handles = 'privacy-policy,terms-and-conditions,cookie-policy' | split: ',' -%}
+      {%- for handle in legal_handles -%}
+        {%- assign legal_page = pages[handle] -%}
+        {%- if legal_page != blank -%}
+          <li>
+            <a href='{{ legal_page.url }}' class='text-white-100 hover:text-gray-300'>{{ legal_page.title }}</a>
+          </li>
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endcapture -%}
+
+    {%- if legal_links != blank -%}
       <div class='border-t border-gray-800 pt-8 mt-8'>
         <ul class='flex flex-wrap justify-center gap-4 text-sm'>
-          {%- for policy in shop.policies -%}
-            <li>
-              <a href='{{ policy.url }}' class='text-white-100 hover:text-gray-300'>{{ policy.title }}</a>
-            </li>
-          {%- endfor -%}
+          {{ legal_links }}
         </ul>
       </div>
     {%- endif -%}
@@ -58,6 +65,12 @@
   "name": "t:sections.footer.name",
   "tag": "section",
   "settings": [
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu",
+      "default": "footer"
+    },
     {
       "type": "text",
       "id": "contact_heading",

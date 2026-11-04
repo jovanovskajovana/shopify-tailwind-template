@@ -21,12 +21,13 @@
     </h3>
     <p class='text-sm text-gray-600 leading-relaxed mb-4'>
       {{ 'sections.cookie_banner.text' | t }}
-      {%- if pages['privacy-policy'] != blank %}
+      {%- assign cookie_policy_page = pages['cookie-policy'] -%}
+      {%- if cookie_policy_page != blank %}
         <a
-          href='{{ pages['privacy-policy'].url }}'
+          href='{{ cookie_policy_page.url }}'
           class='hover:text-black-100 underline transition-colors'
         >
-          {{ 'sections.cookie_banner.privacy_link' | t -}}</a
+          {{ cookie_policy_page.title -}}</a
         >.
       {%- endif -%}
     </p>

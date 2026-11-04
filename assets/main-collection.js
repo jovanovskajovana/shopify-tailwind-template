@@ -1,8 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-  if (!window.gsap) return
-
-  const { gsap } = window
-
   const section = document.querySelector('[data-collection-section]')
   if (!section) return
 
@@ -12,6 +8,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const targets = [heading, ...cards].filter(Boolean)
   if (!targets.length) return
+
+  if (!window.gsap || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    heading?.classList.remove('opacity-0')
+    grid?.classList.remove('[&>*]:opacity-0')
+    return
+  }
+
+  const { gsap } = window
 
   gsap.set(targets, { opacity: 0, y: 40 })
 

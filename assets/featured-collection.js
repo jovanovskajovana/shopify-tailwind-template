@@ -1,8 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-  if (!window.gsap) return
-
-  const { gsap } = window
-
   const section = document.querySelector('[data-featured-collection-section]')
   if (!section) return
 
@@ -13,6 +9,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const targets = [heading, ...cards, button].filter(Boolean)
   if (!targets.length) return
+
+  if (!window.gsap || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    heading?.classList.remove('opacity-0')
+    button?.classList.remove('opacity-0')
+    grid?.classList.remove('[&>*]:opacity-0')
+    return
+  }
+
+  const { gsap } = window
 
   // Reveal the content once the section scrolls into view.
   gsap.set(targets, { opacity: 0, y: 40 })
