@@ -1,16 +1,16 @@
-<footer class='bg-gray-900 text-white py-12'>
-  <div class='max-w-screen-2xl px-4 md:px-8 lg:px-12 mx-auto'>
-    <div class='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8'>
+<footer class='bg-gray-900 text-white-100 py-[12.8vw] lg:py-[3.333vw]' data-footer-section>
+  <div class='px-[4.267vw] lg:px-[3.333vw] mx-auto opacity-0' data-footer-reveal>
+    <div class='grid grid-cols-1 lg:grid-cols-4 gap-[8.533vw] lg:gap-[2.222vw]'>
       {%- comment -%} Shop Links {%- endcomment -%}
       {%- if section.settings.menu != blank -%}
         {%- for link in section.settings.menu.links -%}
           <div>
-            <h3 class='text-lg text-white-100 font-bold mb-4'>{{ link.title }}</h3>
+            <h3 class='text-[4.8vw] lg:text-[1.25vw] text-white-100 font-bold leading-[1.556] mb-[4.267vw] lg:mb-[1.111vw]'>{{ link.title }}</h3>
             {%- if link.links != blank -%}
-              <ul class='space-y-2'>
+              <ul class='space-y-[2.133vw] lg:space-y-[0.556vw]'>
                 {%- for childlink in link.links -%}
                   <li>
-                    <a href='{{ childlink.url }}' class='text-gray-400 hover:text-gray-300'>{{ childlink.title }}</a>
+                    <a href='{{ childlink.url }}' class='text-[4.267vw] lg:text-[1.111vw] text-gray-400 hover:text-gray-300 leading-[1.5]'>{{ childlink.title }}</a>
                   </li>
                 {%- endfor -%}
               </ul>
@@ -22,8 +22,8 @@
       {%- comment -%} Contact Info {%- endcomment -%}
       {%- if section.settings.contact_info != blank -%}
         <div>
-          <h3 class='text-lg text-white-100 font-bold mb-4'>{{ section.settings.contact_heading }}</h3>
-          <a href='mailto:{{ section.settings.contact_info }}' class='text-gray-400 hover:text-gray-300'>
+          <h3 class='text-[4.8vw] lg:text-[1.25vw] text-white-100 font-bold leading-[1.556] mb-[4.267vw] lg:mb-[1.111vw]'>{{ section.settings.contact_heading }}</h3>
+          <a href='mailto:{{ section.settings.contact_info }}' class='text-[4.267vw] lg:text-[1.111vw] text-gray-400 hover:text-gray-300 leading-[1.5]'>
             {{ section.settings.contact_info }}
           </a>
         </div>
@@ -43,22 +43,24 @@
     {%- endcapture -%}
 
     {%- if legal_links != blank -%}
-      <div class='border-t border-gray-800 pt-8 mt-8'>
-        <ul class='flex flex-wrap justify-center gap-4 text-sm'>
+      <div class='border-t border-gray-800 pt-[8.533vw] lg:pt-[2.222vw] mt-[8.533vw] lg:mt-[2.222vw]'>
+        <ul class='flex flex-wrap justify-center gap-[4.267vw] lg:gap-[1.111vw] text-[3.733vw] lg:text-[0.972vw] leading-[1.429]'>
           {{ legal_links }}
         </ul>
       </div>
     {%- endif -%}
 
     {%- comment -%} Copyright {%- endcomment -%}
-    <div class='border-t border-gray-800 text-gray-400 text-center pt-8 mt-8'>
-      <p>
+    <div class='border-t border-gray-800 text-gray-400 text-center pt-[8.533vw] lg:pt-[2.222vw] mt-[8.533vw] lg:mt-[2.222vw]'>
+      <p class='text-[4.267vw] lg:text-[1.111vw] leading-[1.5]'>
         &copy; {{ 'now' | date: '%Y' }}
         {{ shop.name }}. All rights reserved.
       </p>
     </div>
   </div>
 </footer>
+
+<script src='{{ 'footer.js' | asset_url }}' defer='defer'></script>
 
 {% schema %}
 {

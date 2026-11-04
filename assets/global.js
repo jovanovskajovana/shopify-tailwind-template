@@ -9,17 +9,17 @@ function getFocusableElements(container) {
 class SectionId {
   static #separator = '__'
 
-  // For a qualified section id (e.g. 'template--22224696705326__main'), return just the section id (e.g. 'template--22224696705326')
+  // For a qualified section id (for example 'template--22224696705326__main'), return just the section id (for example 'template--22224696705326')
   static parseId(qualifiedSectionId) {
     return qualifiedSectionId.split(SectionId.#separator)[0]
   }
 
-  // For a qualified section id (e.g. 'template--22224696705326__main'), return just the section name (e.g. 'main')
+  // For a qualified section id (for example 'template--22224696705326__main'), return just the section name (for example 'main')
   static parseSectionName(qualifiedSectionId) {
     return qualifiedSectionId.split(SectionId.#separator)[1]
   }
 
-  // For a section id (e.g. 'template--22224696705326') and a section name (e.g. 'recommended-products'), return a qualified section id (e.g. 'template--22224696705326__recommended-products')
+  // For a section id (for example 'template--22224696705326') and a section name (for example 'recommended-products'), return a qualified section id (for example 'template--22224696705326__recommended-products')
   static getIdForSection(sectionId, sectionName) {
     return `${sectionId}${SectionId.#separator}${sectionName}`
   }
@@ -27,8 +27,8 @@ class SectionId {
 
 class HTMLUpdateUtility {
   /**
-   * Used to swap an HTML node with a new node.
-   * The new node is inserted as a previous sibling to the old node, the old node is hidden, and then the old node is removed.
+   * Used to swap an HTML node with a new node
+   * The new node is inserted as a previous sibling to the old node, the old node is hidden, and then the old node is removed
    *
    * The function currently uses a double buffer approach, but this should be replaced by a view transition once it is more widely supported https://developer.mozilla.org/en-US/docs/Web/API/View_Transitions_API
    */
@@ -54,7 +54,7 @@ class HTMLUpdateUtility {
     setTimeout(() => oldNode.remove(), 500)
   }
 
-  // Sets inner HTML and reinjects the script tags to allow execution. By default, scripts are disabled when using element.innerHTML.
+  // Sets inner HTML and reinjects the script tags so they can run; scripts stay disabled when using element.innerHTML
   static setInnerHTML(element, html) {
     element.innerHTML = html
     element.querySelectorAll('script').forEach((oldScriptTag) => {
@@ -89,13 +89,13 @@ function trapFocus(container, elementToFocus = container) {
 
   trapFocusHandlers.keydown = function (event) {
     if (event.code.toUpperCase() !== 'TAB') return // If not TAB key
-    // On the last focusable element and tab forward, focus the first element.
+    // On the last focusable element and tab forward, focus the first element
     if (event.target === last && !event.shiftKey) {
       event.preventDefault()
       first.focus()
     }
 
-    //  On the first focusable element and tab backward, focus the last element.
+    //  On the first focusable element and tab backward, focus the last element
     if ((event.target === container || event.target === first) && event.shiftKey) {
       event.preventDefault()
       last.focus()
@@ -112,7 +112,7 @@ function trapFocus(container, elementToFocus = container) {
   }
 }
 
-// Here run the querySelector to figure out if the browser supports :focus-visible or not and run code based on it.
+// Here run the querySelector to figure out if the browser supports :focus-visible or not and run code based on it
 try {
   document.querySelector(':focus-visible')
 } catch (e) {

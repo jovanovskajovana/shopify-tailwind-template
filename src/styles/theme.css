@@ -20,6 +20,17 @@
     @apply bg-blue-100;
   }
 
+  /* Account dialog */
+  shopify-account {
+    --shopify-account-dialog-position-top: var(--header-height, 25.6vw);
+  }
+
+  @media (min-width: 1200px) {
+    shopify-account {
+      --shopify-account-dialog-position-top: var(--header-height, 6.667vw);
+    }
+  }
+
   /* Lenis smooth scroll */
   html.lenis,
   html.lenis body {
@@ -55,4 +66,116 @@
  */
 @layer utilities {
   /* Add your custom utility styles here */
+}
+
+/* Shopify data-sharing opt-out form */
+#pc--optOutFormContainer .pc--opt-out-form,
+#pc--optOutFormContainer .pc--opt-out-form-container {
+  align-items: flex-start;
+  max-width: none;
+}
+
+#pc--optOutFormContainer .pc--opt-out-form-container {
+  gap: 4.267vw;
+}
+
+#pc--optOutFormContainer .pc--show-email-field label {
+  display: flex;
+  align-items: center;
+  gap: 2.667vw;
+  width: auto;
+  max-width: 100%;
+  font-size: 4.267vw;
+  line-height: 1.5;
+  letter-spacing: 0;
+  cursor: pointer;
+}
+
+#pc--optOutFormContainer .pc--show-email-field input[type='checkbox'] {
+  appearance: none;
+  flex-shrink: 0;
+  width: 4.267vw;
+  height: 4.267vw;
+  margin: 0;
+  border: 0.267vw solid #000;
+  border-radius: 0.8vw;
+  background-color: #fff;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 62%;
+  accent-color: #000;
+  cursor: pointer;
+}
+
+#pc--optOutFormContainer .pc--show-email-field input[type='checkbox']:checked {
+  border-color: #000;
+  background-color: #000;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2 6.2 L4.8 9 L10 3' fill='none' stroke='white' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+#pc--optOutFormContainer .pc--opt-out-form-button {
+  width: fit-content;
+  height: auto;
+  max-height: none;
+  margin: 0;
+  padding: 3.2vw 6.4vw;
+  border: 0;
+  border-radius: 2.133vw;
+  background-color: #000;
+  color: #fff;
+  font-size: 4.267vw;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0;
+  filter: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+#pc--optOutFormContainer .pc--opt-out-form-button:hover {
+  background-color: #1f2937;
+}
+
+#pc--optOutFormContainer .pc--opt-out-form-field input {
+  height: auto;
+  max-height: none;
+  margin: 0;
+  padding: 2.133vw 4.267vw;
+  border: 1px solid #d1d5db;
+  border-radius: 1.067vw;
+  background-color: #fff;
+  font-size: 4.267vw;
+  line-height: 1.5;
+  letter-spacing: 0;
+  filter: none;
+}
+
+@media (min-width: 1200px) {
+  #pc--optOutFormContainer .pc--opt-out-form-container {
+    gap: 1.111vw;
+  }
+
+  #pc--optOutFormContainer .pc--show-email-field label {
+    gap: 0.694vw;
+    font-size: 1.111vw;
+  }
+
+  #pc--optOutFormContainer .pc--show-email-field input[type='checkbox'] {
+    width: 1.111vw;
+    height: 1.111vw;
+    border-width: 0.07vw;
+    border-radius: 0.208vw;
+  }
+
+  #pc--optOutFormContainer .pc--opt-out-form-button {
+    padding: 0.833vw 1.667vw;
+    border-radius: 0.556vw;
+    font-size: 1.111vw;
+  }
+
+  #pc--optOutFormContainer .pc--opt-out-form-field input {
+    padding: 0.556vw 1.111vw;
+    border-radius: 0.278vw;
+    font-size: 1.111vw;
+  }
 }

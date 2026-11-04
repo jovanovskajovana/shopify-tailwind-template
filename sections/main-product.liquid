@@ -5,8 +5,8 @@
   data-update-url='true'
   data-url='{{ product.url }}'
 >
-  <div class='max-w-screen-2xl py-12 px-4 md:px-8 lg:px-12 mx-auto' data-product-section>
-    <div class='grid grid-cols-1 md:grid-cols-2 gap-8'>
+  <div class='py-[12.8vw] lg:py-[3.333vw] px-[4.267vw] lg:px-[3.333vw] mx-auto' data-product-section>
+    <div class='grid grid-cols-1 lg:grid-cols-2 gap-[8.533vw] lg:gap-[2.222vw]'>
       {%- comment -%} Product Media {%- endcomment -%}
       <div class='opacity-0' data-product-media>
         {% render 'product-media-gallery', product: product, section: section %}
@@ -14,14 +14,14 @@
 
       {%- comment -%} Product Info {%- endcomment -%}
       <div>
-        <h1 class='text-4xl font-bold mb-4 opacity-0' data-product-title>{{ product.title }}</h1>
+        <h1 class='text-[9.6vw] lg:text-[2.5vw] font-bold leading-[1.111] mb-[4.267vw] lg:mb-[1.111vw] opacity-0' data-product-title>{{ product.title }}</h1>
 
-        <div id='price-{{ section.id }}' class='text-2xl font-semibold mb-6 opacity-0' data-product-price>
+        <div id='price-{{ section.id }}' class='text-[6.4vw] lg:text-[1.667vw] font-semibold leading-[1.333] mb-[6.4vw] lg:mb-[1.667vw] opacity-0' data-product-price>
           {% render 'price', product: product, use_variant: true, show_compare_at_price: true, starting_price: true %}
         </div>
 
         <div
-          class='mb-8 text-gray-700 leading-relaxed opacity-0 [&>h2]:text-2xl [&>h2]:font-bold [&>h2]:mt-6 [&>h2]:mb-4 [&>h3]:text-xl [&>h3]:font-semibold [&>h3]:mt-4 [&>h3]:mb-3 [&>p]:mb-4 [&>ul]:list-disc [&>ul]:ml-6 [&>ul]:mb-4 [&>ol]:list-decimal [&>ol]:ml-6 [&>ol]:mb-4 [&>li]:mb-2 [&>a]:text-black [&>a]:underline [&>a]:hover:text-gray-600'
+          class='text-[4.267vw] lg:text-[1.111vw] text-gray-700 leading-relaxed mb-[8.533vw] lg:mb-[2.222vw] opacity-0 [&>h2]:text-[6.4vw] lg:[&>h2]:text-[1.667vw] [&>h2]:font-bold [&>h2]:leading-[1.333] [&>h2]:mt-[6.4vw] lg:[&>h2]:mt-[1.667vw] [&>h2]:mb-[4.267vw] lg:[&>h2]:mb-[1.111vw] [&>h3]:text-[5.333vw] lg:[&>h3]:text-[1.389vw] [&>h3]:font-semibold [&>h3]:leading-[1.4] [&>h3]:mt-[4.267vw] lg:[&>h3]:mt-[1.111vw] [&>h3]:mb-[3.2vw] lg:[&>h3]:mb-[0.833vw] [&>p]:mb-[4.267vw] lg:[&>p]:mb-[1.111vw] [&>ul]:list-disc [&>ul]:ml-[6.4vw] lg:[&>ul]:ml-[1.667vw] [&>ul]:mb-[4.267vw] lg:[&>ul]:mb-[1.111vw] [&>ol]:list-decimal [&>ol]:ml-[6.4vw] lg:[&>ol]:ml-[1.667vw] [&>ol]:mb-[4.267vw] lg:[&>ol]:mb-[1.111vw] [&>li]:mb-[2.133vw] lg:[&>li]:mb-[0.556vw] [&>a]:text-black-100 [&>a]:underline [&>a]:hover:text-gray-600'
           data-product-description
         >
           {{ product.description }}
@@ -30,22 +30,22 @@
         {%- unless product.has_only_default_variant -%}
           <variant-selects
             id='variant-selects-{{ section.id }}'
-            class='opacity-0'
+            class='block w-full opacity-0'
             data-section='{{ section.id }}'
             data-url='{{ product.url }}'
             data-update-url='true'
             data-product-variants
           >
-            <div class='mb-6'>
+            <div class='mb-[6.4vw] lg:mb-[1.667vw]'>
               {%- for option in product.options_with_values -%}
-                <div class='mb-4'>
-                  <label for='Option-{{ section.id }}-{{ forloop.index0 }}' class='block font-semibold mb-2'>
+                <div class='mb-[4.267vw] lg:mb-[1.111vw]'>
+                  <label for='Option-{{ section.id }}-{{ forloop.index0 }}' class='block text-[4.267vw] lg:text-[1.111vw] font-semibold leading-[1.5] mb-[2.133vw] lg:mb-[0.556vw]'>
                     {{ option.name }}
                   </label>
                   <select
                     id='Option-{{ section.id }}-{{ forloop.index0 }}'
                     name='options[{{ option.name | escape }}]'
-                    class='border border-gray-300 rounded w-full py-2 px-4'
+                    class='border border-gray-300 rounded-[1.067vw] lg:rounded-[0.278vw] text-[4.267vw] lg:text-[1.111vw] leading-[1.5] w-full py-[2.133vw] lg:py-[0.556vw] px-[4.267vw] lg:px-[1.111vw]'
                   >
                     {%- for value in option.values -%}
                       <option
@@ -65,9 +65,9 @@
           </variant-selects>
         {%- endunless -%}
 
-        <product-form class='product-form opacity-0' data-section-id='{{ section.id }}' data-product-form>
-          <div class='hidden bg-red-50 border border-red-200 rounded-lg p-4 mb-4' role='alert' hidden>
-            <span class='text-sm text-red-700'></span>
+        <product-form class='product-form block w-full opacity-0' data-section-id='{{ section.id }}' data-product-form>
+          <div class='hidden bg-red-50 border border-red-200 rounded-[2.133vw] lg:rounded-[0.556vw] p-[4.267vw] lg:p-[1.111vw] mb-[4.267vw] lg:mb-[1.111vw]' role='alert' hidden>
+            <span class='text-[3.733vw] lg:text-[0.972vw] text-red-700 leading-[1.429]'></span>
           </div>
 
           {%- assign form_id = 'product-form-' | append: section.id -%}
@@ -79,8 +79,8 @@
               class='product-variant-id'
             >
 
-            <div class='mb-4'>
-              <label for='Quantity-{{ section.id }}' class='block font-semibold mb-2'>
+            <div class='mb-[4.267vw] lg:mb-[1.111vw]'>
+              <label for='Quantity-{{ section.id }}' class='block text-[4.267vw] lg:text-[1.111vw] font-semibold leading-[1.5] mb-[2.133vw] lg:mb-[0.556vw]'>
                 {{ 'products.product.quantity.label' | t }}
               </label>
               <input
@@ -89,7 +89,7 @@
                 name='quantity'
                 value='1'
                 min='1'
-                class='border border-gray-300 rounded w-full py-2 px-4'
+                class='border border-gray-300 rounded-[1.067vw] lg:rounded-[0.278vw] text-[4.267vw] lg:text-[1.111vw] leading-[1.5] w-full py-[2.133vw] lg:py-[0.556vw] px-[4.267vw] lg:px-[1.111vw]'
               >
             </div>
 
@@ -97,7 +97,7 @@
               type='submit'
               name='add'
               id='ProductSubmitButton-{{ section.id }}'
-              class='flex items-center justify-center gap-2 bg-black-100 hover:bg-gray-800 rounded-lg text-white-100 w-full py-4 px-8 transition disabled:opacity-50 disabled:cursor-not-allowed'
+              class='relative flex items-center justify-center gap-[2.133vw] lg:gap-[0.556vw] bg-black-100 hover:bg-gray-800 rounded-[2.133vw] lg:rounded-[0.556vw] text-[4.267vw] lg:text-[1.111vw] text-white-100 leading-[1.5] w-full py-[4.267vw] lg:py-[1.111vw] px-[8.533vw] lg:px-[2.222vw] transition disabled:opacity-50 disabled:cursor-not-allowed'
               {% if product.selected_or_first_available_variant.available == false %}
                 disabled
               {% endif %}
@@ -109,8 +109,8 @@
                   {{ 'products.product.add_to_cart' | t }}
                 {%- endif -%}
               </span>
-              <span class='hidden loading-spinner'>
-                {%- render 'loading-spinner' -%}
+              <span class='absolute inset-y-0 right-[4.267vw] lg:right-[1.111vw] hidden loading-spinner flex items-center'>
+                {%- render 'loading-spinner', variant: 'light', size: 'w-[4.8vw] lg:w-[1.25vw] h-[4.8vw] lg:h-[1.25vw]' -%}
               </span>
             </button>
           {%- endform -%}

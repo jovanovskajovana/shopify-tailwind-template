@@ -1,21 +1,21 @@
-<section class='flex items-center min-h-[calc(100vh-var(--header-height,6rem))] px-4' data-contact-section>
-  <div class='text-center w-full max-w-2xl mx-auto'>
-    <h1 class='text-4xl md:text-5xl font-bold tracking-tight mb-4 opacity-0' data-contact-heading>{{ page.title }}</h1>
+<section class='flex items-center min-h-[calc(100vh-var(--header-height,25.6vw))] lg:min-h-[calc(100vh-var(--header-height,6.667vw))] px-[4.267vw] lg:px-[1.111vw]' data-contact-section>
+  <div class='text-center w-full lg:max-w-[46.667vw] mx-auto'>
+    <h1 class='text-[9.6vw] lg:text-[3.333vw] font-bold leading-[1.111] lg:leading-[1] tracking-tight mb-[4.267vw] lg:mb-[1.111vw] opacity-0' data-contact-heading>{{ page.title }}</h1>
 
     {%- if page.content != blank -%}
-      <div class='text-lg text-gray-600 leading-relaxed max-w-prose mx-auto opacity-0' data-contact-content>
+      <div class='text-[4.8vw] lg:text-[1.25vw] text-gray-600 leading-relaxed max-w-prose mx-auto opacity-0' data-contact-content>
         {{ page.content }}
       </div>
     {%- endif -%}
 
     {%- if section.settings.email != blank -%}
-      <div class='mt-12 opacity-0' data-contact-cta>
-        <p class='text-sm text-gray-500 tracking-widest uppercase mb-3'>Get in touch</p>
+      <div class='mt-[12.8vw] lg:mt-[3.333vw] opacity-0' data-contact-cta>
+        <p class='text-[3.733vw] lg:text-[0.972vw] text-gray-500 leading-[1.429] tracking-widest uppercase mb-[3.2vw] lg:mb-[0.833vw]'>Get in touch</p>
         <a
           href='mailto:{{ section.settings.email }}'
-          class='inline-flex items-center gap-2 bg-black-100 hover:bg-gray-800 rounded-lg text-white-100 py-4 px-8 transition-colors'
+          class='inline-flex items-center gap-[2.133vw] lg:gap-[0.556vw] bg-black-100 hover:bg-gray-800 rounded-[2.133vw] lg:rounded-[0.556vw] text-[4.267vw] lg:text-[1.111vw] text-white-100 leading-[1.5] py-[4.267vw] lg:py-[1.111vw] px-[8.533vw] lg:px-[2.222vw] transition-colors'
         >
-          <svg class='w-5 h-5' fill='none' stroke='currentColor' viewBox='0 0 24 24' aria-hidden='true'>
+          <svg class='w-[5.333vw] lg:w-[1.389vw] h-[5.333vw] lg:h-[1.389vw]' fill='none' stroke='currentColor' viewBox='0 0 24 24' aria-hidden='true'>
             <path stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M3 8l9 6 9-6M3 8v8a2 2 0 002 2h14a2 2 0 002-2V8M3 8a2 2 0 012-2h14a2 2 0 012 2'></path>
           </svg>
           {{ section.settings.email }}

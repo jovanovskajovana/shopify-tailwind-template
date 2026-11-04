@@ -1,5 +1,5 @@
 {% comment %}
-  Renders the product buy-button.
+  Renders the product buy-button
 
   Accepts:
   - class: {String} a class to be added to the container (optional)
@@ -19,8 +19,8 @@
   class='{% if class %} {{ class }}{% endif %}'
   data-section-id='{{ section.id }}'
 >
-  <div class='hidden bg-red-50 border border-red-200 rounded-lg p-4 mb-4' role='alert' hidden>
-    <span class='text-sm text-red-700'></span>
+  <div class='hidden bg-red-50 border border-red-200 rounded-[2.133vw] lg:rounded-[0.556vw] p-[4.267vw] lg:p-[1.111vw] mb-[4.267vw] lg:mb-[1.111vw]' role='alert' hidden>
+    <span class='text-[3.733vw] lg:text-[0.972vw] text-red-700 leading-[1.429]'></span>
   </div>
 
   {%- form 'product', product, id: product_form_id, class: 'form', novalidate: 'novalidate', data-type: 'add-to-cart-form' -%}
@@ -47,7 +47,7 @@
       id='ProductSubmitButton-{{ section_id }}'
       type='submit'
       name='add'
-      class='flex items-center gap-2 hover:bg-gray-100 border border-black rounded-lg py-3 px-6 transition disabled:opacity-50 disabled:cursor-not-allowed'
+      class='relative flex items-center gap-[2.133vw] lg:gap-[0.556vw] hover:bg-gray-100 border border-black-100 rounded-[2.133vw] lg:rounded-[0.556vw] text-[4.267vw] lg:text-[1.111vw] leading-[1.5] py-[3.2vw] lg:py-[0.833vw] px-[6.4vw] lg:px-[1.667vw] transition disabled:opacity-50 disabled:cursor-not-allowed'
       {% if product.selected_or_first_available_variant.available == false
         or quantity_rule_soldout
         or product.selected_or_first_available_variant == null
@@ -67,7 +67,7 @@
         <span>
           {{ 'products.product.add_to_cart' | t }}
         </span>
-        <span class='w-4 h-4'>
+        <span class='w-[4.267vw] lg:w-[1.111vw] h-[4.267vw] lg:h-[1.111vw]'>
           {{- 'icon-plus.svg' | inline_asset_content -}}
         </span>
       {%- endif -%}
@@ -75,8 +75,8 @@
       <span id='price-{{ section_id }}' role='status' class='hidden'>
         {%- render 'price', product: product, use_variant: true -%}
       </span>
-      <span class='hidden' hidden>
-        {%- render 'loading-spinner' -%}
+      <span class='absolute inset-0 hidden loading-spinner flex items-center justify-center bg-white-100'>
+        {%- render 'loading-spinner', size: 'w-[4.267vw] lg:w-[1.111vw] h-[4.267vw] lg:h-[1.111vw]' -%}
       </span>
     </button>
   {%- endform -%}

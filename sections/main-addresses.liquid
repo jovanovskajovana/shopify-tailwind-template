@@ -1,19 +1,19 @@
-<section class='max-w-screen-2xl py-12 px-4 md:px-8 lg:px-12 mx-auto'>
-  <h1 class='text-3xl font-bold mb-8'>{{ 'customer.addresses.title' | t }}</h1>
+<section class='py-[12.8vw] lg:py-[3.333vw] px-[4.267vw] lg:px-[3.333vw] mx-auto'>
+  <h1 class='text-[8vw] lg:text-[2.083vw] font-bold leading-[1.2] mb-[8.533vw] lg:mb-[2.222vw]'>{{ 'customer.addresses.title' | t }}</h1>
 
   {%- paginate customer.addresses by 5 -%}
-    <div class='mb-8'>
-      <button type='button' class='bg-black hover:bg-gray-800 rounded-lg text-white py-3 px-6 transition' data-address-toggle>
+    <div class='mb-[8.533vw] lg:mb-[2.222vw]'>
+      <button type='button' class='bg-black-100 hover:bg-gray-800 rounded-[2.133vw] lg:rounded-[0.556vw] text-[4.267vw] lg:text-[1.111vw] text-white-100 leading-[1.5] py-[3.2vw] lg:py-[0.833vw] px-[6.4vw] lg:px-[1.667vw] transition' data-address-toggle>
         {{ 'customer.addresses.add_an_address' | t }}
       </button>
     </div>
 
-    <div data-address-form class='hidden border border-gray-200 rounded-lg p-6 mb-8'>
+    <div data-address-form class='hidden border border-gray-200 rounded-[2.133vw] lg:rounded-[0.556vw] p-[6.4vw] lg:p-[1.667vw] mb-[8.533vw] lg:mb-[2.222vw]'>
       {%- form 'customer_address', customer.new_address, aria-labelledBy: 'AddressNewHeading' -%}
         {%- if form.errors -%}
-          <div class='bg-red-50 border border-red-200 rounded-lg p-4 mb-6'>
-            <h2 class='text-red-800 font-semibold mb-2'>{{ 'accessibility.error' | t }}</h2>
-            <ul class='text-sm text-red-700 list-disc list-inside'>
+          <div class='bg-red-50 border border-red-200 rounded-[2.133vw] lg:rounded-[0.556vw] p-[4.267vw] lg:p-[1.111vw] mb-[6.4vw] lg:mb-[1.667vw]'>
+            <h2 class='text-[4.267vw] lg:text-[1.111vw] text-red-800 font-semibold leading-[1.5] mb-[2.133vw] lg:mb-[0.556vw]'>{{ 'accessibility.error' | t }}</h2>
+            <ul class='text-[3.733vw] lg:text-[0.972vw] text-red-700 leading-[1.429] list-disc list-inside'>
               {%- for field in form.errors -%}
                 <li>
                   {%- if field == 'form' -%}
@@ -29,154 +29,154 @@
             </ul>
           </div>
         {%- endif -%}
-        <h2 id='AddressNewHeading' class='text-2xl font-bold mb-4'>{{ 'customer.addresses.add_an_address' | t }}</h2>
-        <div class='grid grid-cols-1 md:grid-cols-2 gap-4 mb-4'>
+        <h2 id='AddressNewHeading' class='text-[6.4vw] lg:text-[1.667vw] font-bold leading-[1.333] mb-[4.267vw] lg:mb-[1.111vw]'>{{ 'customer.addresses.add_an_address' | t }}</h2>
+        <div class='grid grid-cols-1 lg:grid-cols-2 gap-[4.267vw] lg:gap-[1.111vw] mb-[4.267vw] lg:mb-[1.111vw]'>
           <div>
-            <label for='AddressFirstNameNew' class='block font-semibold mb-2'>{{ 'customer.addresses.first_name' | t }}</label>
+            <label for='AddressFirstNameNew' class='block text-[4.267vw] lg:text-[1.111vw] font-semibold leading-[1.5] mb-[2.133vw] lg:mb-[0.556vw]'>{{ 'customer.addresses.first_name' | t }}</label>
             <input
               type='text'
               id='AddressFirstNameNew'
               name='address[first_name]'
               value='{{ form.first_name }}'
               autocomplete='given-name'
-              class='border border-gray-300 focus:ring-2 focus:ring-black rounded w-full py-2 px-4 focus:outline-none'
+              class='border border-gray-300 focus:ring-2 focus:ring-black rounded-[1.067vw] lg:rounded-[0.278vw] text-[4.267vw] lg:text-[1.111vw] leading-[1.5] w-full py-[2.133vw] lg:py-[0.556vw] px-[4.267vw] lg:px-[1.111vw] focus:outline-none'
               {% if form.errors contains 'first_name' %}
                 aria-invalid='true'
                 aria-describedby='first_name-error'
               {% endif %}
             >
             {%- if form.errors contains 'first_name' -%}
-              <p id='first_name-error' class='text-sm text-red-600 mt-1'>{{ form.errors.messages.first_name }}</p>
+              <p id='first_name-error' class='text-[3.733vw] lg:text-[0.972vw] text-red-600 leading-[1.429] mt-[1.067vw] lg:mt-[0.278vw]'>{{ form.errors.messages.first_name }}</p>
             {%- endif -%}
           </div>
           <div>
-            <label for='AddressLastNameNew' class='block font-semibold mb-2'>{{ 'customer.addresses.last_name' | t }}</label>
+            <label for='AddressLastNameNew' class='block text-[4.267vw] lg:text-[1.111vw] font-semibold leading-[1.5] mb-[2.133vw] lg:mb-[0.556vw]'>{{ 'customer.addresses.last_name' | t }}</label>
             <input
               type='text'
               id='AddressLastNameNew'
               name='address[last_name]'
               value='{{ form.last_name }}'
-              class='border border-gray-300 rounded w-full py-2 px-4'
+              class='border border-gray-300 rounded-[1.067vw] lg:rounded-[0.278vw] text-[4.267vw] lg:text-[1.111vw] leading-[1.5] w-full py-[2.133vw] lg:py-[0.556vw] px-[4.267vw] lg:px-[1.111vw]'
             >
           </div>
         </div>
-        <div class='mb-4'>
-          <label for='AddressCompanyNew' class='block font-semibold mb-2'>{{ 'customer.addresses.company' | t }}</label>
+        <div class='mb-[4.267vw] lg:mb-[1.111vw]'>
+          <label for='AddressCompanyNew' class='block text-[4.267vw] lg:text-[1.111vw] font-semibold leading-[1.5] mb-[2.133vw] lg:mb-[0.556vw]'>{{ 'customer.addresses.company' | t }}</label>
           <input
             type='text'
             id='AddressCompanyNew'
             name='address[company]'
             value='{{ form.company }}'
-            class='border border-gray-300 rounded w-full py-2 px-4'
+            class='border border-gray-300 rounded-[1.067vw] lg:rounded-[0.278vw] text-[4.267vw] lg:text-[1.111vw] leading-[1.5] w-full py-[2.133vw] lg:py-[0.556vw] px-[4.267vw] lg:px-[1.111vw]'
           >
         </div>
-        <div class='mb-4'>
-          <label for='AddressAddress1New' class='block font-semibold mb-2'>{{ 'customer.addresses.address1' | t }}</label>
+        <div class='mb-[4.267vw] lg:mb-[1.111vw]'>
+          <label for='AddressAddress1New' class='block text-[4.267vw] lg:text-[1.111vw] font-semibold leading-[1.5] mb-[2.133vw] lg:mb-[0.556vw]'>{{ 'customer.addresses.address1' | t }}</label>
           <input
             type='text'
             id='AddressAddress1New'
             name='address[address1]'
             value='{{ form.address1 }}'
-            class='border border-gray-300 rounded w-full py-2 px-4'
+            class='border border-gray-300 rounded-[1.067vw] lg:rounded-[0.278vw] text-[4.267vw] lg:text-[1.111vw] leading-[1.5] w-full py-[2.133vw] lg:py-[0.556vw] px-[4.267vw] lg:px-[1.111vw]'
           >
         </div>
-        <div class='mb-4'>
-          <label for='AddressAddress2New' class='block font-semibold mb-2'>{{ 'customer.addresses.address2' | t }}</label>
+        <div class='mb-[4.267vw] lg:mb-[1.111vw]'>
+          <label for='AddressAddress2New' class='block text-[4.267vw] lg:text-[1.111vw] font-semibold leading-[1.5] mb-[2.133vw] lg:mb-[0.556vw]'>{{ 'customer.addresses.address2' | t }}</label>
           <input
             type='text'
             id='AddressAddress2New'
             name='address[address2]'
             value='{{ form.address2 }}'
-            class='border border-gray-300 rounded w-full py-2 px-4'
+            class='border border-gray-300 rounded-[1.067vw] lg:rounded-[0.278vw] text-[4.267vw] lg:text-[1.111vw] leading-[1.5] w-full py-[2.133vw] lg:py-[0.556vw] px-[4.267vw] lg:px-[1.111vw]'
           >
         </div>
-        <div class='grid grid-cols-1 md:grid-cols-3 gap-4 mb-4'>
+        <div class='grid grid-cols-1 lg:grid-cols-3 gap-[4.267vw] lg:gap-[1.111vw] mb-[4.267vw] lg:mb-[1.111vw]'>
           <div>
-            <label for='AddressCityNew' class='block font-semibold mb-2'>{{ 'customer.addresses.city' | t }}</label>
+            <label for='AddressCityNew' class='block text-[4.267vw] lg:text-[1.111vw] font-semibold leading-[1.5] mb-[2.133vw] lg:mb-[0.556vw]'>{{ 'customer.addresses.city' | t }}</label>
             <input
               type='text'
               id='AddressCityNew'
               name='address[city]'
               value='{{ form.city }}'
-              class='border border-gray-300 rounded w-full py-2 px-4'
+              class='border border-gray-300 rounded-[1.067vw] lg:rounded-[0.278vw] text-[4.267vw] lg:text-[1.111vw] leading-[1.5] w-full py-[2.133vw] lg:py-[0.556vw] px-[4.267vw] lg:px-[1.111vw]'
             >
           </div>
           <div>
-            <label for='AddressCountryNew' class='block font-semibold mb-2'>{{ 'customer.addresses.country' | t }}</label>
+            <label for='AddressCountryNew' class='block text-[4.267vw] lg:text-[1.111vw] font-semibold leading-[1.5] mb-[2.133vw] lg:mb-[0.556vw]'>{{ 'customer.addresses.country' | t }}</label>
             <select
               id='AddressCountryNew'
               name='address[country]'
               data-default='{{ form.country }}'
-              class='border border-gray-300 rounded w-full py-2 px-4'
+              class='border border-gray-300 rounded-[1.067vw] lg:rounded-[0.278vw] text-[4.267vw] lg:text-[1.111vw] leading-[1.5] w-full py-[2.133vw] lg:py-[0.556vw] px-[4.267vw] lg:px-[1.111vw]'
             >
               {{ all_country_option_tags }}
             </select>
           </div>
           <div id='AddressProvinceContainerNew'>
-            <label for='AddressProvinceNew' class='block font-semibold mb-2'>{{ 'customer.addresses.province' | t }}</label>
+            <label for='AddressProvinceNew' class='block text-[4.267vw] lg:text-[1.111vw] font-semibold leading-[1.5] mb-[2.133vw] lg:mb-[0.556vw]'>{{ 'customer.addresses.province' | t }}</label>
             <select
               id='AddressProvinceNew'
               name='address[province]'
               data-default='{{ form.province }}'
-              class='border border-gray-300 rounded w-full py-2 px-4'
+              class='border border-gray-300 rounded-[1.067vw] lg:rounded-[0.278vw] text-[4.267vw] lg:text-[1.111vw] leading-[1.5] w-full py-[2.133vw] lg:py-[0.556vw] px-[4.267vw] lg:px-[1.111vw]'
             ></select>
           </div>
         </div>
-        <div class='grid grid-cols-1 md:grid-cols-2 gap-4 mb-4'>
+        <div class='grid grid-cols-1 lg:grid-cols-2 gap-[4.267vw] lg:gap-[1.111vw] mb-[4.267vw] lg:mb-[1.111vw]'>
           <div>
-            <label for='AddressZipNew' class='block font-semibold mb-2'>{{ 'customer.addresses.zip' | t }}</label>
+            <label for='AddressZipNew' class='block text-[4.267vw] lg:text-[1.111vw] font-semibold leading-[1.5] mb-[2.133vw] lg:mb-[0.556vw]'>{{ 'customer.addresses.zip' | t }}</label>
             <input
               type='text'
               id='AddressZipNew'
               name='address[zip]'
               value='{{ form.zip }}'
-              class='border border-gray-300 rounded w-full py-2 px-4'
+              class='border border-gray-300 rounded-[1.067vw] lg:rounded-[0.278vw] text-[4.267vw] lg:text-[1.111vw] leading-[1.5] w-full py-[2.133vw] lg:py-[0.556vw] px-[4.267vw] lg:px-[1.111vw]'
             >
           </div>
           <div>
-            <label for='AddressPhoneNew' class='block font-semibold mb-2'>{{ 'customer.addresses.phone' | t }}</label>
+            <label for='AddressPhoneNew' class='block text-[4.267vw] lg:text-[1.111vw] font-semibold leading-[1.5] mb-[2.133vw] lg:mb-[0.556vw]'>{{ 'customer.addresses.phone' | t }}</label>
             <input
               type='tel'
               id='AddressPhoneNew'
               name='address[phone]'
               value='{{ form.phone }}'
-              class='border border-gray-300 rounded w-full py-2 px-4'
+              class='border border-gray-300 rounded-[1.067vw] lg:rounded-[0.278vw] text-[4.267vw] lg:text-[1.111vw] leading-[1.5] w-full py-[2.133vw] lg:py-[0.556vw] px-[4.267vw] lg:px-[1.111vw]'
             >
           </div>
         </div>
-        <div class='mb-4'>
+        <div class='mb-[4.267vw] lg:mb-[1.111vw]'>
           <label class='flex items-center'>
-            <input type='checkbox' name='address[default]' value='1' class='mr-2'>
+            <input type='checkbox' name='address[default]' value='1' class='mr-[2.133vw] lg:mr-[0.556vw]'>
             <span>{{ 'customer.addresses.set_default' | t }}</span>
           </label>
         </div>
-        <div class='flex gap-4'>
-          <button type='submit' class='bg-black hover:bg-gray-800 rounded-lg text-white py-3 px-6 transition'>
+        <div class='flex gap-[4.267vw] lg:gap-[1.111vw]'>
+          <button type='submit' class='bg-black-100 hover:bg-gray-800 rounded-[2.133vw] lg:rounded-[0.556vw] text-[4.267vw] lg:text-[1.111vw] text-white-100 leading-[1.5] py-[3.2vw] lg:py-[0.833vw] px-[6.4vw] lg:px-[1.667vw] transition'>
             {{ 'customer.addresses.save' | t }}
           </button>
-          <button type='button' class='hover:bg-gray-100 border border-black rounded-lg py-3 px-6 transition' data-address-toggle>
+          <button type='button' class='hover:bg-gray-100 border border-black-100 rounded-[2.133vw] lg:rounded-[0.556vw] text-[4.267vw] lg:text-[1.111vw] leading-[1.5] py-[3.2vw] lg:py-[0.833vw] px-[6.4vw] lg:px-[1.667vw] transition' data-address-toggle>
             {{ 'customer.login_page.cancel' | t }}
           </button>
         </div>
       {%- endform -%}
     </div>
 
-    <div class='space-y-6'>
+    <div class='space-y-[6.4vw] lg:space-y-[1.667vw]'>
       {%- for address in customer.addresses -%}
-        <div data-address class='border border-gray-200 rounded-lg p-6'>
+        <div data-address class='border border-gray-200 rounded-[2.133vw] lg:rounded-[0.556vw] p-[6.4vw] lg:p-[1.667vw]'>
           {%- if address == customer.default_address -%}
-            <p class='text-sm font-semibold mb-2'>{{ 'customer.addresses.default' | t }}</p>
+            <p class='text-[3.733vw] lg:text-[0.972vw] font-semibold leading-[1.429] mb-[2.133vw] lg:mb-[0.556vw]'>{{ 'customer.addresses.default' | t }}</p>
           {%- endif -%}
-          <div class='mb-4'>
+          <div class='mb-[4.267vw] lg:mb-[1.111vw]'>
             {{ address | format_address }}
           </div>
-          <div class='flex gap-4'>
-            <button type='button' class='text-sm underline' data-address-toggle data-form-id='{{ address.id }}'>
+          <div class='flex gap-[4.267vw] lg:gap-[1.111vw]'>
+            <button type='button' class='text-[3.733vw] lg:text-[0.972vw] leading-[1.429] underline' data-address-toggle data-form-id='{{ address.id }}'>
               {{ 'customer.addresses.edit' | t }}
             </button>
             <button
               type='button'
-              class='text-sm text-red-600 underline'
+              class='text-[3.733vw] lg:text-[0.972vw] text-red-600 leading-[1.429] underline'
               data-address-delete
               data-form-url='{{ address.url }}'
               data-confirm-message='{{ 'customer.addresses.delete_confirm' | t }}'
@@ -185,12 +185,12 @@
             </button>
           </div>
 
-          <div data-address-forms data-form-id='{{ address.id }}' class='hidden bg-gray-50 border border-gray-200 rounded-lg p-6 mt-4'>
+          <div data-address-forms data-form-id='{{ address.id }}' class='hidden bg-gray-50 border border-gray-200 rounded-[2.133vw] lg:rounded-[0.556vw] p-[6.4vw] lg:p-[1.667vw] mt-[4.267vw] lg:mt-[1.111vw]'>
             {%- form 'customer_address', address -%}
               {%- if form.errors -%}
-                <div class='bg-red-50 border border-red-200 rounded-lg p-4 mb-6'>
-                  <h2 class='text-red-800 font-semibold mb-2'>{{ 'accessibility.error' | t }}</h2>
-                  <ul class='text-sm text-red-700 list-disc list-inside'>
+                <div class='bg-red-50 border border-red-200 rounded-[2.133vw] lg:rounded-[0.556vw] p-[4.267vw] lg:p-[1.111vw] mb-[6.4vw] lg:mb-[1.667vw]'>
+                  <h2 class='text-[4.267vw] lg:text-[1.111vw] text-red-800 font-semibold leading-[1.5] mb-[2.133vw] lg:mb-[0.556vw]'>{{ 'accessibility.error' | t }}</h2>
+                  <ul class='text-[3.733vw] lg:text-[0.972vw] text-red-700 leading-[1.429] list-disc list-inside'>
                     {%- for field in form.errors -%}
                       <li>
                         {%- if field == 'form' -%}
@@ -206,10 +206,10 @@
                   </ul>
                 </div>
               {%- endif -%}
-              <h2 class='text-xl font-bold mb-4'>{{ 'customer.addresses.edit_address' | t }}</h2>
-              <div class='grid grid-cols-1 md:grid-cols-2 gap-4 mb-4'>
+              <h2 class='text-[5.333vw] lg:text-[1.389vw] font-bold leading-[1.4] mb-[4.267vw] lg:mb-[1.111vw]'>{{ 'customer.addresses.edit_address' | t }}</h2>
+              <div class='grid grid-cols-1 lg:grid-cols-2 gap-[4.267vw] lg:gap-[1.111vw] mb-[4.267vw] lg:mb-[1.111vw]'>
                 <div>
-                  <label for='AddressFirstName_{{ form.id }}' class='block font-semibold mb-2'>
+                  <label for='AddressFirstName_{{ form.id }}' class='block text-[4.267vw] lg:text-[1.111vw] font-semibold leading-[1.5] mb-[2.133vw] lg:mb-[0.556vw]'>
                     {{- 'customer.addresses.first_name' | t -}}
                   </label>
                   <input
@@ -217,11 +217,11 @@
                     id='AddressFirstName_{{ form.id }}'
                     name='address[first_name]'
                     value='{{ form.first_name }}'
-                    class='border border-gray-300 rounded w-full py-2 px-4'
+                    class='border border-gray-300 rounded-[1.067vw] lg:rounded-[0.278vw] text-[4.267vw] lg:text-[1.111vw] leading-[1.5] w-full py-[2.133vw] lg:py-[0.556vw] px-[4.267vw] lg:px-[1.111vw]'
                   >
                 </div>
                 <div>
-                  <label for='AddressLastName_{{ form.id }}' class='block font-semibold mb-2'>
+                  <label for='AddressLastName_{{ form.id }}' class='block text-[4.267vw] lg:text-[1.111vw] font-semibold leading-[1.5] mb-[2.133vw] lg:mb-[0.556vw]'>
                     {{- 'customer.addresses.last_name' | t -}}
                   </label>
                   <input
@@ -229,64 +229,64 @@
                     id='AddressLastName_{{ form.id }}'
                     name='address[last_name]'
                     value='{{ form.last_name }}'
-                    class='border border-gray-300 rounded w-full py-2 px-4'
+                    class='border border-gray-300 rounded-[1.067vw] lg:rounded-[0.278vw] text-[4.267vw] lg:text-[1.111vw] leading-[1.5] w-full py-[2.133vw] lg:py-[0.556vw] px-[4.267vw] lg:px-[1.111vw]'
                   >
                 </div>
               </div>
-              <div class='mb-4'>
-                <label for='AddressCompany_{{ form.id }}' class='block font-semibold mb-2'>{{ 'customer.addresses.company' | t }}</label>
+              <div class='mb-[4.267vw] lg:mb-[1.111vw]'>
+                <label for='AddressCompany_{{ form.id }}' class='block text-[4.267vw] lg:text-[1.111vw] font-semibold leading-[1.5] mb-[2.133vw] lg:mb-[0.556vw]'>{{ 'customer.addresses.company' | t }}</label>
                 <input
                   type='text'
                   id='AddressCompany_{{ form.id }}'
                   name='address[company]'
                   value='{{ form.company }}'
-                  class='border border-gray-300 rounded w-full py-2 px-4'
+                  class='border border-gray-300 rounded-[1.067vw] lg:rounded-[0.278vw] text-[4.267vw] lg:text-[1.111vw] leading-[1.5] w-full py-[2.133vw] lg:py-[0.556vw] px-[4.267vw] lg:px-[1.111vw]'
                 >
               </div>
-              <div class='mb-4'>
-                <label for='AddressAddress1_{{ form.id }}' class='block font-semibold mb-2'>{{ 'customer.addresses.address1' | t }}</label>
+              <div class='mb-[4.267vw] lg:mb-[1.111vw]'>
+                <label for='AddressAddress1_{{ form.id }}' class='block text-[4.267vw] lg:text-[1.111vw] font-semibold leading-[1.5] mb-[2.133vw] lg:mb-[0.556vw]'>{{ 'customer.addresses.address1' | t }}</label>
                 <input
                   type='text'
                   id='AddressAddress1_{{ form.id }}'
                   name='address[address1]'
                   value='{{ form.address1 }}'
-                  class='border border-gray-300 rounded w-full py-2 px-4'
+                  class='border border-gray-300 rounded-[1.067vw] lg:rounded-[0.278vw] text-[4.267vw] lg:text-[1.111vw] leading-[1.5] w-full py-[2.133vw] lg:py-[0.556vw] px-[4.267vw] lg:px-[1.111vw]'
                 >
               </div>
-              <div class='mb-4'>
-                <label for='AddressAddress2_{{ form.id }}' class='block font-semibold mb-2'>{{ 'customer.addresses.address2' | t }}</label>
+              <div class='mb-[4.267vw] lg:mb-[1.111vw]'>
+                <label for='AddressAddress2_{{ form.id }}' class='block text-[4.267vw] lg:text-[1.111vw] font-semibold leading-[1.5] mb-[2.133vw] lg:mb-[0.556vw]'>{{ 'customer.addresses.address2' | t }}</label>
                 <input
                   type='text'
                   id='AddressAddress2_{{ form.id }}'
                   name='address[address2]'
                   value='{{ form.address2 }}'
-                  class='border border-gray-300 rounded w-full py-2 px-4'
+                  class='border border-gray-300 rounded-[1.067vw] lg:rounded-[0.278vw] text-[4.267vw] lg:text-[1.111vw] leading-[1.5] w-full py-[2.133vw] lg:py-[0.556vw] px-[4.267vw] lg:px-[1.111vw]'
                 >
               </div>
-              <div class='grid grid-cols-1 md:grid-cols-3 gap-4 mb-4'>
+              <div class='grid grid-cols-1 lg:grid-cols-3 gap-[4.267vw] lg:gap-[1.111vw] mb-[4.267vw] lg:mb-[1.111vw]'>
                 <div>
-                  <label for='AddressCity_{{ form.id }}' class='block font-semibold mb-2'>{{ 'customer.addresses.city' | t }}</label>
+                  <label for='AddressCity_{{ form.id }}' class='block text-[4.267vw] lg:text-[1.111vw] font-semibold leading-[1.5] mb-[2.133vw] lg:mb-[0.556vw]'>{{ 'customer.addresses.city' | t }}</label>
                   <input
                     type='text'
                     id='AddressCity_{{ form.id }}'
                     name='address[city]'
                     value='{{ form.city }}'
-                    class='border border-gray-300 rounded w-full py-2 px-4'
+                    class='border border-gray-300 rounded-[1.067vw] lg:rounded-[0.278vw] text-[4.267vw] lg:text-[1.111vw] leading-[1.5] w-full py-[2.133vw] lg:py-[0.556vw] px-[4.267vw] lg:px-[1.111vw]'
                   >
                 </div>
                 <div>
-                  <label for='AddressCountry_{{ form.id }}' class='block font-semibold mb-2'>{{ 'customer.addresses.country' | t }}</label>
+                  <label for='AddressCountry_{{ form.id }}' class='block text-[4.267vw] lg:text-[1.111vw] font-semibold leading-[1.5] mb-[2.133vw] lg:mb-[0.556vw]'>{{ 'customer.addresses.country' | t }}</label>
                   <select
                     id='AddressCountry_{{ form.id }}'
                     name='address[country]'
                     data-default='{{ form.country }}'
-                    class='border border-gray-300 rounded w-full py-2 px-4'
+                    class='border border-gray-300 rounded-[1.067vw] lg:rounded-[0.278vw] text-[4.267vw] lg:text-[1.111vw] leading-[1.5] w-full py-[2.133vw] lg:py-[0.556vw] px-[4.267vw] lg:px-[1.111vw]'
                   >
                     {{ all_country_option_tags }}
                   </select>
                 </div>
                 <div id='AddressProvinceContainer_{{ form.id }}'>
-                  <label for='AddressProvince_{{ form.id }}' class='block font-semibold mb-2'>
+                  <label for='AddressProvince_{{ form.id }}' class='block text-[4.267vw] lg:text-[1.111vw] font-semibold leading-[1.5] mb-[2.133vw] lg:mb-[0.556vw]'>
                     {{- 'customer.addresses.province' | t -}}
                   </label>
                   <select
@@ -294,33 +294,33 @@
                     name='address[province]'
                     data-default='{{ form.province }}'
                     data-form-id='{{ form.id }}'
-                    class='border border-gray-300 rounded w-full py-2 px-4'
+                    class='border border-gray-300 rounded-[1.067vw] lg:rounded-[0.278vw] text-[4.267vw] lg:text-[1.111vw] leading-[1.5] w-full py-[2.133vw] lg:py-[0.556vw] px-[4.267vw] lg:px-[1.111vw]'
                   ></select>
                 </div>
               </div>
-              <div class='grid grid-cols-1 md:grid-cols-2 gap-4 mb-4'>
+              <div class='grid grid-cols-1 lg:grid-cols-2 gap-[4.267vw] lg:gap-[1.111vw] mb-[4.267vw] lg:mb-[1.111vw]'>
                 <div>
-                  <label for='AddressZip_{{ form.id }}' class='block font-semibold mb-2'>{{ 'customer.addresses.zip' | t }}</label>
+                  <label for='AddressZip_{{ form.id }}' class='block text-[4.267vw] lg:text-[1.111vw] font-semibold leading-[1.5] mb-[2.133vw] lg:mb-[0.556vw]'>{{ 'customer.addresses.zip' | t }}</label>
                   <input
                     type='text'
                     id='AddressZip_{{ form.id }}'
                     name='address[zip]'
                     value='{{ form.zip }}'
-                    class='border border-gray-300 rounded w-full py-2 px-4'
+                    class='border border-gray-300 rounded-[1.067vw] lg:rounded-[0.278vw] text-[4.267vw] lg:text-[1.111vw] leading-[1.5] w-full py-[2.133vw] lg:py-[0.556vw] px-[4.267vw] lg:px-[1.111vw]'
                   >
                 </div>
                 <div>
-                  <label for='AddressPhone_{{ form.id }}' class='block font-semibold mb-2'>{{ 'customer.addresses.phone' | t }}</label>
+                  <label for='AddressPhone_{{ form.id }}' class='block text-[4.267vw] lg:text-[1.111vw] font-semibold leading-[1.5] mb-[2.133vw] lg:mb-[0.556vw]'>{{ 'customer.addresses.phone' | t }}</label>
                   <input
                     type='tel'
                     id='AddressPhone_{{ form.id }}'
                     name='address[phone]'
                     value='{{ form.phone }}'
-                    class='border border-gray-300 rounded w-full py-2 px-4'
+                    class='border border-gray-300 rounded-[1.067vw] lg:rounded-[0.278vw] text-[4.267vw] lg:text-[1.111vw] leading-[1.5] w-full py-[2.133vw] lg:py-[0.556vw] px-[4.267vw] lg:px-[1.111vw]'
                   >
                 </div>
               </div>
-              <div class='mb-4'>
+              <div class='mb-[4.267vw] lg:mb-[1.111vw]'>
                 <label class='flex items-center'>
                   <input
                     type='checkbox'
@@ -329,18 +329,18 @@
                     {% if address == customer.default_address %}
                       checked
                     {% endif %}
-                    class='mr-2'
+                    class='mr-[2.133vw] lg:mr-[0.556vw]'
                   >
                   <span>{{ 'customer.addresses.set_default' | t }}</span>
                 </label>
               </div>
-              <div class='flex gap-4'>
-                <button type='submit' class='bg-black hover:bg-gray-800 rounded-lg text-white py-3 px-6 transition'>
+              <div class='flex gap-[4.267vw] lg:gap-[1.111vw]'>
+                <button type='submit' class='bg-black-100 hover:bg-gray-800 rounded-[2.133vw] lg:rounded-[0.556vw] text-[4.267vw] lg:text-[1.111vw] text-white-100 leading-[1.5] py-[3.2vw] lg:py-[0.833vw] px-[6.4vw] lg:px-[1.667vw] transition'>
                   {{ 'customer.account.update' | t }}
                 </button>
                 <button
                   type='button'
-                  class='hover:bg-gray-100 border border-black rounded-lg py-3 px-6 transition'
+                  class='hover:bg-gray-100 border border-black-100 rounded-[2.133vw] lg:rounded-[0.556vw] text-[4.267vw] lg:text-[1.111vw] leading-[1.5] py-[3.2vw] lg:py-[0.833vw] px-[6.4vw] lg:px-[1.667vw] transition'
                   data-address-toggle
                   data-form-id='{{ address.id }}'
                 >
@@ -354,11 +354,11 @@
     </div>
 
     {%- if paginate.pages > 1 -%}
-      <nav role='navigation' aria-label='Pagination' class='mt-8'>
-        <ul class='flex justify-center gap-4'>
+      <nav role='navigation' aria-label='Pagination' class='mt-[8.533vw] lg:mt-[2.222vw]'>
+        <ul class='flex justify-center gap-[4.267vw] lg:gap-[1.111vw]'>
           {%- if paginate.previous -%}
             <li>
-              <a href='{{ paginate.previous.url }}' class='hover:bg-gray-100 border border-gray-300 rounded py-2 px-4'>
+              <a href='{{ paginate.previous.url }}' class='hover:bg-gray-100 border border-gray-300 rounded-[1.067vw] lg:rounded-[0.278vw] text-[4.267vw] lg:text-[1.111vw] leading-[1.5] py-[2.133vw] lg:py-[0.556vw] px-[4.267vw] lg:px-[1.111vw]'>
                 {{ 'accessibility.previous' | t }}
               </a>
             </li>
@@ -366,11 +366,11 @@
           {%- for part in paginate.parts -%}
             <li>
               {%- if part.is_link -%}
-                <a href='{{ part.url }}' class='hover:bg-gray-100 border border-gray-300 rounded py-2 px-4'>
+                <a href='{{ part.url }}' class='hover:bg-gray-100 border border-gray-300 rounded-[1.067vw] lg:rounded-[0.278vw] text-[4.267vw] lg:text-[1.111vw] leading-[1.5] py-[2.133vw] lg:py-[0.556vw] px-[4.267vw] lg:px-[1.111vw]'>
                   {{ part.title }}
                 </a>
               {%- else -%}
-                <span class='bg-gray-100 border border-gray-300 rounded py-2 px-4'>
+                <span class='bg-gray-100 border border-gray-300 rounded-[1.067vw] lg:rounded-[0.278vw] text-[4.267vw] lg:text-[1.111vw] leading-[1.5] py-[2.133vw] lg:py-[0.556vw] px-[4.267vw] lg:px-[1.111vw]'>
                   {{ part.title }}
                 </span>
               {%- endif -%}
@@ -378,7 +378,7 @@
           {%- endfor -%}
           {%- if paginate.next -%}
             <li>
-              <a href='{{ paginate.next.url }}' class='hover:bg-gray-100 border border-gray-300 rounded py-2 px-4'>
+              <a href='{{ paginate.next.url }}' class='hover:bg-gray-100 border border-gray-300 rounded-[1.067vw] lg:rounded-[0.278vw] text-[4.267vw] lg:text-[1.111vw] leading-[1.5] py-[2.133vw] lg:py-[0.556vw] px-[4.267vw] lg:px-[1.111vw]'>
                 {{ 'accessibility.next' | t }}
               </a>
             </li>

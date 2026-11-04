@@ -20,10 +20,15 @@ document.addEventListener('DOMContentLoaded', () => {
     })
   }
 
-  // Expose the header group height.
+  // Expose the header group height
   const headerGroup = document.getElementById('main-header')
 
   if (headerGroup) {
-    document.documentElement.style.setProperty('--header-height', `${headerGroup.offsetHeight}px`)
+    const setHeaderHeight = () => {
+      document.documentElement.style.setProperty('--header-height', `${headerGroup.offsetHeight}px`)
+    }
+
+    setHeaderHeight()
+    window.addEventListener('resize', setHeaderHeight)
   }
 })

@@ -1,7 +1,7 @@
-<section class='max-w-screen-2xl py-12 px-4 md:px-8 lg:px-12 mx-auto' data-featured-collection-section>
+<section class='py-[12.8vw] lg:py-[3.333vw] px-[4.267vw] lg:px-[3.333vw] mx-auto' data-featured-collection-section>
   {%- if section.settings.heading != blank -%}
-    <div class='text-center mb-12'>
-      <h2 class='text-4xl md:text-5xl font-bold mb-4 opacity-0' data-featured-heading>{{ section.settings.heading }}</h2>
+    <div class='text-center mb-[12.8vw] lg:mb-[3.333vw]'>
+      <h2 class='text-[9.6vw] lg:text-[3.333vw] font-bold leading-[1.111] lg:leading-[1] mb-[4.267vw] lg:mb-[1.111vw] opacity-0' data-featured-heading>{{ section.settings.heading }}</h2>
     </div>
   {%- endif -%}
 
@@ -12,18 +12,17 @@
   {%- endif -%}
 
   {%- if featured_collection.products.size > 0 -%}
-    <div class='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 [&>*]:opacity-0' data-featured-grid>
+    <div class='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[6.4vw] lg:gap-[2.222vw] opacity-0' data-featured-products>
       {%- for product in featured_collection.products limit: section.settings.products_to_show -%}
         {% render 'card-product-medium', card_product: product, section_id: section.id %}
       {%- endfor -%}
     </div>
 
     {%- if section.settings.show_view_all and featured_collection.url != blank -%}
-      <div class='text-center mt-12'>
+      <div class='text-center mt-[12.8vw] lg:mt-[3.333vw] opacity-0' data-featured-button>
         <a
           href='{{ featured_collection.url }}'
-          class='inline-block bg-black-100 hover:bg-gray-800 rounded-lg text-white-100 py-4 px-8 transition-colors opacity-0'
-          data-featured-button
+          class='inline-block bg-black-100 hover:bg-gray-800 rounded-[2.133vw] lg:rounded-[0.556vw] text-[4.267vw] lg:text-[1.111vw] text-white-100 leading-[1.5] py-[4.267vw] lg:py-[1.111vw] px-[8.533vw] lg:px-[2.222vw] transition-colors'
         >
           {{ 'sections.featured_collection.view_all' | t }}
         </a>

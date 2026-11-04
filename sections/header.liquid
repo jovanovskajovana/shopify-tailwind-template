@@ -1,27 +1,28 @@
 <header class='sticky top-0 bg-white-100 border-b border-gray-200 z-40'>
-  <div class='max-w-screen-2xl px-4 md:px-8 lg:px-12 mx-auto'>
-    <div class='grid grid-cols-3 items-center h-16'>
+  <div class='px-[4.267vw] lg:px-[3.333vw] mx-auto'>
+    <div class='relative grid grid-cols-3 items-center h-[17.067vw] lg:h-[4.444vw] z-40'>
       {%- comment -%} Mobile Menu Toggle {%- endcomment -%}
       <button
         type='button'
-        class='md:hidden col-start-1 justify-self-start -ml-2 p-2'
+        class='group lg:hidden col-start-1 justify-self-start p-[2.133vw] lg:p-[0.556vw] -ml-[2.133vw] lg:-ml-[0.556vw]'
         aria-label='{{ 'sections.header.menu_items.back' | t }}'
         aria-expanded='false'
         data-mobile-menu-toggle
       >
-        <svg class='w-6 h-6' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
-          <path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M4 6h16M4 12h16M4 18h16'></path>
-        </svg>
+        <span class='relative block w-[6.4vw] lg:w-[1.667vw] h-[6.4vw] lg:h-[1.667vw]' aria-hidden='true'>
+          <span class='absolute top-1/2 left-1/2 bg-current w-2/3 h-[0.26vw] -translate-x-1/2 -translate-y-[calc(50%+0.651vw)] group-aria-expanded:-translate-y-1/2 group-aria-expanded:-rotate-45 transition-transform duration-200'></span>
+          <span class='absolute top-1/2 left-1/2 bg-current w-2/3 h-[0.26vw] -translate-x-1/2 translate-y-[calc(-50%+0.651vw)] group-aria-expanded:-translate-y-1/2 group-aria-expanded:rotate-45 transition-transform duration-200'></span>
+        </span>
       </button>
 
       {%- comment -%} Logo (centered on mobile, left on desktop) {%- endcomment -%}
       <a
         href='{{ routes.root_url }}'
-        class='col-start-2 justify-self-center md:col-start-1 md:justify-self-start text-center md:text-left text-base md:text-2xl font-bold leading-none'
+        class='col-start-2 justify-self-center lg:col-start-1 lg:justify-self-start text-[3.2vw] lg:text-[1.667vw] font-bold leading-none text-center lg:text-left max-w-[16ch] lg:max-w-none'
       >
         {%- if section.settings.logo != blank -%}
           <img
-            class='h-8 md:h-10 w-auto object-contain'
+            class='w-auto h-[8.533vw] lg:h-[2.778vw] object-contain'
             src='{{ section.settings.logo | image_url: width: 400 }}'
             alt='{{ shop.name }}'
             width='200'
@@ -35,9 +36,9 @@
 
       {%- comment -%} Desktop Navigation {%- endcomment -%}
       {%- if section.settings.menu != blank -%}
-        <nav class='hidden md:flex md:col-start-2 md:justify-self-center space-x-6 lg:space-x-8'>
+        <nav class='hidden lg:flex lg:col-start-2 lg:justify-self-center space-x-[6.4vw] lg:space-x-[2.222vw]'>
           {%- for link in section.settings.menu.links -%}
-            <a href='{{ link.url }}' class='whitespace-nowrap hover:text-gray-600'>{{ link.title }}</a>
+            <a href='{{ link.url }}' class='text-[4.267vw] lg:text-[1.111vw] hover:text-gray-600 leading-[1.5] whitespace-nowrap'>{{ link.title }}</a>
           {%- endfor -%}
         </nav>
       {%- endif -%}
@@ -45,13 +46,13 @@
       {%- comment -%} Mobile Menu (hidden by default, toggled via JS) {%- endcomment -%}
       {%- if section.settings.menu != blank -%}
         <nav
-          class='fixed inset-x-0 top-16 hidden md:hidden max-h-[calc(100vh-4rem)] overflow-y-auto bg-white-100 border-b border-gray-200 shadow-lg px-4 sm:px-8'
+          class='fixed top-[var(--header-height,25.6vw)] inset-x-0 hidden lg:hidden bg-white-100 border-b border-gray-200 shadow-lg max-h-[calc(100vh-var(--header-height,25.6vw))] overflow-y-auto px-[4.267vw] lg:px-[2.222vw] z-30'
           data-mobile-menu
         >
           <ul class='divide-y divide-gray-100'>
             {%- for link in section.settings.menu.links -%}
               <li>
-                <a href='{{ link.url }}' class='block py-4 text-base hover:text-gray-600'>{{ link.title }}</a>
+                <a href='{{ link.url }}' class='block text-[4.267vw] lg:text-[1.111vw] hover:text-gray-600 leading-[1.5] py-[4.267vw] lg:py-[1.111vw]'>{{ link.title }}</a>
               </li>
             {%- endfor -%}
           </ul>
@@ -59,23 +60,26 @@
       {%- endif -%}
 
       {%- comment -%} Account & Cart {%- endcomment -%}
-      <div class='col-start-3 justify-self-end flex items-center space-x-4 md:space-x-6'>
+      <div class='col-start-3 flex items-center justify-self-end space-x-[4.267vw] lg:space-x-[1.667vw]'>
         {%- if shop.customer_accounts_enabled -%}
-          <shopify-account class='text-sm md:text-base hover:text-gray-600' menu='customer-account-main-menu'>
-            {{ 'sections.header.menu_items.account' | t }}
-          </shopify-account>
+          <div class='relative flex items-center justify-center hover:text-gray-600 p-[2.133vw] lg:p-[0.556vw]'>
+            <shopify-account class='absolute inset-0 cursor-pointer' menu='customer-account-main-menu'></shopify-account>
+            <span class='flex [&_svg]:w-[5.333vw] lg:[&_svg]:w-[1.389vw] [&_svg]:h-[5.333vw] lg:[&_svg]:h-[1.389vw] pointer-events-none' aria-hidden='true'>
+              {{- 'icon-account.svg' | inline_asset_content -}}
+            </span>
+          </div>
         {%- endif -%}
         <div class='relative'>
           <a
             href='{{ routes.cart_url }}'
-            class='relative text-sm md:text-base hover:text-gray-600 no-underline'
+            class='relative text-[3.733vw] lg:text-[1.111vw] hover:text-gray-600 leading-[1.429] lg:leading-[1.5] no-underline'
             id='cart-bubble'
             aria-label='{{ 'sections.header.menu_items.cart' | t }}'
           >
             {{ 'sections.header.menu_items.cart' | t }}
             {%- if cart.item_count > 0 -%}
               <span
-                class='absolute -top-2 -right-2 flex items-center justify-center bg-black-100 rounded-full text-xs text-white-100 font-bold w-5 h-5'
+                class='absolute -top-[3.2vw] lg:-top-[0.833vw] -right-[4.267vw] lg:-right-[1.111vw] flex items-center justify-center bg-black-100 rounded-full text-[3.2vw] lg:text-[0.833vw] text-white-100 font-bold leading-none w-[5.333vw] lg:w-[1.389vw] h-[5.333vw] lg:h-[1.389vw]'
               >
                 {{ cart.item_count }}
               </span>
@@ -88,6 +92,9 @@
 </header>
 
 <script src='{{ 'header.js' | asset_url }}' defer='defer'></script>
+{%- if shop.customer_accounts_enabled -%}
+  <script src='{{ 'account.js' | asset_url }}' defer='defer'></script>
+{%- endif -%}
 
 {% schema %}
 {

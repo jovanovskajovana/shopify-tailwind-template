@@ -1,11 +1,11 @@
-<section class='max-w-md py-12 px-4 md:px-8 lg:px-12 mx-auto'>
-  <h1 class='text-3xl font-bold text-center mb-8'>{{ 'customer.login_page.title' | t }}</h1>
+<section class='lg:max-w-[31.111vw] py-[12.8vw] lg:py-[3.333vw] px-[4.267vw] lg:px-[3.333vw] mx-auto'>
+  <h1 class='text-[8vw] lg:text-[2.083vw] font-bold leading-[1.2] text-center mb-[8.533vw] lg:mb-[2.222vw]'>{{ 'customer.login_page.title' | t }}</h1>
 
   {%- form 'customer_login', class: 'form', novalidate: 'novalidate' -%}
     {%- if form.errors -%}
-      <div class='bg-red-50 border border-red-200 rounded-lg p-4 mb-6'>
-        <h2 class='text-red-800 font-semibold mb-2'>{{ 'accessibility.error' | t }}</h2>
-        <ul class='text-sm text-red-700 list-disc list-inside'>
+      <div class='bg-red-50 border border-red-200 rounded-[2.133vw] lg:rounded-[0.556vw] p-[4.267vw] lg:p-[1.111vw] mb-[6.4vw] lg:mb-[1.667vw]'>
+        <h2 class='text-[4.267vw] lg:text-[1.111vw] text-red-800 font-semibold leading-[1.5] mb-[2.133vw] lg:mb-[0.556vw]'>{{ 'accessibility.error' | t }}</h2>
+        <ul class='text-[3.733vw] lg:text-[0.972vw] text-red-700 leading-[1.429] list-disc list-inside'>
           {%- for field in form.errors -%}
             <li>
               {%- if field == 'form' -%}
@@ -22,8 +22,8 @@
       </div>
     {%- endif -%}
 
-    <div class='mb-4'>
-      <label for='CustomerEmail' class='block font-semibold mb-2'>
+    <div class='mb-[4.267vw] lg:mb-[1.111vw]'>
+      <label for='CustomerEmail' class='block text-[4.267vw] lg:text-[1.111vw] font-semibold leading-[1.5] mb-[2.133vw] lg:mb-[0.556vw]'>
         {{ 'customer.login_page.email' | t }}
       </label>
       <input
@@ -32,19 +32,19 @@
         name='customer[email]'
         autocomplete='email'
         value='{% if form.errors contains "form" %}{{ form.email }}{% endif %}'
-        class='border border-gray-300 focus:ring-2 focus:ring-black rounded w-full py-2 px-4 focus:outline-none'
+        class='border border-gray-300 focus:ring-2 focus:ring-black rounded-[1.067vw] lg:rounded-[0.278vw] text-[4.267vw] lg:text-[1.111vw] leading-[1.5] w-full py-[2.133vw] lg:py-[0.556vw] px-[4.267vw] lg:px-[1.111vw] focus:outline-none'
         {% if form.errors contains 'email' %}
           aria-invalid='true'
           aria-describedby='email-error'
         {% endif %}
       >
       {%- if form.errors contains 'email' -%}
-        <p id='email-error' class='text-sm text-red-600 mt-1'>{{ form.errors.messages.email }}</p>
+        <p id='email-error' class='text-[3.733vw] lg:text-[0.972vw] text-red-600 leading-[1.429] mt-[1.067vw] lg:mt-[0.278vw]'>{{ form.errors.messages.email }}</p>
       {%- endif -%}
     </div>
 
-    <div class='mb-6'>
-      <label for='CustomerPassword' class='block font-semibold mb-2'>
+    <div class='mb-[6.4vw] lg:mb-[1.667vw]'>
+      <label for='CustomerPassword' class='block text-[4.267vw] lg:text-[1.111vw] font-semibold leading-[1.5] mb-[2.133vw] lg:mb-[0.556vw]'>
         {{ 'customer.login_page.password' | t }}
       </label>
       <input
@@ -52,29 +52,29 @@
         id='CustomerPassword'
         name='customer[password]'
         autocomplete='current-password'
-        class='border border-gray-300 focus:ring-2 focus:ring-black rounded w-full py-2 px-4 focus:outline-none'
+        class='border border-gray-300 focus:ring-2 focus:ring-black rounded-[1.067vw] lg:rounded-[0.278vw] text-[4.267vw] lg:text-[1.111vw] leading-[1.5] w-full py-[2.133vw] lg:py-[0.556vw] px-[4.267vw] lg:px-[1.111vw] focus:outline-none'
         {% if form.errors contains 'password' %}
           aria-invalid='true'
           aria-describedby='password-error'
         {% endif %}
       >
       {%- if form.errors contains 'password' -%}
-        <p id='password-error' class='text-sm text-red-600 mt-1'>{{ form.errors.messages.password }}</p>
+        <p id='password-error' class='text-[3.733vw] lg:text-[0.972vw] text-red-600 leading-[1.429] mt-[1.067vw] lg:mt-[0.278vw]'>{{ form.errors.messages.password }}</p>
       {%- endif -%}
     </div>
 
-    <button type='submit' class='bg-black hover:bg-gray-800 rounded-lg text-white w-full py-3 px-8 mb-4 transition'>
+    <button type='submit' class='bg-black-100 hover:bg-gray-800 rounded-[2.133vw] lg:rounded-[0.556vw] text-[4.267vw] lg:text-[1.111vw] text-white-100 leading-[1.5] w-full py-[3.2vw] lg:py-[0.833vw] px-[8.533vw] lg:px-[2.222vw] mb-[4.267vw] lg:mb-[1.111vw] transition'>
       {{ 'customer.login_page.log_in' | t }}
     </button>
 
-    <div class='space-y-2 text-center'>
+    <div class='space-y-[2.133vw] lg:space-y-[0.556vw] text-center'>
       <a
         href='{{ routes.account_recover_url }}'
-        class='block text-sm text-gray-600 hover:text-gray-800'
+        class='block text-[3.733vw] lg:text-[0.972vw] text-gray-600 hover:text-gray-800 leading-[1.429]'
       >
         {{ 'customer.login_page.forgot_password' | t }}
       </a>
-      <p class='text-sm text-gray-600'>
+      <p class='text-[3.733vw] lg:text-[0.972vw] text-gray-600 leading-[1.429]'>
         Don't have an account?
         <a href='{{ routes.account_register_url }}' class='hover:text-gray-800 underline'>
           {{ 'customer.login_page.create_account' | t }}

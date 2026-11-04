@@ -1,7 +1,7 @@
 <script src='{{ 'media-gallery.js' | asset_url }}' defer='defer'></script>
 
 {% comment %}
-  Renders a product media gallery to be used on product page.
+  Renders a product media gallery to be used on product page
 
   Accepts:
   - class: {String} a class to be added to the container (optional)
@@ -72,7 +72,7 @@
       if (!galleryContainer) return
 
       const galleryWidths = [400, 800, 1200, 1600]
-      const gallerySizes = '(min-width: 992px) 50vw, 100vw'
+      const gallerySizes = '(min-width: 1200px) 50vw, 100vw'
 
       const withWidth = (url, width) => {
         const parsed = new URL(url, window.location.origin)
@@ -137,14 +137,14 @@
 >
   <div class='sr-only' role='status' id='GalleryStatus-{{ section.id }}'></div>
   <div class='relative{% if class %} {{ class }}{% endif %}' id='product-gallery'>
-    <div class='relative rounded-lg overflow-hidden'>
+    <div class='relative rounded-[2.133vw] lg:rounded-[0.556vw] overflow-hidden'>
       {%- if selected_variant_image != blank -%}
         {{
           selected_variant_image
           | image_url: width: 1600
           | image_tag:
             widths: '400, 800, 1200, 1600',
-            sizes: '(min-width: 992px) 50vw, 100vw',
+            sizes: '(min-width: 1200px) 50vw, 100vw',
             alt: product.title,
             class: 'w-full h-auto img-thumbnail transition-opacity duration-700 ease-gallery',
             loading: 'eager',
@@ -160,7 +160,7 @@
           | image_url: width: 1600
           | image_tag:
             widths: '400, 800, 1200, 1600',
-            sizes: '(min-width: 992px) 50vw, 100vw',
+            sizes: '(min-width: 1200px) 50vw, 100vw',
             alt: product.title,
             class: 'absolute inset-0 w-full h-full gallery-img object-cover opacity-0 transition-opacity duration-700 ease-gallery',
             loading: 'lazy',
@@ -169,14 +169,14 @@
       {%- endfor -%}
       <div class='absolute inset-0 flex items-center justify-between pointer-events-none gallery-controls-container'>
         <button
-          class='absolute left-4 flex items-center justify-center bg-black bg-opacity-50 hover:bg-opacity-70 rounded-full w-10 h-10 pointer-events-auto'
+          class='absolute left-[4.267vw] lg:left-[1.111vw] flex items-center justify-center bg-black-100/50 hover:bg-black-100/70 rounded-full w-[10.667vw] lg:w-[2.778vw] h-[10.667vw] lg:h-[2.778vw] pointer-events-auto'
           id='gallery-left-btn'
           aria-label='{{ 'accessibility.previous' | t }}'
         >
           {{- 'icon-arrow-left-white.svg' | inline_asset_content -}}
         </button>
         <button
-          class='absolute right-4 flex items-center justify-center bg-black bg-opacity-50 hover:bg-opacity-70 rounded-full w-10 h-10 pointer-events-auto'
+          class='absolute right-[4.267vw] lg:right-[1.111vw] flex items-center justify-center bg-black-100/50 hover:bg-black-100/70 rounded-full w-[10.667vw] lg:w-[2.778vw] h-[10.667vw] lg:h-[2.778vw] pointer-events-auto'
           id='gallery-right-btn'
           aria-label='{{ 'accessibility.next' | t }}'
         >

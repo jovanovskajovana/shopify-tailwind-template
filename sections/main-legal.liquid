@@ -1,14 +1,14 @@
-<section class='max-w-screen-2xl py-12 md:py-16 px-4 md:px-8 lg:px-12 mx-auto'>
-  <div class='max-w-4xl mx-auto'>
+<section class='py-[12.8vw] lg:py-[4.444vw] px-[4.267vw] lg:px-[3.333vw] mx-auto' data-legal-section>
+    <div class='lg:max-w-[62.222vw] mx-auto opacity-0' data-legal-content>
     {%- if section.blocks.size > 0 -%}
-      <nav class='flex flex-wrap gap-y-2 gap-x-6 mb-8' aria-label='{{ 'sections.footer.legal' | t }}'>
+      <nav class='flex flex-wrap gap-y-[2.133vw] lg:gap-y-[0.556vw] gap-x-[6.4vw] lg:gap-x-[1.667vw] mb-[8.533vw] lg:mb-[2.222vw]' aria-label='{{ 'sections.footer.legal' | t }}'>
         {%- for block in section.blocks -%}
           {%- if block.type == 'nav_link' -%}
             {%- assign nav_page = block.settings.page -%}
             {%- if nav_page != blank -%}
               <a
                 href='{{ nav_page.url }}'
-                class='text-sm {% if nav_page == page %}text-black-100 font-bold{% else %}text-gray-600 hover:text-black-100{% endif %}'
+                class='text-[3.733vw] lg:text-[0.972vw] {% if nav_page == page %}text-black-100 font-bold{% else %}text-gray-600 hover:text-black-100{% endif %} leading-[1.429]'
                 {% if nav_page == page %}
                   aria-current='page'
                 {% endif %}
@@ -23,14 +23,16 @@
     {%- endif -%}
 
     {%- if page.title != blank -%}
-      <h1 class='text-3xl md:text-4xl font-bold mb-6 md:mb-8'>{{ page.title }}</h1>
+      <h1 class='text-[8vw] lg:text-[2.5vw] font-bold leading-[1.2] lg:leading-[1.111] mb-[6.4vw] lg:mb-[2.222vw]'>{{ page.title }}</h1>
     {%- endif -%}
 
-    <div class='text-gray-700 leading-relaxed space-y-4 [&>h2]:text-2xl [&>h2]:font-bold [&>h2]:mt-8 [&>h2]:mb-4 [&>h3]:text-xl [&>h3]:font-semibold [&>h3]:mt-6 [&>h3]:mb-3 [&>p]:mb-4 [&>ul]:list-disc [&>ul]:ml-6 [&>ul]:mb-4 [&>ol]:list-decimal [&>ol]:ml-6 [&>ol]:mb-4 [&>li]:mb-2 [&>a]:text-black [&>a]:underline [&>a]:hover:text-gray-600 [&>img]:max-w-full [&>img]:h-auto [&>img]:my-6 [&>blockquote]:border-l-4 [&>blockquote]:border-gray-200 [&>blockquote]:pl-4 [&>blockquote]:my-6 [&>blockquote]:italic'>
+    <div class='space-y-[4.267vw] lg:space-y-[1.111vw] text-[4.267vw] lg:text-[1.111vw] text-gray-700 leading-relaxed [&>h2]:text-[6.4vw] lg:[&>h2]:text-[1.667vw] [&>h2]:font-bold [&>h2]:leading-[1.333] [&>h2]:mt-[8.533vw] lg:[&>h2]:mt-[2.222vw] [&>h2]:mb-[4.267vw] lg:[&>h2]:mb-[1.111vw] [&>h3]:text-[5.333vw] lg:[&>h3]:text-[1.389vw] [&>h3]:font-semibold [&>h3]:leading-[1.4] [&>h3]:mt-[6.4vw] lg:[&>h3]:mt-[1.667vw] [&>h3]:mb-[3.2vw] lg:[&>h3]:mb-[0.833vw] [&>p]:mb-[4.267vw] lg:[&>p]:mb-[1.111vw] [&>ul]:list-disc [&>ul]:ml-[6.4vw] lg:[&>ul]:ml-[1.667vw] [&>ul]:mb-[4.267vw] lg:[&>ul]:mb-[1.111vw] [&>ol]:list-decimal [&>ol]:ml-[6.4vw] lg:[&>ol]:ml-[1.667vw] [&>ol]:mb-[4.267vw] lg:[&>ol]:mb-[1.111vw] [&>li]:mb-[2.133vw] lg:[&>li]:mb-[0.556vw] [&>a]:text-black-100 [&>a]:underline [&>a]:hover:text-gray-600 [&>img]:max-w-full [&>img]:h-auto [&>img]:my-[6.4vw] lg:[&>img]:my-[1.667vw] [&>blockquote]:border-l-4 [&>blockquote]:border-gray-200 [&>blockquote]:pl-[4.267vw] lg:[&>blockquote]:pl-[1.111vw] [&>blockquote]:my-[6.4vw] lg:[&>blockquote]:my-[1.667vw] [&>blockquote]:italic'>
       {{ page.content }}
     </div>
   </div>
 </section>
+
+<script src='{{ 'main-legal.js' | asset_url }}' defer='defer'></script>
 
 {% schema %}
 {

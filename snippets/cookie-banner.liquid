@@ -1,5 +1,5 @@
 {% comment %}
-  Renders the cookie consent banner.
+  Renders the cookie consent banner
 
   Usage:
   {% render 'cookie-banner' %}
@@ -12,14 +12,14 @@
 </style>
 
 <div
-  class='fixed bottom-0 right-0 w-full sm:max-w-md p-4 sm:p-6 z-[999] translate-y-full transition-transform duration-500 ease-out'
+  class='fixed bottom-0 right-0 w-full lg:max-w-[31.111vw] p-[4.267vw] lg:p-[1.667vw] z-[999] translate-y-full transition-transform duration-500 ease-out'
   data-cookie-banner
 >
-  <div class='bg-white-100 border border-gray-200 rounded-lg p-6 shadow-lg'>
-    <h3 class='text-lg text-black-100 font-bold mb-2'>
+  <div class='bg-white-100 border border-gray-200 rounded-[2.133vw] lg:rounded-[0.556vw] p-[6.4vw] lg:p-[1.667vw] shadow-lg'>
+    <h3 class='text-[4.8vw] lg:text-[1.25vw] text-black-100 font-bold leading-[1.556] mb-[2.133vw] lg:mb-[0.556vw]'>
       {{ 'sections.cookie_banner.title' | t }}
     </h3>
-    <p class='text-sm text-gray-600 leading-relaxed mb-4'>
+    <p class='text-[3.733vw] lg:text-[0.972vw] text-gray-600 leading-relaxed mb-[4.267vw] lg:mb-[1.111vw]'>
       {{ 'sections.cookie_banner.text' | t }}
       {%- assign cookie_policy_page = pages['cookie-policy'] -%}
       {%- if cookie_policy_page != blank %}
@@ -31,25 +31,25 @@
         >.
       {%- endif -%}
     </p>
-    <div class='flex items-center justify-between gap-4'>
+    <div class='flex items-center justify-between gap-[4.267vw] lg:gap-[1.111vw]'>
       <button
         type='button'
-        class='text-sm text-gray-600 hover:text-black-100 underline transition-colors'
+        class='text-[3.733vw] lg:text-[0.972vw] text-gray-600 hover:text-black-100 leading-[1.429] underline transition-colors'
         data-cookie-manage
       >
         {{ 'sections.cookie_banner.manage' | t }}
       </button>
-      <div class='flex items-center gap-2'>
+      <div class='flex items-center gap-[2.133vw] lg:gap-[0.556vw]'>
         <button
           type='button'
-          class='hover:bg-gray-100 border border-black-100 rounded text-sm text-black-100 py-2 px-4 transition-colors'
+          class='hover:bg-gray-100 border border-black-100 rounded-[1.067vw] lg:rounded-[0.278vw] text-[3.733vw] lg:text-[0.972vw] text-black-100 leading-[1.429] py-[2.133vw] lg:py-[0.556vw] px-[4.267vw] lg:px-[1.111vw] transition-colors'
           data-cookie-decline
         >
           {{ 'sections.cookie_banner.decline' | t }}
         </button>
         <button
           type='button'
-          class='bg-black-100 hover:bg-gray-800 rounded text-sm text-white-100 py-2 px-4 transition-colors'
+          class='bg-black-100 hover:bg-gray-800 rounded-[1.067vw] lg:rounded-[0.278vw] text-[3.733vw] lg:text-[0.972vw] text-white-100 leading-[1.429] py-[2.133vw] lg:py-[0.556vw] px-[4.267vw] lg:px-[1.111vw] transition-colors'
           data-cookie-accept
         >
           {{ 'sections.cookie_banner.accept' | t }}

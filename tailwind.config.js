@@ -9,6 +9,15 @@ module.exports = {
     './assets/*.js',
   ],
   theme: {
+    screens: {
+      xs: '360px',
+      sm: '672px',
+      md: '992px',
+      lg: '1200px',
+      l: '1440px',
+      xl: '1700px',
+      xxl: '1900px',
+    },
     extend: {
       colors: {
         // Add your custom colors here
@@ -29,15 +38,6 @@ module.exports = {
         'helvetica-now': ['Helvetica Now Display', 'sans-serif'],
         'pp-formula': ['PPFormula', 'monospace'],
         'pp-formula-condensed': ['PPFormula Condensed', 'monospace'],
-      },
-      screens: {
-        xs: '360px',
-        sm: '672px',
-        md: '992px',
-        lg: '1200px',
-        l: '1440px',
-        xl: '1700px',
-        xxl: '1900px',
       },
       transitionTimingFunction: {
         //example:

@@ -1,8 +1,8 @@
-<section class='max-w-screen-2xl py-12 px-4 md:px-8 lg:px-12 mx-auto' data-collection-section>
-  <div class='text-center mb-12 opacity-0' data-collection-heading>
-    <h1 class='text-4xl md:text-5xl font-bold mb-4'>{{ collection.title }}</h1>
+<section class='py-[12.8vw] lg:py-[3.333vw] px-[4.267vw] lg:px-[3.333vw] mx-auto' data-collection-section>
+  <div class='text-center mb-[12.8vw] lg:mb-[3.333vw] opacity-0' data-collection-heading>
+    <h1 class='text-[9.6vw] lg:text-[3.333vw] font-bold leading-[1.111] lg:leading-[1] mb-[4.267vw] lg:mb-[1.111vw]'>{{ collection.title }}</h1>
     {%- if collection.description != blank -%}
-      <div class='text-lg text-gray-600 max-w-3xl mx-auto'>
+      <div class='text-[4.8vw] lg:text-[1.25vw] text-gray-600 leading-[1.556] lg:max-w-[53.333vw] mx-auto'>
         {{ collection.description }}
       </div>
     {%- endif -%}
@@ -10,30 +10,30 @@
 
   {%- paginate collection.products by section.settings.products_per_page -%}
     {%- if collection.products.size == 0 -%}
-      <div class='text-center py-20'>
-        <h2 class='text-2xl mb-6'>{{ 'sections.collection_template.empty' | t }}</h2>
+      <div class='text-center py-[21.333vw] lg:py-[5.556vw] opacity-0' data-collection-empty>
+        <h2 class='text-[6.4vw] lg:text-[1.667vw] leading-[1.333] mb-[6.4vw] lg:mb-[1.667vw]'>{{ 'sections.collection_template.empty' | t }}</h2>
         <a
           href='{{ routes.root_url }}'
-          class='inline-block bg-black-100 hover:bg-gray-800 rounded-lg text-white-100 py-4 px-8 transition-colors'
+          class='inline-block bg-black-100 hover:bg-gray-800 rounded-[2.133vw] lg:rounded-[0.556vw] text-[4.267vw] lg:text-[1.111vw] text-white-100 leading-[1.5] py-[4.267vw] lg:py-[1.111vw] px-[8.533vw] lg:px-[2.222vw] transition-colors'
         >
           {{ 'sections.collection_template.button' | t }}
         </a>
       </div>
     {%- else -%}
-      <div class='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 [&>*]:opacity-0' data-collection-grid>
+      <div class='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[6.4vw] lg:gap-[2.222vw] opacity-0' data-collection-products>
         {%- for product in collection.products -%}
           {% render 'card-product-medium', card_product: product, section_id: section.id %}
         {%- endfor -%}
       </div>
 
       {%- if paginate.pages > 1 -%}
-        <nav role='navigation' aria-label='Pagination' class='mt-12'>
-          <ul class='flex flex-wrap justify-center gap-2'>
+        <nav role='navigation' aria-label='Pagination' class='mt-[12.8vw] lg:mt-[3.333vw] opacity-0' data-collection-pagination>
+          <ul class='flex flex-wrap justify-center gap-[2.133vw] lg:gap-[0.556vw]'>
             {%- if paginate.previous -%}
               <li>
                 <a
                   href='{{ paginate.previous.url }}'
-                  class='hover:bg-gray-100 border border-gray-300 rounded py-2 px-4 transition'
+                  class='hover:bg-gray-100 border border-gray-300 rounded-[1.067vw] lg:rounded-[0.278vw] text-[4.267vw] lg:text-[1.111vw] leading-[1.5] py-[2.133vw] lg:py-[0.556vw] px-[4.267vw] lg:px-[1.111vw] transition'
                 >
                   {{ 'accessibility.previous' | t }}
                 </a>
@@ -44,12 +44,12 @@
                 {%- if part.is_link -%}
                   <a
                     href='{{ part.url }}'
-                    class='hover:bg-gray-100 border border-gray-300 rounded py-2 px-4 transition'
+                    class='hover:bg-gray-100 border border-gray-300 rounded-[1.067vw] lg:rounded-[0.278vw] text-[4.267vw] lg:text-[1.111vw] leading-[1.5] py-[2.133vw] lg:py-[0.556vw] px-[4.267vw] lg:px-[1.111vw] transition'
                   >
                     {{ part.title }}
                   </a>
                 {%- else -%}
-                  <span class='bg-gray-100 border border-gray-300 rounded py-2 px-4'>
+                  <span class='bg-gray-100 border border-gray-300 rounded-[1.067vw] lg:rounded-[0.278vw] text-[4.267vw] lg:text-[1.111vw] leading-[1.5] py-[2.133vw] lg:py-[0.556vw] px-[4.267vw] lg:px-[1.111vw]'>
                     {{ part.title }}
                   </span>
                 {%- endif -%}
@@ -59,7 +59,7 @@
               <li>
                 <a
                   href='{{ paginate.next.url }}'
-                  class='hover:bg-gray-100 border border-gray-300 rounded py-2 px-4 transition'
+                  class='hover:bg-gray-100 border border-gray-300 rounded-[1.067vw] lg:rounded-[0.278vw] text-[4.267vw] lg:text-[1.111vw] leading-[1.5] py-[2.133vw] lg:py-[0.556vw] px-[4.267vw] lg:px-[1.111vw] transition'
                 >
                   {{ 'accessibility.next' | t }}
                 </a>

@@ -52,7 +52,7 @@ if (!customElements.get('media-gallery')) {
 
         if (!this.dotsContainer) {
           this.dotsContainer = document.createElement('div')
-          this.dotsContainer.className = 'gallery-dots flex justify-center gap-2 mt-4'
+          this.dotsContainer.className = 'gallery-dots flex justify-center gap-[2.133vw] lg:gap-[0.556vw] mt-[4.267vw] lg:mt-[1.111vw]'
           this.gallery.appendChild(this.dotsContainer)
         }
       }
@@ -129,7 +129,7 @@ if (!customElements.get('media-gallery')) {
           dots.forEach((dot, index) => {
             const isActive = !this.#isThumbnailVisible && index === this.#currentIndex
             dot.classList.toggle('bg-gray-300', !isActive)
-            dot.classList.toggle('bg-black', isActive)
+            dot.classList.toggle('bg-black-100', isActive)
             dot.setAttribute('aria-current', isActive ? 'true' : 'false')
           })
         }

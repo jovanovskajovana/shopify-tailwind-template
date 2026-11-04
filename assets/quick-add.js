@@ -69,7 +69,7 @@ if (!customElements.get('quick-add-modal')) {
         if (!productElement) return
 
         // The product page hides these with `opacity-0` for a GSAP entrance
-        // animation that never runs inside the modal, so drop the class here.
+        // animation that never runs inside the modal, so drop the class here
         const selector =
           '[data-product-media], [data-product-title], [data-product-price], [data-product-description], [data-product-variants], [data-product-form]'
 

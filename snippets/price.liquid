@@ -47,7 +47,7 @@
 -%}
 {%- unless target == null and placeholder == null -%}
   <div
-    class='text-sm uppercase tracking-wider{% if price_class %} {{ price_class }}{% endif %}{% if available == false %} opacity-50{% endif %}'
+    class='text-[3.733vw] lg:text-[0.972vw] leading-[1.429] tracking-wider uppercase{% if price_class %} {{ price_class }}{% endif %}{% if available == false %} opacity-50{% endif %}'
   >
     <div>
       <div class='{% if compare_at_price > price %}hidden{% endif %}'>
@@ -81,7 +81,7 @@
           {{ money_price }}
         </span>
         {%- unless product.price_varies == false and product.compare_at_price_varies -%}
-          <span class='ml-2'>
+          <span class='ml-[2.133vw] lg:ml-[0.556vw]'>
             <s class='line-through opacity-60{% if starting_price == true and product.price_varies %} hidden{% endif %}'>
               {{ compare_at_price | money }}
             </s>
@@ -89,7 +89,7 @@
           <span class='sr-only'>{{ 'products.product.price.regular_price' | t }}</span>
         {%- endunless -%}
       </div>
-      <small class='text-xs{% if product.selected_or_first_available_variant.unit_price_measurement == nil %} hidden{% endif %}'>
+      <small class='text-[3.2vw] lg:text-[0.833vw] leading-[1.333]{% if product.selected_or_first_available_variant.unit_price_measurement == nil %} hidden{% endif %}'>
         <span class='sr-only'>{{ 'products.product.price.unit_price' | t }}</span>
         <span>
           <span>{{- product.selected_or_first_available_variant.unit_price | money -}}</span>

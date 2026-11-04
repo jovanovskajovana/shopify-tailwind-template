@@ -1,17 +1,18 @@
 {% comment %}
-  Renders a loading-spinner
+  Renders a loading spinner
 
   Accepts:
-    - class: {string} css classes to replace the default ones (optional)
+  - variant: {String} 'light' for dark backgrounds (optional)
+  - size: {String} sizing classes (optional)
+  - class: {String} additional classes (optional)
 
   Usage:
-  {% render 'loading-spinner',
-    class: 'my-class'
-  %}
+  {% render 'loading-spinner' %}
+  {% render 'loading-spinner', variant: 'light', size: 'w-[4.8vw] lg:w-[1.25vw] h-[4.8vw] lg:h-[1.25vw]' %}
 {% endcomment %}
 
 <span
-  class='inline-block w-5 h-5 border-2 border-gray-300 border-t-black rounded-full animate-spin {% if class %}{{ class }}{% endif %}'
+  class='inline-block border-2 rounded-full animate-spin{% if variant == 'light' %} border-white-100/30 border-t-white-100{% else %} border-gray-300 border-t-black{% endif %}{% if size %} {{ size }}{% else %} w-[5.333vw] lg:w-[1.389vw] h-[5.333vw] lg:h-[1.389vw]{% endif %}{% if class %} {{ class }}{% endif %}'
   role='status'
   aria-label='{{ 'accessibility.loading' | t }}'
 >

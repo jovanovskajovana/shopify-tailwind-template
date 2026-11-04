@@ -1,20 +1,20 @@
-<section class='bg-gray-800 text-white-100'>
-  <div class='flex flex-col md:flex-row md:items-center md:justify-between gap-8 max-w-screen-2xl py-12 px-4 md:px-8 lg:px-12 mx-auto'>
-    <div class='max-w-md'>
+<section class='bg-gray-800 text-white-100' data-newsletter-section>
+  <div class='flex flex-col lg:flex-row lg:items-center lg:justify-between gap-[8.533vw] lg:gap-[2.222vw] py-[12.8vw] lg:py-[3.333vw] px-[4.267vw] lg:px-[3.333vw] mx-auto opacity-0' data-newsletter-reveal>
+    <div class='lg:max-w-[31.111vw]'>
       {%- if section.settings.heading != blank -%}
-        <h2 class='text-3xl md:text-4xl text-white-100 font-bold tracking-tight mb-3'>{{ section.settings.heading }}</h2>
+        <h2 class='text-[8vw] lg:text-[2.5vw] text-white-100 font-bold leading-[1.2] lg:leading-[1.111] tracking-tight mb-[3.2vw] lg:mb-[0.833vw]'>{{ section.settings.heading }}</h2>
       {%- endif -%}
 
       {%- if section.settings.text != blank -%}
-        <p class='text-gray-400 leading-relaxed'>{{ section.settings.text }}</p>
+        <p class='text-[4.267vw] lg:text-[1.111vw] text-gray-400 leading-relaxed'>{{ section.settings.text }}</p>
       {%- endif -%}
     </div>
 
     {%- assign form_id = 'NewsletterForm-' | append: section.id -%}
-    {%- form 'customer', id: form_id, class: 'flex flex-col gap-4 w-full md:max-w-md' -%}
+    {%- form 'customer', id: form_id, class: 'flex flex-col gap-[4.267vw] lg:gap-[1.111vw] w-full lg:max-w-[31.111vw]' -%}
       <input type='hidden' name='contact[tags]' value='newsletter'>
 
-      <div class='flex items-center gap-2 bg-gray-900 rounded-lg p-2'>
+      <div class='flex items-center gap-[2.133vw] lg:gap-[0.556vw] bg-gray-900 rounded-[2.133vw] lg:rounded-[0.556vw] p-[2.133vw] lg:p-[0.556vw]'>
         <label for='NewsletterEmail-{{ section.id }}' class='sr-only'>{{ section.settings.heading }}</label>
         <input
           type='email'
@@ -22,26 +22,28 @@
           name='contact[email]'
           value='{% if form.email %}{{ form.email }}{% endif %}'
           placeholder='{{ section.settings.placeholder }}'
-          class='bg-transparent text-white-100 placeholder:text-gray-500 w-full min-w-0 py-2 px-4 focus:outline-none'
+          class='bg-transparent text-[4.267vw] lg:text-[1.111vw] text-white-100 placeholder:text-gray-500 leading-[1.5] w-full min-w-0 py-[2.133vw] lg:py-[0.556vw] px-[4.267vw] lg:px-[1.111vw] focus:outline-none'
           autocomplete='email'
           required
         >
         <button
           type='submit'
-          class='flex-shrink-0 bg-white-100 hover:bg-gray-100 rounded-lg text-sm text-black-100 font-medium tracking-wider uppercase whitespace-nowrap py-3 px-6 transition-colors'
+          class='flex-shrink-0 bg-white-100 hover:bg-gray-100 rounded-[2.133vw] lg:rounded-[0.556vw] text-[3.733vw] lg:text-[0.972vw] text-black-100 font-medium leading-[1.429] tracking-wider uppercase whitespace-nowrap py-[3.2vw] lg:py-[0.833vw] px-[6.4vw] lg:px-[1.667vw] transition-colors'
         >
           {{ section.settings.button_label }}
         </button>
       </div>
 
       {%- if form.posted_successfully? -%}
-        <p class='text-sm text-gray-400' role='status'>{{ section.settings.success_message }}</p>
+        <p class='text-[3.733vw] lg:text-[0.972vw] text-gray-400 leading-[1.429]' role='status'>{{ section.settings.success_message }}</p>
       {%- elsif form.errors -%}
-        <div class='text-sm text-gray-400' role='alert'>{{ form.errors | default_errors }}</div>
+        <div class='text-[3.733vw] lg:text-[0.972vw] text-gray-400 leading-[1.429]' role='alert'>{{ form.errors | default_errors }}</div>
       {%- endif -%}
     {%- endform -%}
   </div>
 </section>
+
+<script src='{{ 'newsletter.js' | asset_url }}' defer='defer'></script>
 
 {% schema %}
 {
